@@ -1,0 +1,208 @@
+EA
+
+; helloworld.easm*
+
+;
+; este programa imprime "hello world"
+; en la pantalla de la consola de S-SUN
+;
+;*
+
+; section variables*
+
+    ;
+    ; MyCharacter
+    ;
+    ; represents a character
+    *
+    MyCharacter = 1
+    MyColor = 2
+
+; section calls_vectors*
+
+    ;
+    ; PrintChar_interruption
+    ;
+    ; prints a character with the parameter
+    *
+    PrintChar_interruption = 1
+
+    ;
+    ; ClearScreen_call
+    ;
+    ; clears the screen
+    *
+    ClearScreen_call = 2
+
+    ;
+    ; ChangeForeground_call
+    ;
+    ; changes the foreground color to the register in the param
+    *
+    ChangeForeground_call = 3
+
+    ;
+    ; ChangeBackground_call
+    ;
+    ; changes the background color to the register in the param
+    *
+    ChangeBackground_call = 4
+
+    ;
+    ; ChangeCursorX_call
+    ;
+    ; changes the cursor x pos to the register in the param
+    *
+    ChangeCursorX_call = 5
+
+    ;
+    ; ChangeCursorY_call
+    ;
+    ; changes the cursor y pos to the register in the param
+    *
+    ChangeCursorY_call = 7
+    
+    ;
+    ; PrintCharWithoutUpdateScreen_call
+    ;
+    ; is PrintChar_interruption but the diference is that PrintChar_interruption updates the screen when make that
+    ; and PrintCharWithoutUpdateScreen_call no
+    *
+    PrintCharWithoutUpdateScreen_call = 8
+
+    ;
+    ; ManuallyScreenUpdate_call
+    ;
+    ; updates the screen manually
+    *
+    ManuallyScreenUpdate_call = 9
+
+    ;
+    ; UefiStall_call
+    ;
+    ; a shortcut to the uefi stall function
+    *
+    UefiStall_call = 10
+
+    ;
+    ; WaitForKeyEvent_call
+    ;
+    ; waits for a key
+    *
+    WaitForKeyEvent_call = 11
+
+    ;
+    ; ReadKey_call
+    ;
+    ; reads the last pressed key
+    *
+    ReadKey_call = 12
+
+    ;
+    ; GetTime
+    ;
+    ; get the time
+    *
+    GetTime = 13
+
+    ;
+    ; DrawPixel
+    ;
+    ; draws a pixel
+    *
+    DrawPixel = 34
+
+; section variables.colors*
+
+    colors.black = 1
+    colors.lightblack = 2
+    colors.darkgray = 3
+    colors.gray = 4
+    colors.lightgray = 5
+    colors.white = 6
+
+    ;
+    ; tonos rojizos
+    ;*
+
+    colors.darkred = 7
+    colors.red = 8
+    colors.brred = 9
+
+    ;
+    ; tonos anaranjados
+    ;*
+
+    colors.darkorange = 10
+    colors.orange = 11
+    colors.brorange = 12
+
+    ;
+    ; tonos amarillozos
+    ;*
+
+    colors.darkyellow = 13
+    colors.yellow = 14
+    colors.bryellow = 15
+
+    ;
+    ; tonos verdosos
+    ;*
+
+    colors.darkgreen = 16
+    colors.green = 17
+    colors.brgreen = 18
+
+    ;
+    ; tonos cianes
+    ;*
+
+    colors.darkcyan = 19
+    colors.cyan = 20
+    colors.brcyan = 21
+
+    ;
+    ; tonos teales
+    ;*
+
+    colors.darkyeal = 22
+    colors.teal = 23
+    colors.brteal = 24
+
+    ;
+    ; tonos azulosos
+    ;*
+
+    colors.darkblue = 25
+    colors.blue = 26
+    colors.brblue = 27
+
+system_call 2,1; limpiar la pantalla*
+
+;
+; cambiar el color a verde claro
+; *
+
+move MyColor,colors.brgreen
+system_call ChangeForeground_call,MyColor
+
+move MyCharacter,10 ; mover el numero*
+system_call 18,MyCharacter ; imprimir el numero*
+
+move MyCharacter,'\s' ; mover la letra*
+system_call PrintChar_interruption,MyCharacter ; imprimir la letra*
+
+move MyColor,colors.brblue
+system_call ChangeForeground_call,MyColor
+
+move MyCharacter,9 ; mover el numero*
+system_call 18,MyCharacter ; imprimir el numero*
+
+move MyCharacter,'\s' ; mover la letra*
+system_call PrintChar_interruption,MyCharacter ; imprimir la letra*
+
+move MyColor,colors.brcyan
+system_call ChangeForeground_call,MyColor
+
+move MyCharacter,18 ; mover el numero*
+system_call 18,MyCharacter ; imprimir el numero*

@@ -149,165 +149,33 @@
 
 /**
 * loop
+* 
+* loops a function
 */
 #define loop_instruction						21
 
 #define safetynow_for_up						22
 #define NULL_PARAM								safetynow_for_up
 
-//
-// asm keywords
-//
-
-#define asm_comment								L';'
-
+/**
+* _BINARY
+* 
+* represents a binary program
+*/
 typedef CHAR16									_BINARY;
 
-/*
-SegAddresPtr
-
-defines a segmente addres pointer
+/**
+* memory_acces
+* 
+* the virtual memory
 */
-typedef struct
-{
-	//
-	// HaveEnd
-	// 
-	// if the segment have end
-	//
-	bool_t HaveEnd;
-
-	//
-	// Start (or Position)
-	// 
-	// the start if the segment have end is a Start otherwise, this is used as the data position
-	//
-	u16 Start;
-
-	//
-	// End
-	// 
-	// the end of the segment
-	//
-	u16 End;
-
-} SegAddresPtr;
-
-typedef struct {
-	CHAR16										Vendor[20];
-	CHAR16										Name[20];
-
-	double										version;
-
-	_BINARY										AssemblyCode[512];
-}
-Driver32, Device32
-;
-
-// ----------------------------------------------------------------------------------------------
-// variables
-
 prototype t16								memory_acces[2000]; // 2000 vars
 
-// ----------------------------------------------------------------------------------------------
-// functions
-
-//
-// assambler functions
-//
-
-prototype void
-sasm_mov
-(
-	CHAR16										Register,
-	CHAR16										NewValue
-);
-
-prototype void
-sasm_lea
-(
-	CHAR16										Register,
-	CHAR16										Register2
-);
-
-prototype void
-sasm_add
-(
-	CHAR16										Register,
-	CHAR16										NewValue
-);
-
-prototype void
-sasm_sub
-(
-	CHAR16										Register,
-	CHAR16										NewValue
-);
-
-prototype void
-sasm_div
-(
-	CHAR16										Register,
-	CHAR16										NewValue
-);
-
-prototype void
-sasm_mul
-(
-	CHAR16										Register,
-	CHAR16										NewValue
-);
-
-prototype BOOLEAN
-sasm_cmp
-(
-	CHAR16										Register,
-	CHAR16										Value
-);
-
-prototype VOID
-sasm_cint_dec
-(
-	CHAR16										id,
-	CHAR16										registeru_from,
-	CHAR16										count_used_registres,
-	VOID(*Function)()
-);
-
-prototype void
-BinaryEx
-(
-	_BINARY* p,
-	BOOLEAN										debug
-);
-
-prototype BOOLEAN
-IsBinaryApp
-(
-	_BINARY* p
-);
-
-prototype ch16
-IMemo
-(
-	u16 register_
-);
-
-prototype SegAddresPtr
-AllocateMemoryS
-(
-	u16 PoolAllocation
-);
-
-// ----------------------------------------------------------------------------------------------
-// END prototypes
-// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
-// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-// functions
-// ----------------------------------------------------------------------------------------------
-
+/**
+* IMemo
+* 
+* locate a memory
+*/
 ch16
 IMemo
 (
@@ -317,10 +185,10 @@ IMemo
 	return memory_acces[register_];
 }
 
-/*
-AllocateMemory
-
-allocate a memory and returns where its allocated
+/**
+* AllocateMemory
+*
+* allocate a memory and returns where its allocated
 */
 u16
 AllocateMemory
@@ -398,151 +266,12 @@ AllocateMemory
 	return 0;
 }
 
-CHAR16*
-GetSgPtr
-(
-	SegAddresPtr pointer
-)
-{
-	if (
-		pointer.HaveEnd
-		)
-	{
-		//
-		// configure variables
-		//
-		u16 lenght = pointer.End - pointer.Start;
-		CHAR16* ea = AllocatePool(sizeof(CHAR16) * lenght);
-
-		u16 curr_pos = pointer.Start;
-		u16 char_write = 0;
-
-		//
-		// recorre array
-		//
-		for (size_t i = 0; i < lenght; i++)
-		{
-			ea[char_write] = memory_acces[curr_pos];
-
-			char_write++;
-			curr_pos++;
-		}
-
-		return ea;
-	}
-	else {
-		CHAR16* ea = AllocatePool(sizeof(CHAR16) * 2);
-		ea[0] = memory_acces[pointer.Start];
-		ea[1] = 0;
-		return ea;
-	}
-}
-
-
-//
-// not for asm , for external programs
-//
-
-void
-sasm_mov
-(
-	CHAR16 Register,
-	CHAR16 NewValue
-)
-{
-	//
-	// action
-	//
-
-	memory_acces[Register] = NewValue;
-}
-
-void
-sasm_lea
-(
-	CHAR16 Register,
-	CHAR16 Register2
-)
-{
-	//
-	// action
-	//
-
-	memory_acces[Register] = memory_acces[Register2];
-}
-
-
-void
-sasm_add
-(
-	CHAR16 Register,
-	CHAR16 NewValue
-)
-{
-	//
-	// action
-	//
-
-	memory_acces[Register] += NewValue;
-}
-
-void
-sasm_sub
-(
-	CHAR16 Register,
-	CHAR16 NewValue
-)
-{
-	//
-	// action
-	//
-
-	memory_acces[Register] -= NewValue;
-}
-
-void
-sasm_div
-(
-	CHAR16 Register,
-	CHAR16 NewValue
-)
-{
-	//
-	// action
-	//
-
-	memory_acces[Register] /= NewValue;
-}
-
-void
-sasm_mul
-(
-	CHAR16 Register,
-	CHAR16 NewValue
-)
-{
-	//
-	// action
-	//
-
-	memory_acces[Register] *= NewValue;
-}
-
-prototype BOOLEAN
-sasm_cmp
-(
-	CHAR16 Register,
-	CHAR16 Value
-)
-{
-	return memory_acces[Register] == Value;
-}
-
 /*
-BinaryEx
-
-Summary:
-	executes a S-SUN binary program
+* BinaryEx
+*
+* executes a binary program
+* 
+* @param p: is that program
 */
 void
 BinaryEx
@@ -1468,10 +1197,9 @@ BinaryEx
 }
 
 /*
-IsBinaryApp
-
-Summary:
-	check if a text is a binary app
+* IsBinaryApp
+*
+* check if a text is a binary app
 */
 BOOLEAN
 IsBinaryApp
@@ -1486,11 +1214,5 @@ IsBinaryApp
 
 	return 1;
 }
-
-_BINARY hello_bin[] = { (CHAR16)69, (CHAR16)65, (CHAR16)3, (CHAR16)11, (CHAR16)24, (CHAR16)22, (CHAR16)1, (CHAR16)23, (CHAR16)126, (CHAR16)11, (CHAR16)23, (CHAR16)23, (CHAR16)1, (CHAR16)23, (CHAR16)123, (CHAR16)11, (CHAR16)23, (CHAR16)23, (CHAR16)1, (CHAR16)23, (CHAR16)130, (CHAR16)11, (CHAR16)23, (CHAR16)23, (CHAR16)1, (CHAR16)23, (CHAR16)130, (CHAR16)11, (CHAR16)23, (CHAR16)23, (CHAR16)1, (CHAR16)23, (CHAR16)133, (CHAR16)11, (CHAR16)23, (CHAR16)23, (CHAR16)1, (CHAR16)23, (CHAR16)54, (CHAR16)11, (CHAR16)23, (CHAR16)23, (CHAR16)1, (CHAR16)23, (CHAR16)141, (CHAR16)11, (CHAR16)23, (CHAR16)23, (CHAR16)1, (CHAR16)23, (CHAR16)133, (CHAR16)11, (CHAR16)23, (CHAR16)23, (CHAR16)1, (CHAR16)23, (CHAR16)136, (CHAR16)11, (CHAR16)23, (CHAR16)23, (CHAR16)1, (CHAR16)23, (CHAR16)130, (CHAR16)11, (CHAR16)23, (CHAR16)23, (CHAR16)1, (CHAR16)23, (CHAR16)122, (CHAR16)11, (CHAR16)23, (CHAR16)23, (CHAR16)0 };
-
-// ----------------------------------------------------------------------------------------------
-// END functions
-// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 #endif // !KERNEL_BINARY_H
