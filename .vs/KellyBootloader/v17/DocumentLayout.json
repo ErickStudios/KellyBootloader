@@ -9,6 +9,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\main.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|solutionrelative:main.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\debug.vbs||{A52A054C-5228-4819-B568-E5B8040801B5}",
+      "RelativeMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|solutionrelative:debug.vbs||{A52A054C-5228-4819-B568-E5B8040801B5}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,11 +22,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "debug.vbs",
+              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\debug.vbs",
+              "RelativeDocumentMoniker": "debug.vbs",
+              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\debug.vbs",
+              "RelativeToolTip": "debug.vbs",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADQSURBVDhPpZJRDsIwDENfEAfrzebezDtZ\u002BFg7SleEgEjTujR2HGchKfkxtG3cASTF5XJBPNbZTiLeFiaZR769bSdw1vbv24CDBpYU1ApSUiu2s5SCJEaSE7A6z50l5ajirQLg7IyUpZSWEu384teVIDORgm0DKWz3m5jBzASSQrUeJF2BTSO5mA3z3GPuny0AqFaA0Ys\u002BzuctjM6fgMzlFp4dO9Eh\u002BQAPY3wcQVJISu97Nw0isJ3e9\u002BUKYW1i7zQ/L9EVhIaf5dsopRAr9m/iAT9Q1k796Ae/AAAAAElFTkSuQmCC",
+              "WhenOpened": "2025-07-08T20:59:43.834Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -32,7 +49,7 @@
               "RelativeDocumentMoniker": ".vs\\msvc\\ErickBinaryFormat.h",
               "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\ErickBinaryFormat.h",
               "RelativeToolTip": ".vs\\msvc\\ErickBinaryFormat.h",
-              "ViewState": "AQIAAJMDAAAAAAAAAAAAABcBAAAAAAAA",
+              "ViewState": "AQIAAFEBAAAAAAAAAAAAAGIBAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-07-08T18:05:56.66Z",
               "EditorCaption": ""
@@ -45,7 +62,7 @@
               "RelativeDocumentMoniker": "main.c",
               "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\main.c",
               "RelativeToolTip": "main.c",
-              "ViewState": "AQIAAIcCAAAAAAAAAAAAAJgCAAAAAAAA",
+              "ViewState": "AQIAAGIAAAAAAAAAAAArwJEBAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2025-07-08T18:03:47.585Z",
               "EditorCaption": ""

@@ -154,7 +154,17 @@
 */
 #define loop_instruction						21
 
+/**
+* for indicate a not instruction the character that are greater that this value
+* are not instructions
+*/
 #define safetynow_for_up						22
+
+/**
+* NULL_PARAM
+* 
+* represents a null parameter
+*/
 #define NULL_PARAM								safetynow_for_up
 
 /**
@@ -221,8 +231,37 @@ AllocateMemory
 			memory_acces[i] != NULL && i != 10
 			)
 		{
-			Buffer = i;
-			break;
+
+			size_t popi = i;
+		
+			bool_t is_not_colide = true;
+			u16 sizem = 0;
+
+			while (sizem != size)
+			{
+				if (
+					memory_acces[i] != 0
+					)
+				{
+					i = popi;
+					is_not_colide = false;
+					break;
+				}
+				i++;
+				sizem++;
+			}
+
+			i = popi;
+
+			if (
+				is_not_colide == true
+				)
+			{
+				if (!REALESE)
+				Print(L"failed attempt of locate in %d to %d\n", i + 1, i + 1 + size);
+				Buffer = i;
+				break;
+			}
 		}
 	}
 
@@ -266,6 +305,89 @@ AllocateMemory
 	return 0;
 }
 
+/**
+* LocateMemory
+* 
+* returns the complete array buffer for a pool
+* 
+* @param StartingAt: is where the buffer starts
+*/
+ch16*
+LocateMemory
+(
+	u16 StartingAt
+)
+{
+	t16 size = memory_acces[StartingAt];
+	ch16* Located = AllocatePool(sizeof(ch16) * (size + 1));
+
+	u16 reader = StartingAt + 1;
+
+	for (size_t i = 0; i < size; i++)
+	{
+		Located[i] = memory_acces[reader];
+		reader++;
+	}
+
+	Located[size] = 0;
+
+	return Located;
+}
+
+/**
+* SetMemoryPool
+* 
+* sets a memory part
+* 
+* @param Pool: is the pool start
+* @param Index: is the item to modifie
+* @param Value: is the new value for the new item
+*/
+VOID
+SetMemoryPool
+(
+	t16 Pool,
+	t16 Index,
+	t16 Value
+)
+{
+	if (!REALESE)Print(L"seting item %d of the pool %d with value %d\n", Index, Pool, Value);
+	memory_acces[(Pool + 1) + Index] = Value;
+}
+
+/**
+* GetMemoryPool
+* 
+* gets a memory buffer item
+* 
+* @param Pool: is the pool
+* @param Index: is the index to get
+* 
+* @returns the content of that location in the pool
+*/
+t16
+GetMemoryPool
+(
+	u16 Pool,
+	u16 Index
+)
+{
+	return memory_acces[(Pool + 1) + Index];
+}
+
+/**
+* BootSpecific
+*
+* try to boot a specific file
+*
+* @param filename is that file
+*/
+VOID 
+BootSpecific
+(
+	ch16* filename, bool_t debugger
+);
+
 /*
 * BinaryEx
 *
@@ -281,16 +403,17 @@ BinaryEx
 )
 {
 	INT8 TratarloComo = 0;
-	// 0 = program
-	// 1 = device
 
-// the reader
-	unsigned __int64 reader;
+	//
+	// if show mems while the execution
+	//
+
 	bool_t ShowMems = false;
 
-	// registers
-
+	//
 	// check the program type
+	//
+
 	if (!(p[0] == L'M' && p[1] == L'P' && p[2] == 3)) {
 		if (!(p[0] == L'E' && p[1] == L'A' && p[2] == 3))
 		{
@@ -306,18 +429,36 @@ BinaryEx
 	// set to skip the program type
 	memory_acces[10] = 3;
 
+	//
 	// the loop
+	//
+
 	while (
 		p[memory_acces[10]] // the reader
 		) {
 
+		//
+		// the reader
+		//
 
 		unsigned __int64 r = memory_acces[10];
 
+		//
+		// the instruction
+		//
+
 		__int16 ch = p[r]; // the character
+
+		//
+		// configure params
+		//
 
 		__int16 p1 = p[r + 1] - safetynow_for_up; // param 1
 		__int16 p2 = p[r + 2] - safetynow_for_up; // param 2
+
+		//
+		// the params of values
+		//
 
 		__int16 p1r = memory_acces[p1]; // param 1 in register
 		__int16 p2r = memory_acces[p2]; // param 2 in register
@@ -798,7 +939,7 @@ BinaryEx
 				EFI_INPUT_KEY Key;
 
 				gST->ConIn->ReadKeyStroke(gST->ConIn, &Key);
-
+				
 				memory_acces[p2] = Key.ScanCode;
 				memory_acces[p2 + 1] = Key.UnicodeChar;
 			}
@@ -856,7 +997,7 @@ BinaryEx
 				p1 == 15
 				)
 			{
-				memory_acces[memory_acces[p2]] = memory_acces[memory_acces[p2 + 1]];
+				SetMemoryPool(memory_acces[p2], memory_acces[p2 + 1], memory_acces[p2 + 2]);
 			}
 
 			///
@@ -922,7 +1063,7 @@ BinaryEx
 			{
 				CHAR16 chain[20];
 
-				ValueToString(chain, 0, (INT16)p2r);
+				ValueToString(chain, 0, (INT64)p2r);
 				printcu(chain); // print without update scree
 			}
 
@@ -957,6 +1098,30 @@ BinaryEx
 					memory_acces[MemFree] = 0;
 					MemFree++;
 				}
+			}
+
+			///
+			/// 21 - boot a file
+			///
+			if (
+				p1 == 21
+				)
+			{
+				t16 saved_stack = memory_acces[10];
+
+				BootSpecific(LocateMemory(memory_acces[p2]), debug);
+
+				memory_acces[10] = saved_stack;
+			}
+
+			///
+			/// 22 - print pool
+			/// 
+			if (
+				p1 == 22
+				)
+			{
+				printc(LocateMemory(memory_acces[p2]));
 			}
 
 			///
@@ -1086,12 +1251,13 @@ BinaryEx
 		*/
 
 		if (
-			debug
+			debug == TRUE
 			)
 		{
 			EFI_INPUT_KEY Key;
+			UINTN Event;
 
-			gBS->WaitForEvent(1, &gST->ConIn->WaitForKey, 1);
+			gBS->WaitForEvent(1, &gST->ConIn->WaitForKey, &Event);
 			gST->ConIn->ReadKeyStroke(gST->ConIn, &Key);
 
 			if (

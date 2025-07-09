@@ -53,6 +53,44 @@ CHAR16* AsciiToChar16(UINT8* AsciiData, UINTN Size)
 	return Utf16;
 }
 
+VOID WriteFile()
+{
+	EFI_FILE_PROTOCOL* Root;
+	EFI_FILE_PROTOCOL* NewFile;
+	EFI_SIMPLE_FILE_SYSTEM_PROTOCOL* FileSystem;
+	EFI_STATUS Status;
+	CHAR16* FileName = L"output.log";
+	CHAR16* Message = L"Hola desde KellyBootloader\r\n";
+	UINTN MessageSize = StrLen(Message) * sizeof(CHAR16);
+
+	// 1. Acceder al sistema de archivos
+	Status = gBS->LocateProtocol(&gEfiSimpleFileSystemProtocolGuid, NULL, (VOID**)&FileSystem);
+	if (EFI_ERROR(Status)) return;
+
+	Status = FileSystem->OpenVolume(FileSystem, &Root);
+	if (EFI_ERROR(Status)) return;
+
+	// 2. Crear o abrir el archivo
+	Status = Root->Open(
+		Root,
+		&NewFile,
+		FileName,
+		EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE | EFI_FILE_MODE_CREATE,
+		0
+	);
+	if (EFI_ERROR(Status)) {
+		Print(L"Error opening %r", Status);
+		return; }
+
+	// 3. Escribir en el archivo
+	Status = NewFile->Write(NewFile, &MessageSize, Message);
+
+	Print(L"Writing : %r\n", Status);
+
+	// 4. Cerrar el archivo
+	NewFile->Close(NewFile);
+}
+
 /**
 * TryBootErickBinarie
 * 
@@ -368,7 +406,7 @@ static VOID ListFiles()
 * 
 * @param filename is that file
 */
-static VOID BootSpecific(ch16* filename)
+VOID BootSpecific(ch16* filename, bool_t debugger)
 {
 	//
 	// configure the status variable
@@ -518,7 +556,7 @@ static VOID BootSpecific(ch16* filename)
 						// execute it
 						//
 
-						BinaryEx((CHAR16*)Buffer, FALSE);
+						BinaryEx((CHAR16*)Buffer, debugger);
 					}
 
 					//
@@ -534,8 +572,8 @@ static VOID BootSpecific(ch16* filename)
 						//
 						// and execute it
 						//
-
-						BinaryEx(Converted, FALSE);
+						
+						BinaryEx(Converted, debugger);
 						FreePool(Converted);
 					}
 
@@ -678,7 +716,10 @@ EFI_STATUS efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
 				gRT->ResetSystem(EfiResetWarm, EFI_SUCCESS, 0, 0);
 			}
 			else if (StrnCmp(FileName,L"./",2) == 0) {
-				BootSpecific(FileName + 2);
+				BootSpecific(FileName + 2, FALSE);
+			}
+			else if (StrnCmp(FileName, L"debug ", 6) == 0) {
+				BootSpecific(FileName + 6, TRUE);
 			}
 		}
 	}

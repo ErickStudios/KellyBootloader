@@ -1,0 +1,81 @@
+EA
+
+; kernel.easm
+
+for the os port for HuguiniOS*
+
+; section macros*
+    macro AllocatePool system_call\s14,
+    macro SetPool system_call\s15,
+
+; section functions*
+    
+; section segments*
+
+    ; "SYSTEM.BIN" *
+    move 30,0
+    move 31,10
+    AllocatePool 30
+
+    set_value_with_value 32,30
+    move 33,0
+    move 34,'S'
+    
+    SetPool 32
+
+    set_value_with_value 32,30
+    move 33,1
+    move 34,'Y'
+    
+    SetPool 32
+
+
+    set_value_with_value 32,30
+    move 33,2
+    move 34,'S'
+    
+    SetPool 32
+
+    set_value_with_value 32,30
+    move 33,3
+    move 34,'T'
+    
+    SetPool 32
+
+    set_value_with_value 32,30
+    move 33,4
+    move 34,'E'
+    
+    SetPool 32
+
+    set_value_with_value 32,30
+    move 33,5
+    move 34,'M'
+    
+    SetPool 32
+
+    set_value_with_value 32,30
+    move 33,6
+    move 34,'.'
+    
+    SetPool 32
+
+    set_value_with_value 32,30
+    move 33,7
+    move 34,'B'
+    
+    SetPool 32
+
+    set_value_with_value 32,30
+    move 33,8
+    move 34,'I'
+    
+    SetPool 32
+
+    set_value_with_value 32,30
+    move 33,9
+    move 34,'N'
+    
+    SetPool 32
+
+    system_call 21,30 ; load the file*

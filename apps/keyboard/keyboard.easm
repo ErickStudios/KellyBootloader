@@ -1,0 +1,55 @@
+EA
+
+; section variables*
+    LOOP = 0
+
+function LOOP
+
+    system_call 11,0
+    system_call 12,1
+
+    ; prints the unicode char*
+
+    move 4,'K'
+    system_call 1,4
+
+    move 4,'E'
+    system_call 1,4
+
+    move 4,'Y'
+    system_call 1,4
+
+    move 4,':'
+    system_call 1,4
+
+    move 4,'\s'
+    system_call 1,4
+
+    system_call 1,2
+
+    move 4,'\n'
+    system_call 1,4
+
+    move 4,'S'
+    system_call 1,4
+
+    move 4,'C'
+    system_call 1,4
+
+    move 4,'A'
+    system_call 1,4
+
+    move 4,'N'
+    system_call 1,4
+
+    move 4,':'
+    system_call 1,4
+
+    move 4,'\s'
+    system_call 1,4
+
+    system_call 18,1
+
+    system_call 9,0
+
+    call_function LOOP
