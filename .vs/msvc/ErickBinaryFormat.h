@@ -1125,6 +1125,35 @@ BinaryEx
 			}
 
 			///
+			/// 23 - readline
+			/// 
+			if (
+				p1 == 23
+				)
+			{
+				ch16* Line = ReadLineSeriusWorck();
+
+				u64 size = StrLen(Line);
+
+				memory_acces[p2] = AllocatePool(size);
+
+				for (size_t i = 0; i < size; i++)
+				{
+					SetMemoryPool(memory_acces[p2], i, (t16)Line);
+				}
+			}
+			
+			///
+			/// 24 - pool comparate
+			///
+			if (
+				p1 == 24
+				)
+			{
+				memory_acces[256] = (StrCmp(LocateMemory(memory_acces[p2]),LocateMemory(memory_acces[p2 + 1])) == 0);
+			}
+
+			///
 			/// 34 - blt
 			/// 
 			/// Summary:
@@ -1143,7 +1172,7 @@ BinaryEx
 			ch == jq_instruction
 			) {
 			if (
-				memory_acces[11] == memory_acces[12]
+				memory_acces[256] == TRUE
 				)
 			{
 				unsigned __int64 search_s;
@@ -1164,7 +1193,7 @@ BinaryEx
 			ch == jnq_instruction
 			) {
 			if (
-				memory_acces[11] != memory_acces[12]
+				memory_acces[256] != TRUE
 				)
 			{
 				unsigned __int64 search_s;

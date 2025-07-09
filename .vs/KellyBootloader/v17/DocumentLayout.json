@@ -38,8 +38,7 @@
               "RelativeToolTip": "debug.vbs",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADQSURBVDhPpZJRDsIwDENfEAfrzebezDtZ\u002BFg7SleEgEjTujR2HGchKfkxtG3cASTF5XJBPNbZTiLeFiaZR769bSdw1vbv24CDBpYU1ApSUiu2s5SCJEaSE7A6z50l5ajirQLg7IyUpZSWEu384teVIDORgm0DKWz3m5jBzASSQrUeJF2BTSO5mA3z3GPuny0AqFaA0Ys\u002BzuctjM6fgMzlFp4dO9Eh\u002BQAPY3wcQVJISu97Nw0isJ3e9\u002BUKYW1i7zQ/L9EVhIaf5dsopRAr9m/iAT9Q1k796Ae/AAAAAElFTkSuQmCC",
-              "WhenOpened": "2025-07-08T20:59:43.834Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-08T20:59:43.834Z"
             },
             {
               "$type": "Document",
@@ -49,7 +48,7 @@
               "RelativeDocumentMoniker": ".vs\\msvc\\ErickBinaryFormat.h",
               "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\ErickBinaryFormat.h",
               "RelativeToolTip": ".vs\\msvc\\ErickBinaryFormat.h",
-              "ViewState": "AQIAAFEBAAAAAAAAAAAAAGIBAAAqAAAA",
+              "ViewState": "AQIAADgEAAAAAAAAAAAkwKsEAAAXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-07-08T18:05:56.66Z",
               "EditorCaption": ""
@@ -64,8 +63,7 @@
               "RelativeToolTip": "main.c",
               "ViewState": "AQIAAGIAAAAAAAAAAAArwJEBAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
-              "WhenOpened": "2025-07-08T18:03:47.585Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-08T18:03:47.585Z"
             }
           ]
         },

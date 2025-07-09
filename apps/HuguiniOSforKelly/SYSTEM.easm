@@ -1,0 +1,261 @@
+EA
+
+; SYSTEM.easm
+; for huguiniOS
+*
+
+;
+    SYS_MAIN
+
+    the system main
+*
+SYS_MAIN = 0
+
+;
+    RUN_DLL_64
+
+    the function for run the dll 64
+*
+RUN_DLL_64 = 1
+
+;
+    POOLS_EDITOR
+
+    the register that is used for allocate the pools
+*
+POOLS_EDITOR = 1
+
+;
+    PromptLoop
+
+    the function for the loop of the prompt
+*
+PromptLoop = 2
+
+;
+    ProcessCommad
+
+    process a command
+*
+ProcessCommad = 3
+
+;
+    end
+
+    the end of the program
+*
+end = 4
+
+;
+    P1_CHAR_UP_DOWN
+
+    the windows corner
+*
+P1_CHAR_UP_DOWN = '-'
+
+;
+    P1_CHAR_LEFT_RIGHT
+
+    the windows left right corner
+*
+P1_CHAR_LEFT_RIGHT = '|'
+
+function SYS_MAIN
+
+    system_call 2,0
+
+    move 35,4
+    system_call 3,35 ; cambiar el color del texto a gris*
+
+    move ax,'B'
+    system_call 1,ax
+
+    move ax,'I'
+    move al,32
+    add ax,al
+    system_call 1,ax
+
+    move ax,'E'
+    move al,32
+    add ax,al    
+    system_call 1,ax
+
+    move ax,'N'
+    move al,32
+    add ax,al
+    system_call 1,ax
+
+    move ax,'V'
+    move al,32
+    add ax,al
+    system_call 1,ax
+
+    move ax,'E'
+    move al,32
+    add ax,al
+    system_call 1,ax
+
+    move ax,'N'
+    move al,32
+    add ax,al
+    system_call 1,ax
+
+    move ax,'I'
+    move al,32
+    add ax,al
+    system_call 1,ax
+    
+    move ax,'D'
+    move al,32
+    add ax,al
+    system_call 1,ax
+    
+    move ax,'O'
+    move al,32
+    add ax,al
+    system_call 1,ax
+    
+    move ax,'\s'
+    system_call 1,ax
+
+    move ax,'A'
+    move al,32
+    add ax,al
+    system_call 1,ax
+
+    move ax,'\s'
+    system_call 1,ax
+
+    move ax,'H'
+    system_call 1,ax
+
+    move ax,'U'
+    move al,32
+    add ax,al
+    system_call 1,ax
+    
+    move ax,'G'
+    move al,32
+    add ax,al
+    system_call 1,ax
+    
+    move ax,'U'
+    move al,32
+    add ax,al
+    system_call 1,ax
+    
+    move ax,'I'
+    move al,32
+    add ax,al
+    system_call 1,ax
+    
+    move ax,'N'
+    move al,32
+    add ax,al
+    system_call 1,ax
+    
+    move ax,'I'
+    move al,32
+    add ax,al
+    system_call 1,ax
+    
+    move ax,'O'
+    system_call 1,ax
+    
+    move ax,'S'
+    system_call 1,ax
+
+    move ax,'\n'
+    system_call 1,ax
+
+    call_function PromptLoop
+
+function PromptLoop
+
+    move 35,15
+    system_call 3,35 ; cambiar el color del texto a amarillo brillante*
+
+    move ax,'H'
+    system_call 1,ax
+
+    move ax,'U'
+    move al,32
+    add ax,al
+    system_call 1,ax
+    
+    move ax,'G'
+    move al,32
+    add ax,al
+    system_call 1,ax
+    
+    move ax,'U'
+    move al,32
+    add ax,al
+    system_call 1,ax
+    
+    move ax,'I'
+    move al,32
+    add ax,al
+    system_call 1,ax
+    
+    move ax,'N'
+    move al,32
+    add ax,al
+    system_call 1,ax
+    
+    move ax,'I'
+    move al,32
+    add ax,al
+    system_call 1,ax
+    
+    move ax,'O'
+    system_call 1,ax
+    
+    move ax,'S'
+    system_call 1,ax
+
+    move ax,'>'
+    system_call 1,ax
+
+    move 35,4
+    system_call 3,35 ; cambiar el color del texto a gris*
+
+    system_call 23,40 ; leer linea*
+
+    call_function ProcessCommad
+
+function ProcessCommad
+
+    move 1,0
+    move 1+1,4
+    system_call 14,1
+
+    set_value_with_value 20,1
+    move 21,0
+    move 22,'e'
+    system_call 15,20
+
+    set_value_with_value 20,1
+    move 21,1
+    move 22,'x'
+    system_call 15,20
+
+    set_value_with_value 20,1
+    move 21,2
+    move 22,'i'
+    system_call 15,20
+
+    set_value_with_value 20,1
+    move 21,3
+    move 22,'t'
+    system_call 15,20
+
+    set_value_with_value 20,1
+    set_value_with_value 20,40
+    system_call 23,20
+
+    if_equal end
+
+    call_function PromptLoop
+
+function end

@@ -1,0 +1,15 @@
+EA
+
+function 0
+
+move 1,'>'
+system_call 1,1
+
+system_call 23,0
+
+move 1,'\n'
+system_call 1,1
+
+system_call 20,0
+
+call_function 0
