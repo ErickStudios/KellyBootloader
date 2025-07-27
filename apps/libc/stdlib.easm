@@ -1,0 +1,49 @@
+HightLevel[ 
+    /**
+    * stdlib.easm
+    *
+    * std functions
+    */
+
+    _Use ASCII
+
+    _Use ErickBinaryFormat
+    _Use LibraryC
+
+    /**
+    * _Status
+    *
+    * represents the status
+    */
+    LET _Status
+    
+    /**
+    * Success
+    *
+    * the operation has been succesed
+    */
+    LET Success
+
+    /**
+    * NotFounded
+    *
+    * there is not founded
+    */
+    LET NotFounded
+
+    /**
+    * OutOffPool
+    *
+    * no more space for other pool
+    */
+    LET OutOffPool
+
+    SetVar Success 0
+    SetVar NotFounded 1
+    SetVar OutOffPool 2
+
+    SetVar _Status Success
+
+    call Main
+
+]HightLevel

@@ -1,0 +1,41 @@
+EA
+;
+; Print A
+
+; *
+move 1,'A'
+system_call 8,1
+move 1,'\n'
+system_call 8,1
+system_call 9,0
+call_function EEE
+;
+; function EEE
+; *
+EEE = 11
+function EEE
+;
+; Print B
+
+; *
+move 1,'B'
+system_call 8,1
+move 1,'\n'
+system_call 8,1
+system_call 9,0
+call_function CCC
+;
+; function CCC
+; *
+CCC = 12
+function CCC
+;
+; Print C
+
+; *
+move 1,'C'
+system_call 8,1
+move 1,'\n'
+system_call 8,1
+system_call 9,0
+call_function EEE

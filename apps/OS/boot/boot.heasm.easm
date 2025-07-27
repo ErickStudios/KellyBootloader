@@ -1,0 +1,443 @@
+EA
+;
+Declare variable MAX_LINE_LENGTH
+;*
+MAX_LINE_LENGTH = 11
+;
+Declare variable VGA_HEIGHT
+;*
+VGA_HEIGHT = 12
+;
+Declare variable VGA_WIDTH
+;*
+VGA_WIDTH = 13
+;
+Declare variable HUGUINIOS_MAX_PATH
+;*
+HUGUINIOS_MAX_PATH = 14
+move HUGUINIOS_MAX_PATH,108
+;
+Declare variable color_terminal
+;*
+color_terminal = 15
+;
+ Define macro HUGUINIOS_ALL_OK
+;*
+HUGUINIOS_ALL_OK = 0
+;
+ Define macro EIO
+;*
+EIO = 1
+;
+ Define macro EINVARG
+;*
+EINVARG = 2
+;
+ Define macro ENOMEM
+;*
+ENOMEM = 3
+;
+ Define macro EBADPATH
+;*
+EBADPATH = 4
+;
+ Define macro EFSNOTUS
+;*
+EFSNOTUS = 5
+;
+ Define macro ERDONLY
+;*
+ERDONLY = 6
+;
+ Define macro EUNIMP
+;*
+EUNIMP = 7
+;
+ Define macro EISTKN
+;*
+EISTKN = 8
+;
+ Define macro EINFORMAT
+;*
+EINFORMAT = 9
+;
+ Define macro HUGUINITOS_TOTAL_INTERRUPTS
+;*
+HUGUINITOS_TOTAL_INTERRUPTS = 512
+;
+ Define macro HUGUINITOS_HEAP_SIZE_BYTES
+;*
+HUGUINITOS_HEAP_SIZE_BYTES = 104857600
+;
+ Define macro HUGUINITOS_HEAP_BLOCK_SIZE
+;*
+HUGUINITOS_HEAP_BLOCK_SIZE = 4096
+;
+ Define macro HUGUINITOS_HEAP_ADDRESS
+;*
+HUGUINITOS_HEAP_ADDRESS = 0x01000000
+;
+ Define macro HUGUINITOS_HEAP_TABLE_ADDRESS
+;*
+HUGUINITOS_HEAP_TABLE_ADDRESS = 0x00007E00
+;
+ Define macro HUGUINITOS_SECTOR_SIZE
+;*
+HUGUINITOS_SECTOR_SIZE = 512
+;
+ Define macro HUGUINITOS_MAX_FILESYSTEMS
+;*
+HUGUINITOS_MAX_FILESYSTEMS = 12
+;
+ Define macro HUGUINITOS_MAX_FILE_DESCRIPTORS
+;*
+HUGUINITOS_MAX_FILE_DESCRIPTORS = 512
+;
+ Define macro HUGUINITOS_MAX_PATH
+;*
+HUGUINITOS_MAX_PATH = 108
+;
+ Define macro HUGUINITOS_TOTAL_GDT_SEGMENTS
+;*
+HUGUINITOS_TOTAL_GDT_SEGMENTS = 6
+;
+ Define macro HUGUINITOS_PROGRAM_VIRTUAL_ADDRESS
+;*
+HUGUINITOS_PROGRAM_VIRTUAL_ADDRESS = 0x400000
+;
+ Define macro HUGUINITOS_USER_PROGRAM_STACK_SIZE
+;*
+HUGUINITOS_USER_PROGRAM_STACK_SIZE = 1024
+;
+ Define macro HUGUINITOS_PROGRAM_VIRTUAL_STACK_ADDRESS_START
+;*
+HUGUINITOS_PROGRAM_VIRTUAL_STACK_ADDRESS_START = 0x3FF000
+;
+ Define macro HUGUINITOS_PROGRAM_VIRTUAL_STACK_ADDRESS_END
+;*
+HUGUINITOS_PROGRAM_VIRTUAL_STACK_ADDRESS_END = HUGUINIOS_PROGRAM_VIRTUAL_STACK_ADDRESS_START
+;
+ Define macro HUGUINITOS_MAX_PROGRAM_ALLOCATIONS
+;*
+HUGUINITOS_MAX_PROGRAM_ALLOCATIONS = 1024
+;
+ Define macro HUGUINITOS_MAX_PROCESSES
+;*
+HUGUINITOS_MAX_PROCESSES = 12
+;
+ Define macro USER_DATA_SEGMENT
+;*
+USER_DATA_SEGMENT = 0x23
+;
+ Define macro USER_CODE_SEGMENT
+;*
+USER_CODE_SEGMENT = 0x1b
+;
+ Define macro HUGUINITOS_MAX_ISR80H_COMMANDS
+;*
+HUGUINITOS_MAX_ISR80H_COMMANDS = 1024
+;
+ Define macro HUGUINITOS_KEYBOARD_BUFFER_SIZE
+;*
+HUGUINITOS_KEYBOARD_BUFFER_SIZE = 1024
+_imprimir_texto.str_ = 16
+move 16,0
+move 17,100
+system_call 14,16
+_crear_boton.texto_ = 17
+move 17,0
+move 18,100
+system_call 14,17
+_crear_boton.texto_ = 18
+move 18,0
+move 19,100
+system_call 14,18
+;
+; function _imprimir_texto_
+; *
+_imprimir_texto_ = 17
+function _imprimir_texto_
+;
+; function _crear_boton_
+; *
+_crear_boton_ = 19
+function _crear_boton_
+;
+; Print OWO bienvenidos a Huguinitos!!!!
+
+; *
+move 1,'O'
+system_call 8,1
+move 1,'W'
+system_call 8,1
+move 1,'O'
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'B'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'I'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'E'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'N'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'V'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'E'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'N'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'I'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'D'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'O'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'S'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'A'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'H'
+system_call 8,1
+move 1,'U'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'G'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'U'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'I'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'N'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'I'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'T'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'O'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'S'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'!'
+system_call 8,1
+move 1,'!'
+system_call 8,1
+move 1,'!'
+system_call 8,1
+move 1,'!'
+system_call 8,1
+move 1,'\n'
+system_call 8,1
+system_call 9,0
+call_function Loop
+;
+; function _DrawPrompt_
+; *
+_DrawPrompt_ = 20
+function _DrawPrompt_
+;
+; Print UnlimitedPower:^/Huguinitos$ 
+; *
+move 1,'U'
+system_call 8,1
+move 1,'N'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'L'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'I'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'M'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'I'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'T'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'E'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'D'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'P'
+system_call 8,1
+move 1,'O'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'W'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'E'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'R'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,':'
+system_call 8,1
+move 1,'^'
+system_call 8,1
+move 1,'/'
+system_call 8,1
+move 1,'H'
+system_call 8,1
+move 1,'U'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'G'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'U'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'I'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'N'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'I'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'T'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'O'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'S'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'$'
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+system_call 9,0
+ret
+;
+; function Loop
+; *
+Loop = 21
+function Loop
+call_function _DrawPrompt_
+Line = 22
+system_call 23,22
+;
+; FreePool Line
+;*
+system_call 20,Line
+call_function Loop

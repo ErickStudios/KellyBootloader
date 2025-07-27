@@ -1,0 +1,64 @@
+HightLevel[ 
+
+    /**
+    * UiApp1.heasm
+    *
+    * a simple Ui App without a objetive xd i want to show my programming habilidies
+    *
+    * is not a really ui app but is a test of the infinite posibilities using only the console
+    *
+    * InRunTime:
+    *
+    *   KellyBootloader> ./UiApp1.ebf
+    *   **Welcome to UiApp1**
+    *
+    *   A Table
+    *   +------------------+
+    *   +COL1 | COL2 | COL3+
+    *   +------------------+
+    *   + OK  | HMMM | OH  +
+    *   +------------------+
+    *   
+    *
+    *   Press any key to continue...
+    *
+    */
+
+    _Use ASCII
+
+    /**
+    * Main
+    *
+    * the main function
+    */
+    FUNCTION Main
+
+        /*welcome to the user*/
+        Print "**Welcome\sto\sUiApp1**\n\n"
+
+        Print "A\sTable\n"
+
+        Print "+------------------+\n"
+
+        /*
+        draw the first row
+        */
+
+        Print "+COL1\s+\sCOL2\s+\sCOL3+\n"
+
+        Print "+------------------+\n"
+
+        /*
+        draw the second row
+        */
+
+        Print "+\sOK\s\s+\sHMMM\s+\sOH\s\s+\n"
+        Print "+------------------+\n"
+
+        Print "\n\n"
+
+        Print "Press\sany\skey\sto\scontinue..."
+
+        __asm system_call 11,0
+
+ ]HightLevel

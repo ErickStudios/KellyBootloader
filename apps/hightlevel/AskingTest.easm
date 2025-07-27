@@ -1,0 +1,16 @@
+EA
+
+HighLevel[ 
+
+    use "ASCII"
+
+    /*
+    configure variables
+    */
+    prototype BUFFER Answare
+    BUFFER Ask StrLen\s"Cual\ses\stu\snombre?"
+
+    PrintPool Ask
+    BUFFER Answare ReadLine
+
+ ]HighLevel

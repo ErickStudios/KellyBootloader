@@ -1,0 +1,653 @@
+HightLevel[ 
+    
+    /**
+    * KellyBootloader.easm
+    *
+    * KellyBootloader library for apps
+    */
+
+    _Use ASCII
+
+    /**
+    * SystemCall
+    *
+    * represents all the calls in the KellyBootloader
+    */
+    ENUM SystemCall
+
+        /**
+        * _SystemCall_PrintCharacter_
+        *
+        * prints a character in the console
+        */
+        _EnumMember _SystemCall_PrintCharacter_ 1
+
+        /**
+        * _SystemCall_ClearScreen_
+        *
+        * clears the screen
+        */
+        _EnumMember _SystemCall_ClearScreen_ 2
+
+        /**
+        * _SystemCall_SetFgColor_
+        *
+        * sets the foreground color
+        */
+        _EnumMember _SystemCall_SetFgColor_ 3
+ 
+        /**
+        * _SystemCall_SetBgColor_
+        *
+        * sets the background color
+        */
+        _EnumMember _SystemCall_SetBgColor_ 4
+
+        /**
+        * _SystemCall_SetCursorPositionX_
+        *
+        * sets the cursor y position
+        */
+        _EnumMember _SystemCall_SetCursorPositionX_ 5
+
+        /**
+        * _SystemCall_SetCursorPositionY_
+        *
+        * sets the cursor x position
+        */
+        _EnumMember _SystemCall_SetCursorPositionY_ 7
+
+        /**
+        * _SystemCall_PrintCharacterWithoutUpdateScreen_
+        *
+        * prints a character without update the screen
+        */
+        _EnumMember _SystemCall_PrintCharacterWithoutUpdateScreen_ 8
+        
+        /**
+        * _SystemCall_UpdateScreen_
+        *
+        * updates the screen
+        */
+        _EnumMember _SystemCall_UpdateScreen_ 9
+
+        /**
+        * _SystemCall_EfiStall_
+        *
+        * a function for wait a count of microseconds
+        */
+        _EnumMember _SystemCall_EfiStall_ 10
+
+        /**
+        * _SystemCall_WaitForKey_
+        *
+        * wait for a key
+        */
+        _EnumMember _SystemCall_WaitForKey_ 11
+
+        /**
+        * _SystemCall_ReadKey_
+        *
+        * reads a key
+        */
+        _EnumMember _SystemCall_ReadKey_ 12
+
+        /**
+        * _SystemCall_GetTime_
+        *
+        * gets the time
+        */
+        _EnumMember _SystemCall_GetTime_ 13
+
+        /**
+        * _SystemCall_AllocatePool_
+        *
+        * allocates a pool
+        */
+        _EnumMember _SystemCall_AllocatePool_ 14
+        
+        /**
+        * _SystemCall_EditPoolItem_
+        *
+        * edits a item from a pool
+        */
+        _EnumMember _SystemCall_EditPoolItem_ 16
+
+        /**
+        * _SystemCall_GetPoolItem_
+        *
+        * gets a item from a pool
+        */
+        _EnumMember _SystemCall_GetPoolItem_ 17
+        
+        /**
+        * _SystemCall_PrintNumberWithoutUpdateScreen_
+        *
+        * prints a number in decimal in the console
+        */
+        _EnumMember _SystemCall_PrintNumberWithoutUpdateScreen_ 18
+
+        /**
+        * _SystemCall_PrintHexNumberWithoutUpdateScreen_
+        *
+        * prints a number in hexadecimal in the console
+        */
+        _EnumMember _SystemCall_PrintHexNumberWithoutUpdateScreen_ 19
+
+        /**
+        * _SystemCall_FreePool_
+        *
+        * frees a pool
+        */
+        _EnumMember _SystemCall_FreePool_ 20
+
+        /**
+        * _SystemCall_ExecuteFile_
+        *
+        * executes other file with provide the other file name in a pool
+        */
+        _EnumMember _SystemCall_ExecuteFile_ 21
+
+        /**
+        * _SystemCall_PrintPool_
+        *
+        * prints a pool content
+        */
+        _EnumMember _SystemCall_PrintPool_ 22
+
+        /**
+        * _SystemCall_ReadLine_
+        *
+        * reads the line
+        */
+        _EnumMember _SystemCall_ReadLine_ 23
+
+        /**
+        * _SystemCall_PoolComparate_
+        *
+        * returns true in the mem 256 if the pools are equal
+        */
+        _EnumMember _SystemCall_PoolComparate_ 24
+        
+        /**
+        * _SystemCall_CompMemNotEqual_
+        *
+        * returns true in the mem 256 if the mems are equal
+        */
+        _EnumMember _SystemCall_CompMem_ 25
+
+        /**
+        * _SystemCall_CompMemNotEqual_
+        *
+        * returns true in the mem 256 if the mems are not equal
+        */
+        _EnumMember _SystemCall_CompMemNotEqual_ 26
+
+        /**
+        * _SystemCall_Shutdown_
+        *
+        * Credits: Skale001
+        *
+        * shutdowns the system
+        */
+        _EnumMember _SystemCall_Shutdown_ 27
+        
+        /**
+        * _SystemCall_Reboot_
+        *
+        * Credits: Skale001
+        *
+        * reboots the system
+        */
+        _EnumMember _SystemCall_Reboot_ 28
+
+        /**
+        * _SystemCall_CustomHexColorForeground_
+        *
+        * changes the color of the foreground to a hex color in a RGB struct
+        */
+        _EnumMember _SystemCall_CustomHexColorForeground_ 29
+
+        /**
+        * _SystemCall_CustomHexColorBackground_
+        *
+        * changes the color of the backgroun to a hex color in a RGB struct
+        */
+        _EnumMember _SystemCall_CustomHexColorBackground_ 30
+
+        /**
+        * _SystemCall_AntiDebugger_
+        *
+        * for avoid some cheats and make the anti cheats more easy for make it,
+        *this helps to the game developers
+        * for obligatorily unable the debugger for avoid the method of press F5 
+        * for edit memory and the step-by-step
+        * execution
+        */
+        _EnumMember _SystemCall_AntiDebugger_ 31
+    END
+
+    /**
+    * ConsoleColor
+    *
+    * represents the standart colors in the console
+    */
+    ENUM ConsoleColor
+
+        /**
+        * _ConsoleColor_black_
+        *
+        * represents the color black
+        */
+        _EnumMember _ConsoleColor_black_ 1
+
+        /**
+        * _ConsoleColor_lightblack_
+        *
+        * represents the color light black
+        */
+        _EnumMember _ConsoleColor_lightblack_ 2
+        
+        /**
+        * _ConsoleColor_darkgray_
+        *
+        * represents the color dark gray
+        */
+        _EnumMember _ConsoleColor_darkgray_ 3
+        
+        /**
+        * _ConsoleColor_gray_
+        *
+        * represents the color gray
+        */
+        _EnumMember _ConsoleColor_gray_ 4
+        
+        /**
+        * _ConsoleColor_lightgray_
+        *
+        * represents the color light gray
+        */
+        _EnumMember _ConsoleColor_lightgray_ 5
+        
+        /**
+        * _ConsoleColor_white_
+        *
+        * represents the color white
+        */
+        _EnumMember _ConsoleColor_white_ 6
+    
+        /**
+        * _ConsoleColor_darkred_
+        *
+        * represents the color dark red
+        */
+        _EnumMember _ConsoleColor_darkred_ 7
+
+        /**
+        * _ConsoleColor_red_
+        *
+        * represents the color red
+        */
+        _EnumMember _ConsoleColor_red_ 8
+
+        /**
+        * _ConsoleColor_brightred_
+        *
+        * represents the color bright red
+        */
+        _EnumMember _ConsoleColor_brightred_ 9
+    
+        /**
+        * _ConsoleColor_darkorange_
+        *
+        * represents the color dark orange
+        */
+        _EnumMember _ConsoleColor_darkorange_ 10
+
+        /**
+        * _ConsoleColor_orange_
+        *
+        * represents the color orange
+        */
+        _EnumMember _ConsoleColor_orange_ 11
+
+        /**
+        * _ConsoleColor_brightorange_
+        *
+        * represents the color bright orange
+        */
+        _EnumMember _ConsoleColor_brightorange_ 12
+        
+        /**
+        * _ConsoleColor_darkyellow_
+        *
+        * represents the color dark yellow
+        */
+        _EnumMember _ConsoleColor_darkyellow_ 13
+
+        /**
+        * _ConsoleColor_yellow_
+        *
+        * represents the color yellow
+        */
+        _EnumMember _ConsoleColor_yellow_ 14
+
+        /**
+        * _ConsoleColor_brightyellow_
+        *
+        * represents the color bright yellow
+        */
+        _EnumMember _ConsoleColor_brightyellow_ 15
+
+        /**
+        * _ConsoleColor_darkgreen_
+        *
+        * represents the color dark green
+        */
+        _EnumMember _ConsoleColor_darkgreen_ 16
+
+        /**
+        * _ConsoleColor_green_
+        *
+        * represents the color green
+        */
+        _EnumMember _ConsoleColor_green_ 17
+
+        /**
+        * _ConsoleColor_brightgreen_
+        *
+        * represents the color bright green
+        */
+        _EnumMember _ConsoleColor_brightgreen_ 18
+
+        /**
+        * _ConsoleColor_darkcyan_
+        *
+        * represents the color dark cyan
+        */
+        _EnumMember _ConsoleColor_darkcyan_ 19
+
+        /**
+        * _ConsoleColor_cyan_
+        *
+        * represents the color cyan
+        */
+        _EnumMember _ConsoleColor_cyan_ 20
+
+        /**
+        * _ConsoleColor_brightcyan_
+        *
+        * represents the color bright cyan
+        */
+        _EnumMember _ConsoleColor_brightcyan_ 21
+
+        /**
+        * _ConsoleColor_darkteal_
+        *
+        * represents the color dark teal
+        */
+        _EnumMember _ConsoleColor_darkteal_ 22
+
+        /**
+        * _ConsoleColor_teal_
+        *
+        * represents the color teal
+        */
+        _EnumMember _ConsoleColor_teal_ 23
+
+        /**
+        * _ConsoleColor_brightteal_
+        *
+        * represents the color bright teal
+        */
+        _EnumMember _ConsoleColor_brightteal_ 24
+
+        /**
+        * _ConsoleColor_darkblue_
+        *
+        * represents the color dark blue
+        */
+        _EnumMember _ConsoleColor_darkblue_ 25
+
+        /**
+        * _ConsoleColor_blue_
+        *
+        * represents the color blue
+        */
+        _EnumMember _ConsoleColor_blue_ 26
+
+        /**
+        * _ConsoleColor_brightblue_
+        *
+        * represents the color bright blue
+        */
+        _EnumMember _ConsoleColor_brightblue_ 27
+    END
+
+    /**
+    * first_item
+    *
+    * get the first item of the pool
+    */
+    #define ->first_item +1
+    
+    /**
+    * second_item
+    *
+    * get the second item of the pool
+    */
+    #define ->second_item +2
+
+    /**
+    * GetLength()
+    *
+    * the length
+    */
+    #define ->GetLength() +0
+
+    /**
+    * Red   _LEGACY_
+    *
+    * the channel red for a color
+    */
+    #define ->Red +0
+    
+    /**
+    * Green _LEGACY_
+    *
+    * the channel green for a color
+    */
+    #define ->Green +1
+        
+    /**
+    * Blue  _LEGACY_
+    *
+    * the channel blue for a color
+    */
+    #define ->Blue +2
+
+    /**
+    * ParametersId
+    *
+    * the parameters
+    */
+    ENUM ParametersId
+        /**
+        * _ParametersId_Param1_
+        *
+        * the param 1
+        */
+        _EnumMember _ParametersId_Param1_ 3001
+
+        /**
+        * _ParametersId_Param2_
+        *
+        * the param 2
+        */
+        _EnumMember _ParametersId_Param2_ 3002
+        
+        /**
+        * _ParametersId_Param3_
+        *
+        * the param 3
+        */
+        _EnumMember _ParametersId_Param3_ 3003
+                
+        /**
+        * _ParametersId_Param4_
+        *
+        * the param 4
+        */
+        _EnumMember _ParametersId_Param4_ 3004
+                        
+        /**
+        * _ParametersId_Param5_
+        *
+        * the param 5
+        */
+        _EnumMember _ParametersId_Param5_ 3005
+                                
+        /**
+        * _ParametersId_Param6_
+        *
+        * the param 6
+        */
+        _EnumMember _ParametersId_Param6_ 3006
+                                        
+        /**
+        * _ParametersId_Param7_
+        *
+        * the param 7
+        */
+        _EnumMember _ParametersId_Param7_ 3007
+                                                
+        /**
+        * _ParametersId_Param8_
+        *
+        * the param 8
+        */
+        _EnumMember _ParametersId_Param8_ 3008
+                                                        
+        /**
+        * _ParametersId_Param9_
+        *
+        * the param 9
+        */
+        _EnumMember _ParametersId_Param9_ 3009
+    END
+
+    /**
+    * EfiInputKey
+    *
+    * represents a input key
+    */
+    swinc EfiInputKey
+    {
+        /**
+        * ScanCode
+        *
+        * represents the scan code of the key
+        */
+        autv ScanCode::LET;
+        /**
+        * UnicodeChar
+        *
+        * represents the unicode character, for example the key a is 'A'
+        */
+        autv UnicodeChar::LET;
+    }
+
+    /**
+    * EfiTime
+    *
+    * represents the time
+    */
+    swinc EfiTime
+    {
+        /**
+        * Second
+        *
+        * represents the second
+        */
+        autv Second::LET;
+        /**
+        * Minute
+        *
+        * represents the minute
+        */
+        autv Minute::LET;
+        /**
+        * Hour
+        *
+        * represents the hour
+        */
+        autv Hour::LET;
+        /**
+        * Day
+        *
+        * represents the day
+        */
+        autv Day::LET;
+        /**
+        * Month
+        *
+        * represents the month
+        */
+        autv Month::LET;
+        /**
+        * Year
+        *
+        * represents the year
+        */
+        autv Year::LET;
+    }
+
+    /**
+    * EbfException
+    *
+    * represents a exception
+    */
+    swinc EbfException
+    {
+        /**
+        * Reason
+        *
+        * represents the reason of the exception
+        */
+        autv Reason::LET;
+        /**
+        * MemoryRegion
+        *
+        * represents the memory region (the slot) where the exception ocurred
+        */
+        autv MemoryRegion::LET;
+        /**
+        * MemoryRegionNewValue
+        *
+        * represents the new error value of the MemoryRegion
+        */
+        autv MemoryRegionNewValue::LET;
+        /**
+        * InstructionNumber
+        *
+        * represents the instruction number where the exception ocurred
+        */
+        autv InstructionNumber::LET;
+    }
+
+    call PreRuntime
+
+    /**
+    * PreRuntime
+    *
+    * execute some function pre-runtime
+    */
+    FUNCTION PreRuntime
+
+        SetVarWithValue _PtrTo_Param1_ 3001
+        SetVarWithValue _PtrTo_Param2_ 3002
+        SetVarWithValue _PtrTo_Param3_ 3003
+        SetVarWithValue _PtrTo_Param4_ 3004
+        SetVarWithValue _PtrTo_Param5_ 3005
+
+ ]HightLevel

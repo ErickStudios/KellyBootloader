@@ -1,0 +1,25 @@
+
+_Use ASCII
+
+%include
+    \dependences\kernel.heasm
+
+Print "OWO\sbienvenidos\sa\sHuguinitos!!!!\n"
+
+call Loop
+
+FUNCTION _DrawPrompt_
+
+    Print "UnlimitedPower:^/Huguinitos$\s"
+
+    __asm ret
+
+FUNCTION Loop
+
+    call _DrawPrompt_
+
+    BUFFER Line ReadLine
+
+    FreePool Line
+
+    call Loop

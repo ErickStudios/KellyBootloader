@@ -1,0 +1,20 @@
+EA
+
+; Pointers.easm
+;
+; compile it with `file` the others are compiled with `hlvc`
+*
+
+; well, here cant use the hightlevel compiler so, configure it manually*
+
+move 1,10
+move 2,10
+
+multiplique 1,2 ; result : 100 *
+multiplique 1,2 ; result : 1000 *
+
+; and with that will be exploit ASCII and there limitations for acces to a pointer that is greater than
+106 ((128 (characters allowed) - 22 (the offset that divide the instrucctions with the real datas)) = 106).
+*
+
+_WorkWithPointers move 1,5 ; move 5 to the ram acces 1000*

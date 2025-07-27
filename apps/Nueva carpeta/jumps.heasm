@@ -1,0 +1,17 @@
+_Use ASCII
+
+Print "A\n"
+
+call EEE
+
+FUNCTION EEE
+
+    Print "B\n"
+
+    call CCC
+
+FUNCTION CCC
+
+    Print "C\n"
+
+    call EEE

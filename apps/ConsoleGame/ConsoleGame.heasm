@@ -1,0 +1,62 @@
+HightLevel[ 
+
+    /**
+    * ConsoleGame.heasm
+    *
+    * a simple game for the console
+    * hackers, i give you the directions that the game uses for the variables
+    * well, there is in the code
+    *
+    * 00000043 : scene
+    * 00000044 : score
+    */
+
+    %include
+        \apps\libc\KellyBootloader.easm
+
+    #define __scene__ 43
+    #define __score__ 44
+
+    call Main
+
+    /**
+    * SceneCheck
+    *
+    * check the scene and the command
+    */
+    FUNCTION SceneCheck
+
+        __asm ret
+
+    /**
+    * OpenHexeditMem
+    *
+    * open the memory editor
+    */
+    FUNCTION OpenHexeditMem
+
+        __asm system_call 32,0
+
+        __asm ret
+
+    /**
+    * Main
+    *
+    * the function of the game
+    */
+    FUNCTION Main
+
+        call Loop
+
+    FUNCTION Loop
+
+        BUFFER ReadedLine ReadLine
+
+        BUFFER __Cmd_Hackview AllocatePool->StrLen\s"hm"
+
+        __Cmd_Hackview [0] 'h'
+        __Cmd_Hackview [1] 'm'
+
+        IF BufferCmp<__Cmd_Hackview,Buffer2> THEN Function
+
+ ]HightLevel

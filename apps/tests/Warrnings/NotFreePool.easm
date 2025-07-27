@@ -1,0 +1,7 @@
+HightLevel[ 
+
+    _Use ASCII
+
+    BUFFER MyBuffer AllocatePool->10
+
+ ]HightLevel

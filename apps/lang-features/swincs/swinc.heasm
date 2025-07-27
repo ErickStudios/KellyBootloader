@@ -1,0 +1,51 @@
+HightLevel[ 
+    /**
+    * swinc.heasm
+    *
+    * a form to organize datas
+    */
+    _Use ASCII
+
+    /**
+    * Job
+    *
+    * defines a job
+    */
+    swinc Job
+    {
+        /**
+        * Salary
+        *
+        * the salary
+        */
+        autv Salary::LET;
+    }
+    /**
+    * Person
+    *
+    * defines a person
+    */
+    swinc Person
+    {
+        /**
+        * Name
+        *
+        * the name of the person
+        */
+        autv Name::BUFFER;
+        /**
+        * Age
+        *
+        * the age of the person
+        */
+        autv Age::LET;
+        /**
+        * Job
+        *
+        * the job of the person
+        */
+        autv Job::swinc Job;
+    }
+    autopbus Juan::swinc Person
+    
+ ]HightLevel

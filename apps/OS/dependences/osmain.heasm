@@ -1,0 +1,13 @@
+
+BUFFER _imprimir_texto.str_ AllocatePool->100
+
+BUFFER _crear_boton.texto_ AllocatePool->100
+BUFFER _crear_boton.texto_ AllocatePool->100
+
+FUNCTION _imprimir_texto_
+
+    PrintPool _imprimir_texto.str_
+
+FUNCTION _crear_boton_
+
+    PrintPool _crear_boton.texto_

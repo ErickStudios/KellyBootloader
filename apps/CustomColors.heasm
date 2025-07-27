@@ -1,0 +1,43 @@
+HightLevel[ 
+
+    /**
+    * CustomColors.heasm
+    *
+    * a custom colors app
+    *
+    * In Runtime:
+    *
+    *   KellyBootloader> ./CustomColors.ebf
+    *   This word is in a custom color
+    *
+    *   KellyBootloader>
+    *
+    */
+
+    _Use ASCII
+
+    %include
+        apps\libc\KellyBootloader.easm
+
+    /**
+    * ColorM
+    *
+    * the color used for work
+    */
+    LET ColorM
+
+    Print "This\s"
+
+    SetVar ColorM->Red 0
+    SetVar ColorM->Green 255
+    SetVar ColorM->Blue 70
+
+    __asm system_call _SystemCall_CustomHexColorForeground_,ColorM
+
+    Print "word\s"
+
+    __asm system_call _SystemCall_SetFgColor_,_ConsoleColor_gray_
+
+    Print "is\sin\sa\sCustom\scolor"
+
+ ]HightLevel

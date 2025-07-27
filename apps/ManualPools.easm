@@ -1,0 +1,61 @@
+EA
+
+; ManualPools.easm
+
+because the pools can broken the firmware in some uefises , will be have warnning and for dont use the
+broken functions, in this file i tech you how to create manual pools without broken your uefi in the process
+*
+
+;
+remember : 
+
+    The EBF-SPC-003 Specificts that a pool is created by a main memory part and a secondarys memory parts
+    Ex: a pool located in 002052 with a length of 000003 that haves the next values (1, 2, 3) are located with the next Method in the memory
+    ```
+    Val  000003 000001 000002 000003
+    Pos  002052 002053 002054 002055
+    ```
+
+so for create manually a pool need a memory part that contains the pool size and a secondarys memory parts that are
+the values of the pool
+*
+
+move 1,2
+move 2,10
+
+multiplique 1,2 ; result : 20*
+multiplique 1,2 ; result : 200*
+multiplique 1,2 ; result : 2000*
+
+move 2,1
+
+; 
+; pool size
+;*
+
+add 1,2 ; result : 2001*
+
+;
+; first pool item
+;* 
+
+
+set_value_with_value 3,1
+add 3,2
+
+;
+; second pool item
+;* 
+
+set_value_with_value 4,1
+add 4,2
+add 4,2
+
+
+;
+; make the pool manually
+; *
+
+_WorkWithPointers move 1,2 ; the pool size*
+_WorkWithPointers move 3,14 ; the first item of pool*
+_WorkWithPointers move 4,9 ; the seond item of pool*

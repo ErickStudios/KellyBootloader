@@ -1,0 +1,24 @@
+# ![ErickAssembly mode]
+
+# ahora tenemos
+# /boot
+#   /boot.heasm
+# /build
+#   the builded content...
+# /dependences
+#   /headers
+#       /config.heasm
+#       /kernel.heasm
+#       /status.heasm
+#   /osmain.heasm
+#   /kernel.heasm
+# /programs
+# /usr
+# /makelima.mkl
+
+# ![use HightLevelCompiler]
+package "boot/boot.heasm" -> convert_to -> "build/BOOT.EBF"
+
+# definitivamente no es un ejecutable de windows solo no se me ocurrio una extension mas original
+# ![use HightLevelCompiler]
+#package "/programs/shell/shell.heasm" -> convert_to -> "/build/shell.exe"

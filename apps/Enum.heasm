@@ -1,0 +1,47 @@
+HightLevel[ 
+
+    /**
+    * Enum.easm
+    *
+    * a enum example
+    */
+
+    _Use ASCII
+    
+    /**
+    * MyEnum
+    *
+    * a example enum
+    */
+    ENUM MyEnum
+        /**
+        * EnumMember1
+        *
+        * a enum member
+        */
+        _EnumMember EnumMember1 0
+
+        /**
+        * EnumMember2
+        *
+        * a enum member
+        */
+        _EnumMember EnumMember2 1
+        
+        /**
+        * EnumMember3
+        *
+        * a enum member
+        */
+        _EnumMember EnumMember3 2
+    END
+
+    /**
+    * Main
+    *
+    * the main point
+    */
+    FUNCTION Main
+
+        __asm ret
+ ]HightLevel

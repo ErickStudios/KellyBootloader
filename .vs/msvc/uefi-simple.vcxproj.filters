@@ -27,7 +27,7 @@
     <ClInclude Include="ErickBinaryFormat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="KernelTextMode.h">
+    <ClInclude Include="Console.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="motor.h">

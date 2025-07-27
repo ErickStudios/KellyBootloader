@@ -27,13 +27,15 @@
 #ifndef _UEFI_LITTE_IMPORTANT_DEP_
 #define _UEFI_LITTE_IMPORTANT_DEP_
 
+#ifndef CONST
 #define CONST
+#endif
 #define IN
 #define OUT
 
 #include <efi.h>
 #include <efilib.h>
-#include <vcruntime.h>
+//#include <vcruntime.h>
 
 #endif
 
@@ -360,14 +362,6 @@ typedef u64                                                longlong_t;
 
 
 typedef u8                                                 bool_t;
-
-struct
-    _CSCHEME {
-    EFI_GRAPHICS_OUTPUT_BLT_PIXEL                           backgroundcolor;
-    EFI_GRAPHICS_OUTPUT_BLT_PIXEL                           buttonscolor;
-    EFI_GRAPHICS_OUTPUT_BLT_PIXEL                           buttonstext;
-}
-;
 
 /// !
 /// !
@@ -817,6 +811,9 @@ typedef struct {
 #define NOT_WITH_TDAH                                       static
 #define FileEntry                                           int Main()
 
+#define EXPORT_STD                                          
+#define IMPORT_STD
+
 #define class                                               struct
 #define ClassType                                           typedef class
 
@@ -937,9 +934,6 @@ typedef struct {
 /// !
 /// !
 /// !
-
-EFI_TIME                                                    GlobalTime;
-EFI_GRAPHICS_OUTPUT_PROTOCOL* gop;
 
 bool_t                                                      IsSuperUser = 0;
 
@@ -1190,20 +1184,172 @@ typedef struct _KELLY_TIME {
 /// !
 /// !
 
-void
-UpdateTime
+CHAR16**
+SplitChs
 (
+    CHAR16* text,
+    UINTN* line_count,
+    CHAR16* Character
 );
 
-bool_t
-ShowCenteredDialogaConf
+BOOLEAN
+StrContain
 (
-    EFI_HANDLE* ImageHamdle,
-    EFI_SYSTEM_TABLE* SystemTable,
-    ch16* message,
-    EFI_GRAPHICS_OUTPUT_BLT_PIXEL bar,
-    EFI_GRAPHICS_OUTPUT_BLT_PIXEL text,
-    struct _CSCHEME* Colors
+    CHAR16* Str,
+    CHAR16* Str2
+)
+{
+    for (size_t i = 0; i < StrLen(Str); i++)
+    {
+        if (StrnCmp((Str + i), Str2, StrLen(Str2)) == 0) return TRUE;
+    }
+
+    return FALSE;
+}
+
+CHAR16*
+StrReplace(CHAR16* source, CHAR16* search, CHAR16* replace)
+{
+    UINTN sourceLen = StrLen(source);
+    UINTN searchLen = StrLen(search);
+    UINTN replaceLen = StrLen(replace);
+
+    // Buffer grande para resultado (puedes optimizarlo luego)
+    CHAR16* result = AllocatePool((sourceLen + 1) * sizeof(CHAR16) * 2);
+    UINTN resultIndex = 0;
+
+    for (UINTN i = 0; i < sourceLen; ) {
+        BOOLEAN match = TRUE;
+        for (UINTN j = 0; j < searchLen; j++) {
+            if (source[i + j] != search[j]) {
+                match = FALSE;
+                break;
+            }
+        }
+
+        if (match) {
+            for (UINTN k = 0; k < replaceLen; k++) {
+                result[resultIndex++] = replace[k];
+            }
+            i += searchLen;
+        }
+        else {
+            result[resultIndex++] = source[i++];
+        }
+    }
+
+    result[resultIndex] = L'\0';
+    return result;
+}
+
+CHAR16*
+StrReplaceChar
+(
+    CHAR16* Str,
+    CHAR16 Char
+)
+{
+    u64 len = StrLen(Str);
+    CHAR16* NewStr = AllocatePool(((len + 1) * sizeof(CHAR16)));
+
+    size_t i = 0;
+    size_t colocador = 0;
+
+    for (i = 0; i < len; i++)
+    {
+        if (Str[i] == Char) NewStr[colocador] = Char;
+        else NewStr[colocador] = Str[i];
+        colocador++;
+    }
+
+    NewStr[i] = 0;
+
+    return NewStr;
+}
+
+CHAR16*
+StrTrim(
+    CHAR16* Str
+)
+{
+    CHAR16* StrRet = StrDuplicate(Str);
+
+    while (StrRet[0] == L' ' || StrRet[0] == L'\t') {
+        StrRet++;
+    }
+
+    return StrRet;
+}
+
+CHAR16*
+StrOnlySpaces(
+    CHAR16* Str
+)
+{
+    CHAR16* StrRet = StrDuplicate(Str);
+
+    for (size_t i = 0; i < StrLen(Str); i++)
+    {
+        if (
+            Str[i] != L' ' && Str[i] != L'\t'
+            )
+        {
+            StrRet[i] = L'\0';
+            return StrRet;
+        }
+
+        StrRet[i] = L' ';
+    }
+
+    return StrRet;
+}
+
+typedef struct {
+    //
+    // Lenght
+    // 
+    // the lenght
+    //
+    u64 Lenght;
+
+    //
+    // Items
+    // 
+    // the items
+    //
+    ch16** Items;
+} StrArray_T;
+
+ch16
+StrGancho
+(
+    CHAR16* Str,
+    CHAR16* Spliting,
+    u64 fast_ITEM_GET_INDEX
+)
+{
+    u64 lenght = 0;
+
+    ch16** splites = SplitChs(Str, &lenght, Spliting);
+
+    return splites[fast_ITEM_GET_INDEX];
+}
+
+StrArray_T
+Str_dot_Split
+(
+    CHAR16* Str,
+    CHAR16* Spliting
+)
+{
+    StrArray_T Structure; 
+    Structure.Items = SplitChs(Str, &Structure.Lenght, Spliting); 
+    return Structure;
+}
+
+VOID
+UpdateTime
+(
 );
 
 bool_t
@@ -1211,39 +1357,4 @@ IsInArrayRange
 (
     ch16                                                    Text[],
     u32                                                     ArrayLen
-)
-;
-
-u64
-StGlobVar(
-    ch16* VarName,
-    EFI_GUID* VarGuid,
-    u64	                                                    DataSize,
-    objet_t                                                 Data
-)
-{
-    //
-    // setuping
-    //
-    u64  Status;
-
-    //
-    // a clean no expand
-    //
-    Status =
-        RT->SetVariable
-        (
-            VarName,
-            VarGuid,
-            EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS | EFI_VARIABLE_NON_VOLATILE,
-            DataSize,
-            Data
-        );
-
-    /*
-    ASSERT(!
-        EFI_ERROR(Status)
-    );
-    */
-    return (Status);
-}
+);

@@ -1,0 +1,93 @@
+EA
+
+; 
+SHELL.easm
+*
+
+move 1,'W'
+system_call 1,1
+
+move 1,'E'
+move 2,32
+add 1,2
+system_call 1,1
+
+move 1,'L'
+move 2,32
+add 1,2
+system_call 1,1
+
+move 1,'C'
+move 2,32
+add 1,2
+system_call 1,1
+
+move 1,'O'
+move 2,32
+add 1,2
+system_call 1,1
+
+move 1,'M'
+move 2,32
+add 1,2
+system_call 1,1
+
+move 1,'E'
+move 2,32
+add 1,2
+system_call 1,1
+
+move 1,'\s'
+system_call 1,1
+
+move 1,'T'
+move 2,32
+add 1,2
+system_call 1,1
+
+move 1,'O'
+move 2,32
+add 1,2
+system_call 1,1
+
+move 1,'\s'
+system_call 1,1
+
+move 1,'A'
+system_call 1,1
+
+move 1,'N'
+move 2,32
+add 1,2
+system_call 1,1
+
+move 1,'Y'
+move 2,32
+add 1,2
+system_call 1,1
+
+move 1,'K'
+system_call 1,1
+
+move 1,'O'
+system_call 1,1
+
+move 1,'S'
+system_call 1,1
+
+move 1,'\n'
+system_call 1,1
+
+function 0
+
+move 1,'>'
+system_call 1,1
+
+system_call 23,0
+
+move 1,'\n'
+system_call 1,1
+
+system_call 20,0
+
+call_function 0

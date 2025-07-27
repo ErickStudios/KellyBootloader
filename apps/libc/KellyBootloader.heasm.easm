@@ -1,0 +1,296 @@
+EA
+;
+Enum Member _SystemCall_PrintCharacter_
+;*
+_SystemCall_PrintCharacter_ = 1
+;
+Enum Member _SystemCall_ClearScreen_
+;*
+_SystemCall_ClearScreen_ = 2
+;
+Enum Member _SystemCall_SetFgColor_
+;*
+_SystemCall_SetFgColor_ = 3
+;
+Enum Member _SystemCall_SetBgColor_
+;*
+_SystemCall_SetBgColor_ = 4
+;
+Enum Member _SystemCall_SetCursorPositionX_
+;*
+_SystemCall_SetCursorPositionX_ = 5
+;
+Enum Member _SystemCall_SetCursorPositionY_
+;*
+_SystemCall_SetCursorPositionY_ = 7
+;
+Enum Member _SystemCall_PrintCharacterWithoutUpdateScreen_
+;*
+_SystemCall_PrintCharacterWithoutUpdateScreen_ = 8
+;
+Enum Member _SystemCall_UpdateScreen_
+;*
+_SystemCall_UpdateScreen_ = 9
+;
+Enum Member _SystemCall_EfiStall_
+;*
+_SystemCall_EfiStall_ = 10
+;
+Enum Member _SystemCall_WaitForKey_
+;*
+_SystemCall_WaitForKey_ = 11
+;
+Enum Member _SystemCall_ReadKey_
+;*
+_SystemCall_ReadKey_ = 12
+;
+Enum Member _SystemCall_GetTime_
+;*
+_SystemCall_GetTime_ = 13
+;
+Enum Member _SystemCall_AllocatePool_
+;*
+_SystemCall_AllocatePool_ = 14
+;
+Enum Member _SystemCall_EditPoolItem_
+;*
+_SystemCall_EditPoolItem_ = 16
+;
+Enum Member _SystemCall_GetPoolItem_
+;*
+_SystemCall_GetPoolItem_ = 17
+;
+Enum Member _SystemCall_PrintNumberWithoutUpdateScreen_
+;*
+_SystemCall_PrintNumberWithoutUpdateScreen_ = 18
+;
+Enum Member _SystemCall_PrintHexNumberWithoutUpdateScreen_
+;*
+_SystemCall_PrintHexNumberWithoutUpdateScreen_ = 19
+;
+Enum Member _SystemCall_FreePool_
+;*
+_SystemCall_FreePool_ = 20
+;
+Enum Member _SystemCall_ExecuteFile_
+;*
+_SystemCall_ExecuteFile_ = 21
+;
+Enum Member _SystemCall_PrintPool_
+;*
+_SystemCall_PrintPool_ = 22
+;
+Enum Member _SystemCall_ReadLine_
+;*
+_SystemCall_ReadLine_ = 23
+;
+Enum Member _SystemCall_PoolComparate_
+;*
+_SystemCall_PoolComparate_ = 24
+;
+Enum Member _SystemCall_CompMem_
+;*
+_SystemCall_CompMem_ = 25
+;
+Enum Member _SystemCall_CompMemNotEqual_
+;*
+_SystemCall_CompMemNotEqual_ = 26
+;
+Enum Member _SystemCall_Shutdown_
+;*
+_SystemCall_Shutdown_ = 27
+;
+Enum Member _SystemCall_Reboot_
+;*
+_SystemCall_Reboot_ = 28
+;
+Enum Member _SystemCall_CustomHexColorForeground_
+;*
+_SystemCall_CustomHexColorForeground_ = 29
+;
+Enum Member _SystemCall_CustomHexColorBackground_
+;*
+_SystemCall_CustomHexColorBackground_ = 30
+;
+Enum Member _SystemCall_AntiDebugger_
+;*
+_SystemCall_AntiDebugger_ = 31
+;
+Enum Member _ConsoleColor_black_
+;*
+_ConsoleColor_black_ = 1
+;
+Enum Member _ConsoleColor_lightblack_
+;*
+_ConsoleColor_lightblack_ = 2
+;
+Enum Member _ConsoleColor_darkgray_
+;*
+_ConsoleColor_darkgray_ = 3
+;
+Enum Member _ConsoleColor_gray_
+;*
+_ConsoleColor_gray_ = 4
+;
+Enum Member _ConsoleColor_lightgray_
+;*
+_ConsoleColor_lightgray_ = 5
+;
+Enum Member _ConsoleColor_white_
+;*
+_ConsoleColor_white_ = 6
+;
+Enum Member _ConsoleColor_darkred_
+;*
+_ConsoleColor_darkred_ = 7
+;
+Enum Member _ConsoleColor_red_
+;*
+_ConsoleColor_red_ = 8
+;
+Enum Member _ConsoleColor_brightred_
+;*
+_ConsoleColor_brightred_ = 9
+;
+Enum Member _ConsoleColor_darkorange_
+;*
+_ConsoleColor_darkorange_ = 10
+;
+Enum Member _ConsoleColor_orange_
+;*
+_ConsoleColor_orange_ = 11
+;
+Enum Member _ConsoleColor_brightorange_
+;*
+_ConsoleColor_brightorange_ = 12
+;
+Enum Member _ConsoleColor_darkyellow_
+;*
+_ConsoleColor_darkyellow_ = 13
+;
+Enum Member _ConsoleColor_yellow_
+;*
+_ConsoleColor_yellow_ = 14
+;
+Enum Member _ConsoleColor_brightyellow_
+;*
+_ConsoleColor_brightyellow_ = 15
+;
+Enum Member _ConsoleColor_darkgreen_
+;*
+_ConsoleColor_darkgreen_ = 16
+;
+Enum Member _ConsoleColor_green_
+;*
+_ConsoleColor_green_ = 17
+;
+Enum Member _ConsoleColor_brightgreen_
+;*
+_ConsoleColor_brightgreen_ = 18
+;
+Enum Member _ConsoleColor_darkcyan_
+;*
+_ConsoleColor_darkcyan_ = 19
+;
+Enum Member _ConsoleColor_cyan_
+;*
+_ConsoleColor_cyan_ = 20
+;
+Enum Member _ConsoleColor_brightcyan_
+;*
+_ConsoleColor_brightcyan_ = 21
+;
+Enum Member _ConsoleColor_darkteal_
+;*
+_ConsoleColor_darkteal_ = 22
+;
+Enum Member _ConsoleColor_teal_
+;*
+_ConsoleColor_teal_ = 23
+;
+Enum Member _ConsoleColor_brightteal_
+;*
+_ConsoleColor_brightteal_ = 24
+;
+Enum Member _ConsoleColor_darkblue_
+;*
+_ConsoleColor_darkblue_ = 25
+;
+Enum Member _ConsoleColor_blue_
+;*
+_ConsoleColor_blue_ = 26
+;
+Enum Member _ConsoleColor_brightblue_
+;*
+_ConsoleColor_brightblue_ = 27
+;
+ Define macro ->first_item
+;*
+->first_item = +1
+;
+ Define macro ->second_item
+;*
+->second_item = +2
+;
+ Define macro ->GetLength()
+;*
+->GetLength() = +0
+;
+ Define macro ->Red
+;*
+->Red = +0
+;
+ Define macro ->Green
+;*
+->Green = +1
+;
+ Define macro ->Blue
+;*
+->Blue = +2
+;
+Enum Member _ParametersId_Param1_
+;*
+_ParametersId_Param1_ = 3001
+;
+Enum Member _ParametersId_Param2_
+;*
+_ParametersId_Param2_ = 3002
+;
+Enum Member _ParametersId_Param3_
+;*
+_ParametersId_Param3_ = 3003
+;
+Enum Member _ParametersId_Param4_
+;*
+_ParametersId_Param4_ = 3004
+;
+Enum Member _ParametersId_Param5_
+;*
+_ParametersId_Param5_ = 3005
+;
+Enum Member _ParametersId_Param6_
+;*
+_ParametersId_Param6_ = 3006
+;
+Enum Member _ParametersId_Param7_
+;*
+_ParametersId_Param7_ = 3007
+;
+Enum Member _ParametersId_Param8_
+;*
+_ParametersId_Param8_ = 3008
+;
+Enum Member _ParametersId_Param9_
+;*
+_ParametersId_Param9_ = 3009
+call_function PreRuntime
+;
+; function PreRuntime
+; *
+PreRuntime = 11
+function PreRuntime
+set_value_with_value _PtrTo_Param1_,3001
+set_value_with_value _PtrTo_Param2_,3002
+set_value_with_value _PtrTo_Param3_,3003
+set_value_with_value _PtrTo_Param4_,3004
+set_value_with_value _PtrTo_Param5_,3005

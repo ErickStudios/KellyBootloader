@@ -1,0 +1,72 @@
+HightLevel[ 
+
+    use "ASCII"
+
+    /*
+    * SYSTEM.easm
+    *
+    * programa para la shell
+    */
+
+    /**
+    * ColorDelPrompt
+    *
+    * representa el color del prompt
+    */
+    LET ColorDelPrompt
+
+    /**
+    * ColorDelPromptColorDelTexto
+    *
+    * representa el color del texto
+    */
+    LET ColorDelTexto
+
+    SetVar ColorDelPrompt 15
+                        /*amarillo brillante*/
+
+    SetVar ColorDelTexto 4
+                        /*gris*/
+
+    /**
+    * Loop
+    *
+    * hace un loop para el sistema
+    */
+    FUNCTION Loop
+
+        /*
+        imprimir el prompt
+        */
+
+        __asm system_call 3,ColorDelPrompt
+
+        Print "MiKernel:\s"
+
+        /**
+        recuerden que la llamada 3 es para cambiar el color del texto de la consola
+        */
+        __asm system_call 3,ColorDelTexto
+
+        /**
+        * LineText
+        *
+        * la linea
+        */
+        BUFFER LineText ReadLine
+
+        __asm system_call 22,LineText
+
+        /*
+        liberar el pool
+        */
+        __asm system_call 20,LineText
+
+        /*
+        siguiente prompt
+        */
+        Print "\n"
+
+    call Loop
+
+ ]HightLevel

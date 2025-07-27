@@ -1,0 +1,10 @@
+EA
+;
+Declare variable Var1
+;*
+Var1 = 11
+move Var1,0
+;
+Operate Variable Var1 with operator AnyThingExceptAValidOperator
+;*
+AAAAAAAAAAAAHHHHHHHH Var1,1

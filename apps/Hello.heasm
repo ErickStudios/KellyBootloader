@@ -1,0 +1,30 @@
+HightLevel[ 
+
+    /**
+    * Hello.heasm
+    *
+    * hello world application
+    * following the EBF specifications from the beta 3 of the Kelly Bootloader and up
+|   *
+    * InTuntime:
+    *
+    *    KellyBootloader> ./Hello.ebf
+    *    Hello World!
+    *
+    *    KellyBootloader> 
+    */
+
+    use "ASCII"
+
+    /**
+    * Main
+    *
+    * the main function of the application
+    */
+    FUNCTION Main
+
+        Print "Hello\sWorld!"
+
+        __asm ret
+    
+ ]HightLevel

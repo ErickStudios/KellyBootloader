@@ -1,0 +1,29 @@
+HightLevel[ 
+
+    /**
+    * RunTimeErrors.heasm
+    *
+    * this is not a app is a experiment of a litte warnning in some cases
+    * this is a test of what happen if a error has been in your code
+    *
+    * for these cases the ErickBinaryFormat take a 'Security Alert Method'
+    * for dont make the error a bigger problem
+    *
+    * In Runtime:
+    *
+    *   KellyBootloader> ./RunTimeErrors.ebf
+    *   *Screen is clearded*
+    *
+    *   *the pc resets*
+    *
+    */
+
+    _Use ASCII
+
+    LET Var1
+
+    SetVar Var1 0
+
+    _Math Var1 AnyThingExceptAValidOperator 1
+
+ ]HightLevel

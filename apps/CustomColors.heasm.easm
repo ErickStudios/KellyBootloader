@@ -1,0 +1,594 @@
+EA
+;
+Enum Member _SystemCall_PrintCharacter_
+;*
+_SystemCall_PrintCharacter_ = 1
+;
+Enum Member _SystemCall_ClearScreen_
+;*
+_SystemCall_ClearScreen_ = 2
+;
+Enum Member _SystemCall_SetFgColor_
+;*
+_SystemCall_SetFgColor_ = 3
+;
+Enum Member _SystemCall_SetBgColor_
+;*
+_SystemCall_SetBgColor_ = 4
+;
+Enum Member _SystemCall_SetCursorPositionX_
+;*
+_SystemCall_SetCursorPositionX_ = 5
+;
+Enum Member _SystemCall_SetCursorPositionY_
+;*
+_SystemCall_SetCursorPositionY_ = 7
+;
+Enum Member _SystemCall_PrintCharacterWithoutUpdateScreen_
+;*
+_SystemCall_PrintCharacterWithoutUpdateScreen_ = 8
+;
+Enum Member _SystemCall_UpdateScreen_
+;*
+_SystemCall_UpdateScreen_ = 9
+;
+Enum Member _SystemCall_EfiStall_
+;*
+_SystemCall_EfiStall_ = 10
+;
+Enum Member _SystemCall_WaitForKey_
+;*
+_SystemCall_WaitForKey_ = 11
+;
+Enum Member _SystemCall_ReadKey_
+;*
+_SystemCall_ReadKey_ = 12
+;
+Enum Member _SystemCall_GetTime_
+;*
+_SystemCall_GetTime_ = 13
+;
+Enum Member _SystemCall_AllocatePool_
+;*
+_SystemCall_AllocatePool_ = 14
+;
+Enum Member _SystemCall_EditPoolItem_
+;*
+_SystemCall_EditPoolItem_ = 16
+;
+Enum Member _SystemCall_GetPoolItem_
+;*
+_SystemCall_GetPoolItem_ = 17
+;
+Enum Member _SystemCall_PrintNumberWithoutUpdateScreen_
+;*
+_SystemCall_PrintNumberWithoutUpdateScreen_ = 18
+;
+Enum Member _SystemCall_PrintHexNumberWithoutUpdateScreen_
+;*
+_SystemCall_PrintHexNumberWithoutUpdateScreen_ = 19
+;
+Enum Member _SystemCall_FreePool_
+;*
+_SystemCall_FreePool_ = 20
+;
+Enum Member _SystemCall_ExecuteFile_
+;*
+_SystemCall_ExecuteFile_ = 21
+;
+Enum Member _SystemCall_PrintPool_
+;*
+_SystemCall_PrintPool_ = 22
+;
+Enum Member _SystemCall_ReadLine_
+;*
+_SystemCall_ReadLine_ = 23
+;
+Enum Member _SystemCall_PoolComparate_
+;*
+_SystemCall_PoolComparate_ = 24
+;
+Enum Member _SystemCall_CompMem_
+;*
+_SystemCall_CompMem_ = 25
+;
+Enum Member _SystemCall_CompMemNotEqual_
+;*
+_SystemCall_CompMemNotEqual_ = 26
+;
+Enum Member _SystemCall_Shutdown_
+;*
+_SystemCall_Shutdown_ = 27
+;
+Enum Member _SystemCall_Reboot_
+;*
+_SystemCall_Reboot_ = 28
+;
+Enum Member _SystemCall_CustomHexColorForeground_
+;*
+_SystemCall_CustomHexColorForeground_ = 29
+;
+Enum Member _SystemCall_CustomHexColorBackground_
+;*
+_SystemCall_CustomHexColorBackground_ = 30
+;
+Enum Member _ConsoleColor_black_
+;*
+_ConsoleColor_black_ = 1
+;
+Enum Member _ConsoleColor_lightblack_
+;*
+_ConsoleColor_lightblack_ = 2
+;
+Enum Member _ConsoleColor_darkgray_
+;*
+_ConsoleColor_darkgray_ = 3
+;
+Enum Member _ConsoleColor_gray_
+;*
+_ConsoleColor_gray_ = 4
+;
+Enum Member _ConsoleColor_lightgray_
+;*
+_ConsoleColor_lightgray_ = 5
+;
+Enum Member _ConsoleColor_white_
+;*
+_ConsoleColor_white_ = 6
+;
+Enum Member _ConsoleColor_darkred_
+;*
+_ConsoleColor_darkred_ = 7
+;
+Enum Member _ConsoleColor_red_
+;*
+_ConsoleColor_red_ = 8
+;
+Enum Member _ConsoleColor_brightred_
+;*
+_ConsoleColor_brightred_ = 9
+;
+Enum Member _ConsoleColor_darkorange_
+;*
+_ConsoleColor_darkorange_ = 10
+;
+Enum Member _ConsoleColor_orange_
+;*
+_ConsoleColor_orange_ = 11
+;
+Enum Member _ConsoleColor_brightorange_
+;*
+_ConsoleColor_brightorange_ = 12
+;
+Enum Member _ConsoleColor_darkyellow_
+;*
+_ConsoleColor_darkyellow_ = 13
+;
+Enum Member _ConsoleColor_yellow_
+;*
+_ConsoleColor_yellow_ = 14
+;
+Enum Member _ConsoleColor_brightyellow_
+;*
+_ConsoleColor_brightyellow_ = 15
+;
+Enum Member _ConsoleColor_darkgreen_
+;*
+_ConsoleColor_darkgreen_ = 16
+;
+Enum Member _ConsoleColor_green_
+;*
+_ConsoleColor_green_ = 17
+;
+Enum Member _ConsoleColor_brightgreen_
+;*
+_ConsoleColor_brightgreen_ = 18
+;
+Enum Member _ConsoleColor_darkcyan_
+;*
+_ConsoleColor_darkcyan_ = 19
+;
+Enum Member _ConsoleColor_cyan_
+;*
+_ConsoleColor_cyan_ = 20
+;
+Enum Member _ConsoleColor_brightcyan_
+;*
+_ConsoleColor_brightcyan_ = 21
+;
+Enum Member _ConsoleColor_darkteal_
+;*
+_ConsoleColor_darkteal_ = 22
+;
+Enum Member _ConsoleColor_teal_
+;*
+_ConsoleColor_teal_ = 23
+;
+Enum Member _ConsoleColor_brightteal_
+;*
+_ConsoleColor_brightteal_ = 24
+;
+Enum Member _ConsoleColor_darkblue_
+;*
+_ConsoleColor_darkblue_ = 25
+;
+Enum Member _ConsoleColor_blue_
+;*
+_ConsoleColor_blue_ = 26
+;
+Enum Member _ConsoleColor_brightblue_
+;*
+_ConsoleColor_brightblue_ = 27
+;
+ Define macro ->Second
+;*
+->Second = +0
+;
+ Define macro ->Minute
+;*
+->Minute = +1
+;
+ Define macro ->Hour
+;*
+->Hour = +2
+;
+ Define macro ->Day
+;*
+->Day = +3
+;
+ Define macro ->Month
+;*
+->Month = +4
+;
+ Define macro ->Year
+;*
+->Year = +5
+;
+ Define macro ->first_item
+;*
+->first_item = +1
+;
+ Define macro ->second_item
+;*
+->second_item = +2
+;
+ Define macro ->GetLengt
+;*
+->GetLengt = +0
+;
+ Define macro ->Red
+;*
+->Red = +0
+;
+ Define macro ->Green
+;*
+->Green = +1
+;
+ Define macro ->Blue
+;*
+->Blue = +2
+;
+Declare variable _PtrTo_Param1_
+;*
+_PtrTo_Param1_ = 11
+;
+Declare variable _PtrTo_Param2_
+;*
+_PtrTo_Param2_ = 12
+;
+Declare variable _PtrTo_Param3_
+;*
+_PtrTo_Param3_ = 13
+;
+Declare variable _PtrTo_Param4_
+;*
+_PtrTo_Param4_ = 14
+;
+Declare variable _PtrTo_Param5_
+;*
+_PtrTo_Param5_ = 15
+;
+; function _Lib_Pause_
+; *
+_Lib_Pause_ = 16
+function _Lib_Pause_
+;
+; Print Press any key to continue...
+; *
+move 1,'P'
+system_call 8,1
+move 1,'R'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'E'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'S'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'S'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'A'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'N'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'Y'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'K'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'E'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'Y'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'T'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'O'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'C'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'O'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'N'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'T'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'I'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'N'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'U'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'E'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'.'
+system_call 8,1
+move 1,'.'
+system_call 8,1
+move 1,'.'
+system_call 8,1
+system_call 9,0
+system_call _SystemCall_WaitForKey_,0
+;
+; Print 
+
+; *
+move 1,'\n'
+system_call 8,1
+system_call 9,0
+ret
+;
+; function _Lib_NullPause_
+; *
+_Lib_NullPause_ = 17
+function _Lib_NullPause_
+system_call _SystemCall_WaitForKey_,0
+;
+; Print 
+
+; *
+move 1,'\n'
+system_call 8,1
+system_call 9,0
+ret
+;
+; function PreRuntime
+; *
+PreRuntime = 18
+function PreRuntime
+set_value_with_value _PtrTo_Param1_,3001
+set_value_with_value _PtrTo_Param2_,3002
+set_value_with_value _PtrTo_Param3_,3003
+set_value_with_value _PtrTo_Param4_,3004
+set_value_with_value _PtrTo_Param5_,3005
+;
+Declare variable ColorM
+;*
+ColorM = 19
+;
+; Print This 
+; *
+move 1,'T'
+system_call 8,1
+move 1,'H'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'I'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'S'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+system_call 9,0
+move ColorM->Red,0
+move ColorM->Green,255
+move ColorM->Blue,70
+system_call _SystemCall_CustomHexColorForeground_,ColorM
+;
+; Print word 
+; *
+move 1,'W'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'O'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'R'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'D'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+system_call 9,0
+system_call _SystemCall_SetFgColor_,_ConsoleColor_gray_
+;
+; Print is in a Custom color
+; *
+move 1,'I'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'S'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'I'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'N'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'A'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'C'
+system_call 8,1
+move 1,'U'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'S'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'T'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'O'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'M'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'C'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'O'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'L'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'O'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'R'
+move 2,32
+add 1,2
+
+system_call 8,1
+system_call 9,0

@@ -1,0 +1,21 @@
+# ![ErickAssambler]
+
+# makelima.mkl
+
+# makelima for assambler all the programs
+
+##
+# * compile
+# *
+# * compiles all the files
+# *
+##
+<compile>
+
+    package --hlvc -> "Hello.heasm"
+    package --hlvc -> "Enum.heasm"
+
+    package --o -> "Pointers.easm"
+    package --o -> "ManualPools.easm"
+
+    end

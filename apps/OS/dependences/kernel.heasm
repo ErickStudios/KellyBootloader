@@ -1,0 +1,9 @@
+%include
+    \dependences\headers\kernel.heasm
+%include
+    \dependences\headers\status.heasm
+%include
+    \dependences\headers\config.heasm
+
+%include
+    \dependences\osmain.heasm

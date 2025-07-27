@@ -1,0 +1,490 @@
+EA
+;
+; function Main
+; *
+Main = 11
+function Main
+;
+; Print \l\lWelcome to UiApp1\l\l
+
+
+; *
+move 1,'*'
+system_call 8,1
+move 1,'*'
+system_call 8,1
+move 1,'W'
+system_call 8,1
+move 1,'E'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'L'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'C'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'O'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'M'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'E'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'T'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'O'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'U'
+system_call 8,1
+move 1,'I'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'A'
+system_call 8,1
+move 1,'P'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'P'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'1'
+system_call 8,1
+move 1,'*'
+system_call 8,1
+move 1,'*'
+system_call 8,1
+move 1,'\n'
+system_call 8,1
+move 1,'\n'
+system_call 8,1
+system_call 9,0
+;
+; Print A Table
+
+; *
+move 1,'A'
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'T'
+system_call 8,1
+move 1,'A'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'B'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'L'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'E'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'\n'
+system_call 8,1
+system_call 9,0
+;
+; Print +------------------+
+
+; *
+move 1,'+'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'+'
+system_call 8,1
+move 1,'\n'
+system_call 8,1
+system_call 9,0
+;
+; Print +COL1 + COL2 + COL3+
+
+; *
+move 1,'+'
+system_call 8,1
+move 1,'C'
+system_call 8,1
+move 1,'O'
+system_call 8,1
+move 1,'L'
+system_call 8,1
+move 1,'1'
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'+'
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'C'
+system_call 8,1
+move 1,'O'
+system_call 8,1
+move 1,'L'
+system_call 8,1
+move 1,'2'
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'+'
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'C'
+system_call 8,1
+move 1,'O'
+system_call 8,1
+move 1,'L'
+system_call 8,1
+move 1,'3'
+system_call 8,1
+move 1,'+'
+system_call 8,1
+move 1,'\n'
+system_call 8,1
+system_call 9,0
+;
+; Print +------------------+
+
+; *
+move 1,'+'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'+'
+system_call 8,1
+move 1,'\n'
+system_call 8,1
+system_call 9,0
+;
+; Print + OK  + HMMM + OH  +
+
+; *
+move 1,'+'
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'O'
+system_call 8,1
+move 1,'K'
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'+'
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'H'
+system_call 8,1
+move 1,'M'
+system_call 8,1
+move 1,'M'
+system_call 8,1
+move 1,'M'
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'+'
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'O'
+system_call 8,1
+move 1,'H'
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'+'
+system_call 8,1
+move 1,'\n'
+system_call 8,1
+system_call 9,0
+;
+; Print +------------------+
+
+; *
+move 1,'+'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'-'
+system_call 8,1
+move 1,'+'
+system_call 8,1
+move 1,'\n'
+system_call 8,1
+system_call 9,0
+;
+; Print 
+
+
+; *
+move 1,'\n'
+system_call 8,1
+move 1,'\n'
+system_call 8,1
+system_call 9,0
+;
+; Print Press any key to continue...
+; *
+move 1,'P'
+system_call 8,1
+move 1,'R'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'E'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'S'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'S'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'A'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'N'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'Y'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'K'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'E'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'Y'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'T'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'O'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'C'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'O'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'N'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'T'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'I'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'N'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'U'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'E'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'.'
+system_call 8,1
+move 1,'.'
+system_call 8,1
+move 1,'.'
+system_call 8,1
+system_call 9,0
+system_call 11,0

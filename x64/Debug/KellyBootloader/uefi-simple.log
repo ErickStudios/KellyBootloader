@@ -1,86 +1,376 @@
 ﻿  main.c
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\motor.h(30,9): warning C4005: 'CONST': redefinición de macro
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(389,30): warning C4244: 'función': conversión de 'UINTN' a 'UINT32'; posible pérdida de datos
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(389,52): warning C4244: 'función': conversión de 'UINTN' a 'UINT32'; posible pérdida de datos
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(472,27): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [6]'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(473,27): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [6]'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(474,26): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [5]'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(475,30): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [9]'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(476,29): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [8]'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(477,25): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [4]'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(478,27): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [6]'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(479,32): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [11]'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(480,28): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [7]'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(481,30): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [9]'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(482,32): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [11]'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(483,28): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [7]'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(484,30): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [9]'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(485,31): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [10]'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(486,27): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [6]'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(487,29): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [8]'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(488,30): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [9]'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(489,26): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [5]'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(490,28): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [7]'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(491,30): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [9]'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(492,26): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [5]'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(493,28): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [7]'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(495,5): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [6]'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(518,13): warning C4047: '=': 'UINT16' es distinto en los niveles de direccionamiento indirecto de 'VOID *'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(519,13): warning C4047: '=': 'UINT16' es distinto en los niveles de direccionamiento indirecto de 'VOID *'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(534,23): warning C4047: '==': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'UINTN'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(555,36): warning C4047: '!=': 'int' es distinto en los niveles de direccionamiento indirecto de 'VOID *'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(594,23): warning C4244: '=': conversión de 'INTN' a 'UINT16'; posible pérdida de datos
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(595,23): warning C4244: '=': conversión de 'INTN' a 'UINT16'; posible pérdida de datos
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(604,25): warning C4018: '>': no coinciden signed/unsigned
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(611,36): warning C4244: '=': conversión de 'INTN' a 'UINT16'; posible pérdida de datos
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(612,36): warning C4244: '=': conversión de 'INTN' a 'UINT16'; posible pérdida de datos
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(1234,26): warning C4018: '<': no coinciden signed/unsigned
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(1238,38): warning C4244: 'función': conversión de 'UINTN' a 'UINT32'; posible pérdida de datos
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(1238,60): warning C4244: 'función': conversión de 'UINTN' a 'UINT32'; posible pérdida de datos
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(1244,11): warning C4018: '<': no coinciden signed/unsigned
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(1264,40): warning C4018: '<': no coinciden signed/unsigned
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(1406,20): warning C4018: '<': no coinciden signed/unsigned
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(1439,22): warning C4047: '=': 'INTN' es distinto en los niveles de direccionamiento indirecto de 'INTN *'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(1449,73): warning C4244: 'función': conversión de 'INTN' a 'UINT8'; posible pérdida de datos
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(1449,79): warning C4244: 'función': conversión de 'INTN' a 'INT8'; posible pérdida de datos
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(1452,73): warning C4244: 'función': conversión de 'INTN' a 'UINT8'; posible pérdida de datos
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(1452,79): warning C4244: 'función': conversión de 'INTN' a 'INT8'; posible pérdida de datos
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(1395,9): warning C4047: 'inicializando': 'INTN' es distinto en los niveles de direccionamiento indirecto de 'INTN *'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(1396,9): warning C4047: 'inicializando': 'INTN' es distinto en los niveles de direccionamiento indirecto de 'INTN *'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(1494,9): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'INTN'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(1494,9): warning C4024: 'printf': tipos distintos para el parámetro formal y el parámetro real 3
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(1495,9): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'INTN'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(1495,9): warning C4024: 'printf': tipos distintos para el parámetro formal y el parámetro real 4
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(1787,55): warning C4047: 'función': 'UINTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(1787,55): warning C4024: 'función mediante puntero': tipos distintos para el parámetro formal y el parámetro real 3
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(231,20): warning C4047: '!=': 'int' es distinto en los niveles de direccionamiento indirecto de 'VOID *'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(262,14): warning C4267: '=': conversión de 'size_t' a 'u16'; posible pérdida de datos
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(648,23): warning C4244: '=': conversión de 'unsigned __int64' a 't16'; posible pérdida de datos
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(683,24): warning C4244: '=': conversión de 'unsigned __int64' a 't16'; posible pérdida de datos
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(840,26): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(840,26): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(924,51): warning C4047: 'función': 'UINTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(924,51): warning C4024: 'función mediante puntero': tipos distintos para el parámetro formal y el parámetro real 3
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(1079,26): warning C4020: 'ValueToHex': hay demasiados parámetros reales
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(1138,22): warning C4047: '=': 't16' es distinto en los niveles de direccionamiento indirecto de 'VOID *'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(1142,38): warning C4267: 'función': conversión de 'size_t' a 't16'; posible pérdida de datos
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(1189,24): warning C4244: '=': conversión de 'unsigned __int64' a 't16'; posible pérdida de datos
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(1210,24): warning C4244: '=': conversión de 'unsigned __int64' a 't16'; posible pérdida de datos
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(1231,24): warning C4244: '=': conversión de 'unsigned __int64' a 't16'; posible pérdida de datos
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(1252,24): warning C4244: '=': conversión de 'unsigned __int64' a 't16'; posible pérdida de datos
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(1260,9): warning C4047: '!=': 'int' es distinto en los niveles de direccionamiento indirecto de 'VOID *'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(1167,36): warning C4244: 'inicializando': conversión de 't16' a 'UINT8'; posible pérdida de datos
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(1167,57): warning C4244: 'inicializando': conversión de 't16' a 'UINT8'; posible pérdida de datos
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(1167,78): warning C4244: 'inicializando': conversión de 't16' a 'UINT8'; posible pérdida de datos
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(237,41): warning C4133: 'función': tipos incompatibles, de '_BINARY *' a 'UINT8 *'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(547,41): warning C4133: 'función': tipos incompatibles, de '_BINARY *' a 'UINT8 *'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(676,78): warning C4047: 'función': 'UINTN *' es distinto en los niveles de direccionamiento indirecto de 'EFI_EVENT *'
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(676,78): warning C4024: 'función mediante puntero': tipos distintos para el parámetro formal y el parámetro real 3
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\KernelTextMode.h(1823,1): warning C4716: 'YNConfirmation': debe devolver un valor
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(643,1): warning C4700: se utilizó la variable local 'search_s' sin inicializar
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(678,1): warning C4700: se utilizó la variable local 'search_s' sin inicializar
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(1184,1): warning C4700: se utilizó la variable local 'search_s' sin inicializar
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(1205,1): warning C4700: se utilizó la variable local 'search_s' sin inicializar
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(1226,1): warning C4700: se utilizó la variable local 'search_s' sin inicializar
-C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(1247,1): warning C4700: se utilizó la variable local 'search_s' sin inicializar
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\motor.h(1335,5): warning C4047: 'return': 'ch16' es distinto en los niveles de direccionamiento indirecto de 'ch16 *'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(918,30): warning C4244: 'función': conversión de 'UINTN' a 'UINT32'; posible pérdida de datos
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(918,52): warning C4244: 'función': conversión de 'UINTN' a 'UINT32'; posible pérdida de datos
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1015,27): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [6]'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1016,27): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [6]'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1017,26): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [5]'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1018,30): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [9]'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1019,29): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [8]'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1020,25): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [4]'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1021,27): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [6]'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1022,32): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [11]'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1023,28): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [7]'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1024,30): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [9]'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1025,32): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [11]'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1026,28): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [7]'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1027,30): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [9]'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1028,31): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [10]'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1029,27): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [6]'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1030,29): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [8]'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1031,30): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [9]'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1032,26): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [5]'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1033,28): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [7]'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1034,30): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [9]'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1035,26): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [5]'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1036,28): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [7]'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1038,5): warning C4047: 'return': 'CHAR16' es distinto en los niveles de direccionamiento indirecto de 'unsigned short [6]'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1066,13): warning C4047: '=': 'UINT16' es distinto en los niveles de direccionamiento indirecto de 'VOID *'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1067,13): warning C4047: '=': 'UINT16' es distinto en los niveles de direccionamiento indirecto de 'VOID *'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1090,23): warning C4047: '==': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'UINTN'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1120,36): warning C4047: '!=': 'int' es distinto en los niveles de direccionamiento indirecto de 'VOID *'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1159,23): warning C4244: '=': conversión de 'INTN' a 'UINT16'; posible pérdida de datos
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1160,23): warning C4244: '=': conversión de 'INTN' a 'UINT16'; posible pérdida de datos
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1169,25): warning C4018: '>': no coinciden signed/unsigned
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1176,36): warning C4244: '=': conversión de 'INTN' a 'UINT16'; posible pérdida de datos
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1177,36): warning C4244: '=': conversión de 'INTN' a 'UINT16'; posible pérdida de datos
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1784,26): warning C4018: '<': no coinciden signed/unsigned
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1788,38): warning C4244: 'función': conversión de 'UINTN' a 'UINT32'; posible pérdida de datos
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1788,60): warning C4244: 'función': conversión de 'UINTN' a 'UINT32'; posible pérdida de datos
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1794,11): warning C4018: '<': no coinciden signed/unsigned
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1824,40): warning C4018: '<': no coinciden signed/unsigned
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1950,20): warning C4018: '<': no coinciden signed/unsigned
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1983,22): warning C4047: '=': 'INTN' es distinto en los niveles de direccionamiento indirecto de 'INTN *'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1993,73): warning C4244: 'función': conversión de 'INTN' a 'UINT8'; posible pérdida de datos
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1993,79): warning C4244: 'función': conversión de 'INTN' a 'INT8'; posible pérdida de datos
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1996,73): warning C4244: 'función': conversión de 'INTN' a 'UINT8'; posible pérdida de datos
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1996,79): warning C4244: 'función': conversión de 'INTN' a 'INT8'; posible pérdida de datos
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1939,9): warning C4047: 'inicializando': 'INTN' es distinto en los niveles de direccionamiento indirecto de 'INTN *'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(1940,9): warning C4047: 'inicializando': 'INTN' es distinto en los niveles de direccionamiento indirecto de 'INTN *'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(2048,9): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'INTN'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(2048,9): warning C4024: 'printf': tipos distintos para el parámetro formal y el parámetro real 3
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(2049,9): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'INTN'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(2049,9): warning C4024: 'printf': tipos distintos para el parámetro formal y el parámetro real 4
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(2303,55): warning C4047: 'función': 'UINTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(2303,55): warning C4024: 'función mediante puntero': tipos distintos para el parámetro formal y el parámetro real 3
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(291,23): warning C4047: '!=': 'int' es distinto en los niveles de direccionamiento indirecto de 'VOID *'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(331,20): warning C4047: '==': 'int' es distinto en los niveles de direccionamiento indirecto de 'VOID *'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(334,13): warning C4267: '=': conversión de 'size_t' a 't16'; posible pérdida de datos
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(464,29): warning C4244: 'función': conversión de 'u64' a 't16'; posible pérdida de datos
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(569,23): warning C4018: '<': no coinciden signed/unsigned
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(612,20): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(612,20): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(622,21): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(622,21): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(632,21): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(632,21): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(641,21): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(641,21): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(656,19): warning C4018: '>': no coinciden signed/unsigned
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(668,13): warning C4018: '>': no coinciden signed/unsigned
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(678,22): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(678,22): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(691,23): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(691,23): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(706,22): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(706,22): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(717,21): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(717,21): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(742,21): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(742,21): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(916,14): warning C4244: 'inicializando': conversión de 'UINTN' a 't16'; posible pérdida de datos
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(1365,25): warning C4244: '=': conversión de 'u64' a 't16'; posible pérdida de datos
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(1437,24): warning C4244: '=': conversión de 'u64' a 't16'; posible pérdida de datos
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(1600,26): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(1600,26): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(1684,51): warning C4047: 'función': 'UINTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(1684,51): warning C4024: 'función mediante puntero': tipos distintos para el parámetro formal y el parámetro real 3
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(2165,24): warning C4244: '=': conversión de 'u64' a 't16'; posible pérdida de datos
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(2193,24): warning C4244: '=': conversión de 'unsigned __int64' a 't16'; posible pérdida de datos
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(2214,24): warning C4244: '=': conversión de 'unsigned __int64' a 't16'; posible pérdida de datos
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(2235,24): warning C4244: '=': conversión de 'unsigned __int64' a 't16'; posible pérdida de datos
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(2247,22): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(2247,22): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(2029,36): warning C4244: 'inicializando': conversión de 't16' a 'UINT8'; posible pérdida de datos
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(2029,57): warning C4244: 'inicializando': conversión de 't16' a 'UINT8'; posible pérdida de datos
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(2029,78): warning C4244: 'inicializando': conversión de 't16' a 'UINT8'; posible pérdida de datos
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(2448,23): warning C4244: 'return': conversión de 'UINTN' a 'ch16'; posible pérdida de datos
+  (compilando archivo de origen "../../main.c")
+  
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(200,35): warning C4047: 'función': 'UINTN *' es distinto en los niveles de direccionamiento indirecto de 'UINTN'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(200,35): warning C4024: 'función mediante puntero': tipos distintos para el parámetro formal y el parámetro real 2
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(368,23): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(592,9): warning C4047: 'función': 'CHAR16 *' es distinto en los niveles de direccionamiento indirecto de 'CHAR16 (*)[1024]'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(592,9): warning C4024: 'StrCpy': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(648,21): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(648,21): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(652,21): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(652,21): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(671,21): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(671,21): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(673,21): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(673,21): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(678,22): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(678,22): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(683,21): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(683,21): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(685,21): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(685,21): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(690,22): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(690,22): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(694,21): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(694,21): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(696,21): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(696,21): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(701,22): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(701,22): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(706,21): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(706,21): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(717,21): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(717,21): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(723,21): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(723,21): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(1040,21): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(1040,21): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(1167,6): warning C4033: 'editor' debe devolver un valor
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(1433,41): warning C4133: 'función': tipos incompatibles, de '_BINARY *' a 'UINT8 *'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(1733,41): warning C4133: 'función': tipos incompatibles, de '_BINARY *' a 'UINT8 *'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(1829,25): warning C4033: 'GetFileContent' debe devolver un valor
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(1836,25): warning C4033: 'GetFileContent' debe devolver un valor
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(1929,41): warning C4133: 'función': tipos incompatibles, de '_BINARY *' a 'UINT8 *'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(1975,5): warning C4033: 'GetFileContent' debe devolver un valor
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2036,20): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2036,20): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2314,23): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2322,23): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2331,21): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2331,21): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2380,21): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2380,21): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2390,21): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2390,21): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2394,21): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2394,21): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2444,23): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2444,23): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2449,25): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2449,25): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2458,25): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2458,25): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2510,21): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2510,21): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2516,21): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2516,21): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2521,21): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2521,21): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2553,22): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2553,22): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2669,20): warning C4047: 'función': 'INTN *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2669,20): warning C4024: 'SetScreenAtribute': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(2618,12): warning C4101: 'Event': variable local sin referencia
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\Console.h(2339,1): warning C4716: 'YNConfirmation': debe devolver un valor
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(2596,1): warning C4715: 'SearchSpaceInOutpud': no todas las rutas de acceso de control devuelven un valor
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(1422,1): warning C4700: se utilizó la variable local 'search_s' sin inicializar
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(2594,1): warning C4172: dirección de devolución de variable local o temporal : vvm
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(2149,1): warning C4700: se utilizó la variable local 'search_s' sin inicializar
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(2188,1): warning C4700: se utilizó la variable local 'search_s' sin inicializar
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(2209,1): warning C4700: se utilizó la variable local 'search_s' sin inicializar
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\.vs\msvc\ErickBinaryFormat.h(2230,1): warning C4700: se utilizó la variable local 'search_s' sin inicializar
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(132,1): warning C4172: dirección de devolución de variable local o temporal : lines
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(334,1): warning C4172: dirección de devolución de variable local o temporal : lines
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(1257,1): warning C4715: 'editor': no todas las rutas de acceso de control devuelven un valor
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(1994,1): warning C4715: 'GetFileContent': no todas las rutas de acceso de control devuelven un valor
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(471,1): warning C4700: se utilizó la variable local 'Index' sin inicializar
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(1030,1): warning C4700: se utilizó la variable local 'CurX' sin inicializar
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\main.c(1193,1): warning C4172: dirección de devolución de variable local o temporal : text
   uefi-simple.vcxproj -> C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\x64\Debug\KellyBootloader.efi

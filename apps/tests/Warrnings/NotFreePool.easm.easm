@@ -1,0 +1,5 @@
+EA
+MyBuffer = 11
+move 11,0
+move 12,10
+system_call 14,11

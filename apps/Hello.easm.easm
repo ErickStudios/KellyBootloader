@@ -1,0 +1,59 @@
+EA
+;
+; function Main
+; *
+Main = 11
+function Main
+;
+; Print Hello World!
+; *
+move 1,'H'
+system_call 8,1
+move 1,'E'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'L'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'L'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'O'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'\s'
+system_call 8,1
+move 1,'W'
+system_call 8,1
+move 1,'O'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'R'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'L'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'D'
+move 2,32
+add 1,2
+
+system_call 8,1
+move 1,'!'
+system_call 8,1
+system_call 9,0
+ret

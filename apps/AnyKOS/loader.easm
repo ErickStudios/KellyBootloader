@@ -1,0 +1,40 @@
+HightLevel[ 
+
+    /**
+    * loader.easm
+    *
+    * carga el OS
+    **/
+
+    /*para mantener compatibilidad con ASCII*/
+    use "ASCII"
+
+    /*
+    configurar el archivo del cual el sistema booteara
+    */
+    BUFFER SystemFile AllocatePool->StrLen\s"SYSTEM.BIN"
+
+    /**
+    imprimir el texto
+    **/
+    Print "\nHola\sdesde\sel\sKernel\ssimple\n"
+
+    /**
+    la alocacion automatica tuvo un problema asi que mejor manual
+    **/
+    __asm move 20,10
+    __asm move 21,'S'
+    __asm move 22,'Y'
+    __asm move 23,'S'
+    __asm move 24,'T'
+    __asm move 25,'E'
+    __asm move 26,'M'
+    __asm move 27,'.'
+    __asm move 28,'B'
+    __asm move 29,'I'
+    __asm move 30,'N'
+
+    __asm move 2,20
+    __asm system_call 21,2
+
+ ]HightLevel

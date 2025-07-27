@@ -1,0 +1,29 @@
+HightLevel[ 
+    
+    /**
+    * KellyX.heasm
+    *
+    * library for show grapichs in the screen
+    *
+    */
+
+    %include
+        \apps\libc\KellyBootloader.easm
+
+    LET DefaultBg
+    LET DefaultFg
+
+    SetVar DefaultFg _ConsoleColor_white_
+
+    SetVar DefaultBg->Red 42
+    SetVar DefaultBg->Green 42
+    SetVar DefaultBg->Blue 42
+
+    __asm system_call _SystemCall_CustomHexColorBackground_,DefaultBg
+
+    __asm system_call _SystemCall_SetFgColor_,DefaultFg
+    __asm system_call _SystemCall_ClearScreen_,0
+
+    Print "Initilizing\sKellyX..."
+
+ ]HightLevel

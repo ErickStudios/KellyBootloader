@@ -395,7 +395,7 @@
   <ItemGroup>
     <ClInclude Include="BitMaps.h" />
     <ClInclude Include="ErickBinaryFormat.h" />
-    <ClInclude Include="KernelTextMode.h" />
+    <ClInclude Include="Console.h" />
     <ClInclude Include="motor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

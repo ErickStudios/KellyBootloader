@@ -1,3 +1,4 @@
+# ignore objects
 *.o
 *.efi
 *.vhd
@@ -7,6 +8,11 @@
 *.opendb
 *.fd
 *.db*
+
+# ignore binary results of ErickBinaryFormat
+*.ebf
+
+# ignore folders
 arm
 aa64
 x86_64

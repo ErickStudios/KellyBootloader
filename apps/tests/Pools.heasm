@@ -1,0 +1,18 @@
+HightLevel[ 
+    /**
+    * Pools.heasm
+    *
+    * lal
+    */
+    _Use ASCII
+
+    %include
+        apps\libc\KellyBootloader.easm
+
+    BUFFER MyBuffer AllocatePool->10
+
+    LET Lenght
+
+    SetVarWithValue Lenght MyBuffer->GetLengt
+
+ ]HightLevel
