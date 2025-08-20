@@ -1,7 +1,7 @@
 /**
 * ErickBinaryFormat.h
 * 
-* v: snapshot 34 for the beta 3 
+* v: snapshot 35 for the beta 3 
 * 
 * YAAAY, when i finish the beta 3 i publish the specification
 * 
@@ -408,7 +408,7 @@ LocateMemory
 	}
 
 	Print(L"Ended\n");
-	Located[size - 1] = 0;
+	Located[size] = 0;
 
 	return Located;
 }
@@ -455,7 +455,7 @@ AllocateStringMemory
 	//
 	// configure vars
 	//
-	u64 len = StrLen(Str) + 1;
+	u64 len = StrLen(Str);
 	t16 BufferDir;
 
 	//
@@ -552,10 +552,30 @@ BootSpecific
 */
 VOID EstarEnDirecto()
 {
+	bool_t fast_write_mode = 0;
+
+	// save the bgcol no se por que
+	PIXELCOL savedcolorbg = Conio->atributes->BG;
+	PIXELCOL savedcolorfg = Conio->atributes->TEXT;
+
+	// screen restore
+	Pixels* savedbufsc = AllocatePool(sizeof(Pixels) * pixels);
+	for (size_t i = 0; i < pixels; i++) {
+		// save every pixel
+		savedbufsc[i] = bufferscreen[i];
+	}
+
+	// screen pixels count restore
+	UINTN savpixels = pixels;
+
+	int curxsaved = cursorx;
+	int curysaved = cursory;
 
 	//
 	// configure colors
 	//
+
+	bool_t IsTextView = 0;
 
 	PIXELCOL Background = { 39, 55, 36, 0 };
 	PIXELCOL BackgroundSelected = { 56, 80, 52, 0 };
@@ -614,6 +634,9 @@ VOID EstarEnDirecto()
 	ClearScreen();
 
 	while (1) {
+		SlotsHexSpaces = IsTextView ? 1 : 4;
+		rows_per_page = (((rows)-4));
+		sheetsm = ((columns / (IsTextView ? 1 : 5)));
 
 		//
 		// clear screen
@@ -653,7 +676,7 @@ VOID EstarEnDirecto()
 			// for dont scape for the screen in colummns
 			//
 			if (
-				(cursorx + 4) > columns
+				(cursorx + SlotsHexSpaces) > columns
 				)
 			{
 				cursorx = 0;
@@ -692,19 +715,34 @@ VOID EstarEnDirecto()
 				SetScreenAtribute(0, brgreen);
 			}
 
-			//
-			// format the value
-			//
-			CHAR16 Emm[5];
-			SPrint(Emm, sizeof(Emm), L"%04x", memory_acces[i]);
-			printcu(Emm);
+			if (IsTextView) {
+				//
+				// format the value
+				//
+				CHAR16 Emm[5];
+				SPrint(Emm, sizeof(Emm), L"%c", memory_acces[i]);
+				printcu(Emm[0] == L'\0' ? L"." : Emm);
+			}
+			else {
+				//
+				// format the value
+				//
+				CHAR16 Emm[5];
+				SPrint(Emm, sizeof(Emm), L"%04x", memory_acces[i]);
+				printcu(Emm);
+			}
 
 			//
 			// for split buttons
 			//
 
 			SetScreenAtribute(1, Background);
-			printcu(L" ");
+			if (
+				!IsTextView
+				)
+			{
+				printcu(L" ");
+			}
 
 		}
 
@@ -730,7 +768,7 @@ VOID EstarEnDirecto()
 			)
 			printcu(L"G=go Arrows=tab P^Pv=Pag <]=Sel");
 		else
-			printcu(L"<]=OK ^=ValInc v=ValDec E=Edit");
+			printcu(fast_write_mode ? L"Write mem as chars ,F10=Disable" : L"F10=fwmod <]=OK ^=ValInc v=ValDec E=Edit");
 
 		cursorx = 0;
 		cursory--;
@@ -868,6 +906,74 @@ VOID EstarEnDirecto()
 		}
 
 		///
+		/// F10
+		/// 
+		/// Action:
+		/// 
+		///		enables/disables fast write mode
+		/// 
+		else if (
+			Key.ScanCode == SCAN_F10
+			)
+		{
+			if (fast_write_mode) fast_write_mode = 0;
+			else fast_write_mode = 1;
+		}
+
+		///
+		/// any char
+		/// 
+		/// Action:
+		/// 
+		///		in fast write mode put char
+		/// 
+		else if (
+			Key.UnicodeChar != 0 &&
+			fast_write_mode
+			)
+		{
+			memory_acces[EditorPos] = Key.UnicodeChar;
+			EditorPos++;
+		}
+
+		///
+		/// t
+		/// 
+		/// Action:
+		/// 
+		///		enable/disable the char view mode
+		/// 
+		else if (
+			Key.UnicodeChar == L't' ||
+			Key.UnicodeChar == L'T'
+			)
+		{
+			if (IsTextView == 1) IsTextView = 0;
+			else  IsTextView = 1;
+		}
+		
+		///
+		/// F3
+		/// 
+		/// Action:
+		/// 
+		///		shows the info of the editor
+		/// 
+		else if (
+			Key.ScanCode == SCAN_F3
+			)
+			{
+				CHAR16 Info[80];
+
+				SPrint(Info, sizeof(Info), L"ps: %d, sc: %d, reg: %d", EditorPos, scroll, EditorPos != 0? (EditorPos / (sheetsm * rows_per_page)) : 0);
+				printc(Info);
+
+				gST->BootServices->WaitForEvent(1, &gST->ConIn->WaitForKey, &Event);
+				gST->ConIn->ReadKeyStroke(gST->ConIn, &Key);
+
+			}
+
+		///
 		/// g
 		/// 
 		/// Action:
@@ -933,6 +1039,28 @@ VOID EstarEnDirecto()
 			if (editing) editing = false;
 			ClearScreen();
 			FreePool(tcm);
+
+			// load the pixels count
+			pixels = savpixels;
+
+			// restore the pixels
+			for (size_t i = 0; i < savpixels; i++) {
+				bufferscreen[i] = savedbufsc[i];
+			}
+
+			Conio->atributes->TEXT = savedcolorfg;
+			Conio->atributes->BG = savedcolorbg;
+
+			cursorx = curxsaved;
+			cursory = curysaved;
+
+			FreePool(savedbufsc);
+
+			// draw the bg
+			DrawRectangle(gop, 0, 0, horizontalResolution, verticalResolution, savedcolorbg);
+
+			// draw the screen
+			DrawScreen();
 			return;
 		}
 	}
@@ -1331,7 +1459,7 @@ BinaryEx
 			* 
 			* represents the search in program function
 			*/
-			u64 search_s = 0;
+			t16 search_s = 0;
 
 			//
 			// loops
@@ -1352,6 +1480,7 @@ BinaryEx
 					)
 					)
 				{
+					//Print(L"Saving %d point...\n", memory_acces[10] + 1);
 					//
 					// save the before stack
 					//
@@ -1362,6 +1491,7 @@ BinaryEx
 					//
 					// set the stack position
 					//
+
 					memory_acces[10] = search_s;
 					break;
 				}
@@ -1370,7 +1500,7 @@ BinaryEx
 					p[search_s] == 0
 					)
 				{
-					while (1);
+					//while (1);
 					break;
 				}
 			}
@@ -1441,7 +1571,9 @@ BinaryEx
 			ch == ret_instruction // ret
 			)
 		{
-			memory_acces[10] = stack_pop[curr_popback];
+			//Print(L"Restoring %d point...\n", stack_pop[curr_popback - 1]);
+
+			memory_acces[10] = stack_pop[curr_popback - 1];
 			curr_popback--;
 		}
 		else if (
@@ -1463,6 +1595,18 @@ BinaryEx
 			}
 
 			memory_acces[10] += 2;
+
+			///
+			/// 0 - Stop program
+			/// 
+			/// detener el programa
+			/// 
+			if (
+				p1 == 0
+				)
+			{
+				break;
+			}
 
 			///
 			/// 1 - PrintChar
@@ -1817,7 +1961,7 @@ BinaryEx
 				u16 RedirectTo = p2 + 2;
 
 				if (
-					debug
+					1
 					)
 					Print(L"gets the item %d of the buffer %d", BufferItem, BufferToManipule);
 
@@ -1827,7 +1971,10 @@ BinaryEx
 				{
 				}
 				else
+				{
 					memory_acces[RedirectTo] = memory_acces[(BufferToManipule + 1) + BufferItem];
+					Print(L"Is: %d\n", memory_acces[(BufferToManipule + 1) + BufferItem]);
+				}
 			}
 
 			///
@@ -1875,7 +2022,7 @@ BinaryEx
 					MemFree++;
 				}
 			}
-
+			
 			///
 			/// 21 - boot a file
 			///
@@ -1920,11 +2067,12 @@ BinaryEx
 				)
 			{
 				if (!REALESE)
-				Print(L"IF BufferCmp<%d,%d> THEN %d\n   (\"%s\"==\"%s\")=%d\n", 
-					memory_acces[p2], memory_acces[p2 + 1], (p[r + 4] - safetynow_for_up),
-					LocateMemory(memory_acces[p2]), LocateMemory(memory_acces[p2 + 1]), 
-					(StrCmp(LocateMemory(memory_acces[p2]), LocateMemory(memory_acces[p2 + 1])) == 0)
+				{
+					Print(L"'%s'=='%s': %d\n", LocateMemory(memory_acces[p2]), LocateMemory(memory_acces[p2 + 1]),
+						(StrCmp(LocateMemory(memory_acces[p2]), LocateMemory(memory_acces[p2 + 1])) == 0)
 					);
+				}
+				
 				memory_acces[256] = (t16)(StrCmp(LocateMemory(memory_acces[p2]), LocateMemory(memory_acces[p2 + 1])) == 0);
 			}
 
@@ -2111,6 +2259,116 @@ BinaryEx
 			{
 				memory_acces[ptr_memory_max] = memory_acces[p2];
 			}
+
+			///
+			/// 38 - buffer length
+			/// 
+			if (p1 == 38) {
+				t16 buffer_pos = memory_acces[p2];
+				t16 retval = p2 + 1;
+
+				memory_acces[retval] = memory_acces[buffer_pos];
+			}
+
+			///
+			/// 39 - comparate
+			/// 
+			/// retvals:
+			/// 
+			///		0 = equal
+			///		1 = greater (V1 > V2)
+			///		2 = not greater (V1 < V2)
+			/// 
+			if (p1 == 39)
+			{
+				t16 Value1 = memory_acces[p2];
+				t16 Value2 = memory_acces[p2 + 1];
+
+				if (Value1 == Value2) memory_acces[256] = 0;
+				else if (Value1 > Value2) memory_acces[256] = 1;
+				else if (Value1 < Value2) memory_acces[256] = 2;
+
+				Print(L"Outpud: %d\n", memory_acces[256]);
+			}
+
+			///
+			/// 40 - jump if condition
+			/// 
+			/// params [C: number] [To: any] [SavedPC: boolean]
+			/// 
+			if (p1 == 40) 
+			{
+				t16 ConditionNum = memory_acces[p2];
+				t16 JumpTo = memory_acces[p2 + 1];
+				t16 SaveProgramCounter = memory_acces[p2 + 2];
+
+				if (ConditionNum != 3 ? (memory_acces[256] == ConditionNum ): 1)
+				{
+					/**
+					* search_s
+					*
+					* represents the search in program function
+					*/
+					t16 search_s = 0;
+
+					//
+					// loops
+					//
+					while (
+						1
+						)
+					{
+						search_s++
+							;
+						if (
+							(
+								//
+								// you found a function?
+								//
+								p[search_s] == section_instruction ? ((p[search_s + 1] - safetynow_for_up) == (JumpTo)) : 0
+
+								)
+							)
+						{
+							if (
+								SaveProgramCounter == 1
+								)
+							{
+								//
+								// save the before stack
+								//
+
+								stack_pop[curr_popback] = memory_acces[10] + 1;
+								curr_popback++; // next position
+							}
+
+						//
+						// set the stack position
+						//
+						memory_acces[10] = search_s;
+						break;
+						}
+						else if (
+							p[search_s] == 0
+							)
+						{
+							//while (1);
+							break;
+						}
+					}
+				}
+			}
+
+			///
+			/// 41 - convert string to number
+			/// 
+			if (p1 == 41)
+			{
+				t16 RetOnNumber = memory_acces[p2];
+				t16 StrPos = memory_acces[p2 + 1];
+
+				memory_acces[RetOnNumber] = Atoi(LocateMemory(StrPos));
+			}
 		}
 		else if (
 			ch == jq_instruction
@@ -2249,6 +2507,7 @@ BinaryEx
 			ch == invalid_instruction
 			)
 		{
+			/*
 			ClearScreen();
 
 			Conio->atributes->size = 2;
@@ -2267,13 +2526,14 @@ BinaryEx
 			gBS->Stall(1000000);
 
 			gRT->ResetSystem(EfiResetWarm, EFI_ACCESS_DENIED, 0, 0);
+			*/
 		}
 		else {
 			if (
 				debug
 				)
 			{
-				Print(L"Invalid Instruction: %d\n", ch);
+				//Print(L"Invalid Instruction: %d\n", ch);
 			}
 		}
 		
@@ -2305,6 +2565,12 @@ BinaryEx
 				)
 			{
 				ShowMems = ShowMems == true ? false : true;
+			}
+			else if (
+				Key.ScanCode == SCAN_F4
+				)
+			{
+				DrawScreen();
 			}
 			else if (
 				Key.ScanCode == SCAN_F5

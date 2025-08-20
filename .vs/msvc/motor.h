@@ -1358,3 +1358,11 @@ IsInArrayRange
     ch16                                                    Text[],
     u32                                                     ArrayLen
 );
+
+
+#define ControlA_Combination 1
+#define ControlB_Combination 2
+#define ControlC_Combination 3
+#define ControlD_Combination 4
+#define ControlE_Combination 5
+#define ControlF_Combination 6

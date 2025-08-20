@@ -1,554 +1,206 @@
-# EBF Manual Specification - For KellyBootloader beta 3 and upper
+# Manual de implementacion de ErickBinaryFormat y de ErickAssembly desde un punto de vista entendible
 
-Maded By ErickCraftStudios
+en este md (o pdf si logre hacerlo como queria) veremos como implementar tu propio ErickBinaryFormat , sin copiar el .h
 
-KellyBootloader EBF Instructive Manul.md
+## lenguaje
 
-Documment for the Specifications of the Beta 3 (that is taken as the first stable version, that is currently in
-progress for now (that message has been removed when the Beta 3 of ErickBinaryFormat has been finished))
+usen la libreria `gnu-efi` para su implementacion, usen C sin C++ y compatible con `gnu-efi`
 
-DISCLAMER:
+## RAM
 
-    THIS TAKEN THE BETA 3 OF THE KELLYBOOTLOADER AS A REFERENCE FOR THAT SPECIFICATIONS SPECIFQUED
-    IN THIS DOCUMMENT, IF A NEW FUNCTION HAS BEEN ADDED THE FUNCTION HAS BEEN IGNORED
+la ram en ErickBinaryFormat por dentro no es mas que un array de tipo `short` con 2000000 items (lo que equivale a 4 megas de ram), a este en el documento lo llamaremos `MemoryAccess`
 
-    THIS FILE IS ONLY FOR THE Standart. Markarian. ErickBinaryFormat. Specifications. (EBF-SMES) BECAUSE
-    IF YOU WANT TO MAKE YOUR OWN VERSION OF THE FORMAT WITHOUT DOWNLOAD THE .H FILE USE THIS MANUAL
-    AS A REFERENCE
+fuera de eso hay otra variable con el tipo `long long` el cual es usado para manejar punteros mas grandes que el limite de 16 bits que tiene cada slot individual, a este `long long` en el documento lo llamaremos `CukysCukysPtr`
 
-for other uses (for example, only for learn about ErickAssembly) you can download this Markdown
+(cabe aclarar que en su codigo le puden poner cualquier nombre, mientras entiendan como funciona, ponganle el nombre que quieran)
 
-## EBF-Specifications
-THERE OF ALL THIS ARE ONLY RECOMENDATIONS AND FOLLOW THE NEXT RULES ARE NOT NECESARY, 
-BUT IS RECOMENDED TO FOLLOW FOR DONT BROKEN COMPATIBILITY
+### Variables
 
-### EBF-SPC-001
+esto se hace solo, solo necesitas manejar un slot
 
-notes for implementations:
-    the Spc 001 in the "??????" really idk if i mean Kilobytes or KiB but the lenght of the memory_acces
-    that is a array of t16 (short) have a lenght of 32000 spaces
+### Pools (o arrays)
 
-```c
-    short								memory_acces[32000];
+esto ya es un poco compilacado
+
+primero , los pools estan conformados por una variable principal y varias variables que les siguen, la variable principal contiene el tamaño del pool (cuantos slots de memoria mide) y las otras variables contienen la informacion
+
+supongamos que un pool esta ubicado en la pocision 40000 y tiene 5 elementos [ 1, 5, 2, 7, 3 ] en el editor de memoria se veria asi
+```console
+HexMemoryEditor for ErickBinaryFromat
+
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0005 0001 0005 0002 0007 0003 0000 0000
+ps: 39848, sc: 4981, reg: 249
+G=go Arrows=P^Pv=Pag <]=Sel
 ```
 
-The EBF-SPC-001 Specificts that the 64 kilobytes of the memory that ErickBinaryFormat provides need 
-to be divide on the next regions
-```c
-Start:   End:     Description:
-000000-000009 - > temporaly registres usted in operations
-000011-002000 - > static directionable variables
-002001-004999 - > pools buffer and arrays
-005000-006000 - > dinámic variables
-006001-010000 - > for your kernel code
-010001-015000 - > personalizable memory
-015001-050000 - > for multitask process
-050001-032000 - > reserved
-```
-
-### EBF-SPC-002
-
-notes for implementations:
-    you dont need to specific a new type of data, only have you need that your developers that
-    write programs for your implementation use the rules of the EBF-SPC-002 and is ready
-
-The EBF-SPC-002 Specificts that if you want to use 32bits memory use two memory positions
-
-### EBF-SPC-003
-
-notes for implementations:
-    the implementation of the pools is with
-```c
-
-/**
-* IsFreeSpaceFromTo
-*
-* check if there is free space in registers
-*/
-bool_t
-IsFreeSpaceFromTo
-(
-	size_t From,
-	size_t To
-)
-{
-	size_t i = From;
-	while (i < To + 1)
-	{
-		if (memory_acces[i] != NULL) return false;
-		i++;
-	}
-	return true;
-}
-
-/**
-* AllocateMemory
-*
-* allocate a memory and returns where its allocated
-*/
-t16
-AllocateMemory
-(
-	t16 size
-)
-{
-	//
-	// check if not trolling
-	//
-
-	if (
-		size == 0
-		)
-		return 0;
-
-	//
-	// set the buffer variables
-	//
-
-	t16 Buffer = -1;
-
-	//
-	// search space in the memory
-	//
-
-	for (size_t i = 2001; i < 4000; i++)
-	{
-		if (
-			memory_acces[i] == NULL && i != 10
-			)
-		{
-			Buffer = i;
-			break;
-		}
-	}
-
-	//
-	// check if the buffer is not nulling
-	//
-
-	if (
-		Buffer != -1
-		)
-	{
-		//
-		// configure vars
-		//
-
-		u16 fill_end = Buffer + 1 + size;
-		u16 filling_i = Buffer + 1;
-
-		Print(L"Try to allocate memory starting in based of Header at %d and ends in %d\n", filling_i, fill_end);
-
-		//
-		// initialize buffer
-		//
-
-		while (filling_i != fill_end) {
-			memory_acces[filling_i] = 1;
-			filling_i++;
-		}
-
-		memory_acces[Buffer] = size;
-
-		if
-			(
-				!REALESE
-				)
-		{
-			Print(L"Pool allocated in : %d to %d", Buffer, Buffer + 1 + size);
-		}
-
-		Print(L"Pool starting at: %d\n",(INTN)Buffer);
-
-		return Buffer;
-	}
-
-	return 0;
-}
-
-/**
-* LocateMemory
-* 
-* returns the complete array buffer for a pool
-* 
-* @param StartingAt: is where the buffer starts
-*/
-ch16*
-LocateMemory
-(
-	t16 StartingAt
-)
-{
-	t16 size = memory_acces[StartingAt];
-	ch16* Located = AllocatePool(sizeof(ch16) * (size + 1));
-
-	u16 reader = StartingAt + 1;
-
-	for (size_t i = 0; i < (size_t)size; i++)
-	{
-		Located[i] = memory_acces[reader];
-		reader++;
-	}
-
-	Located[size] = 0;
-
-	Print(Located);
-
-	return Located;
-}
-
-/**
-* SetMemoryPool
-* 
-* sets a memory part
-* 
-* @param Pool: is the pool start
-* @param Index: is the item to modifie
-* @param Value: is the new value for the new item
-*/
-VOID
-SetMemoryPool
-(
-	t16 Pool,
-	t16 Index,
-	t16 Value
-)
-{
-	if (!0)Print(L"seting item %d of the pool %d with value %c\n", Index, Pool, Value);
-	
-	//Print(L"the size of the pool is : %d\n", memory_acces[Pool]);
-
-	memory_acces[
-		Index
-	] = Value;
-}
-
-/**
-* GetMemoryPool
-* 
-* gets a memory buffer item
-* 
-* @param Pool: is the pool
-* @param Index: is the index to get
-* 
-* @returns the content of that location in the pool
-*/
-t16
-GetMemoryPool
-(
-	u16 Pool,
-	u16 Index
-)
-{
-	return memory_acces[(Pool + 1) + Index];
-}
-```
-
-The EBF-SPC-003 Specificts that a pool is created by a main memory part and a secondarys memory parts
-Ex: a pool located in 002052 with a length of 000003 that haves the next values (1, 2, 3) are located with the next Method in the memory
-```
-Val  000003 000001 000002 000003
-Pos  002052 002053 002054 002055
-```
-
-### EBF-SPC-004
-
-notes for implementations:
-
-    if you want to implement your own assembly for your implementation documment the secctions and what
-    make every functions
-
-Hlvc syntax is like C but you dont use ;, yo use the line feed
-
-### EBF-SPC-005
-
-notes for implementations:
-
-    your can create your own magic , but
-    DONT COPPY MY MAGICS AND SAY THAT IS MADED BY YOU, I REFFER TO (EA and MP)
-    I DONT SAY THAT YOU CAN USE IT BUT 
-
-Every binary file formate with ErickBinaryFormat will be start with in the two first characters the two letters of the magic, and the thridy letter will need to have the value of U-000003 the character opcode not the number letter, the literaly char 3, before that letters the program instructivos will be executed
-
-### EBF-SPC-006
-
-notes for implementations:
-    for you own bootloader bassed in KellyBootloader please stay the program params position for dont
-    break compatibility
-
-the params of the program when is called by the command prompt will be saved in
-```c
-Param:  AdPool:
-000001  003001
-000002  003002
-000003  003003
-000004  003004
-000005  003005
-000006  003006
-000007  003007
-```
-
-### EBF-SPC-007
-
-All drivers need to be start with the function 0 for set all variables and the envioriment
-
-```c
-Id:		Description:
-000000	DriverImageHandle
-000001	DriverLoader
-000002	DriverUnload
-000003+ Driver functions
-```
-
-### EBF-SPC-008
-
-all the hlvcs that contains the line
-```
-_Use DriverCompiler
-```
-has been compíled as MP
-
-### EBF-SPC-009
-
-the program will be stop automatically when there is no more lines to process, you can make too with
-```
-system_call 0,0
-```
-
-## EBF-Instrucion-Reference
-
-notes for implementations:
-
-OPCODES (IN CHAR16)
-```c
-
-/**
-* move
-* 
-* moves a literal value to a register
-*/
-#define mov_instruction							1
-
-/**
-* add
-*
-* adds to a register a value of a register
-*/
-#define add_instruction							2
-
-/**
-* sub
-*
-* suns to a register a value of a register
-*/
-#define sub_instruction							3
-
-/**
-* divide
-*
-* divides to a register a value of a register
-*/
-#define div_instruction							4
-
-/**
-* multipliques
-*
-* multipliques to a register a value of a register
-*/
-#define imul_instruction						5
-
-/**
-* incremment
-* 
-* Incremments the value of a register
-*/
-#define incr_instruction						6
-
-/**
-* decrement
-*
-* Decremments the value of a register
-*/
-#define decr_instruction						7
-
-/**
-* call_function
-*
-* calls a function
-*/
-#define jump_instruction						8
-
-/**
-* return
-* 
-* return to the before point from a jump
-*/
-#define ret_instruction							9
-
-/**
-* functions
-* 
-* defines the function point
-*/
-#define section_instruction						10
-
-/**
-* system_call
-* 
-* makes a call to the system
-*/
-#define interruption_instruction				11
-
-/**
-* if_equal
-*
-* calls if equal
-*/
-#define jq_instruction							12
-
-/**
-* if_greater
-*
-* calls if greater
-*/
-#define jg_instruction							13
-
-/**
-* if_not_greater
-*
-* calls if not greater
-*/
-#define jng_instruction							14
-
-/**
-* if_not_equal
-*
-* calls if not equal
-*/
-#define jnq_instruction							15
-
-/**
-* set_value_with_value
-* 
-* sets a register with the value of a other register
-*/
-#define lea_instruction							18
-
-/**
-* prototypes
-* 
-* universal word for declare a prototype
-*/
-#define nop_instruction							19
-
-/**
-* set_value_with_value_of_value
-* 
-* set a register with the value of the register of a register
-*/
-#define ptr_instruction							20
-
-/**
-* loop
-* 
-* loops a function
-*/
-#define loop_instruction						21
-
-/**
-* for indicate a not instruction the character that are greater that this value
-* are not instructions
-*/
-#define safetynow_for_up						22
-
-```
-
-### move
-Moves a literal value to a memory part
-
-usage:
-```
-move 1,0
-```
-
-### set_value_with_value
-Searchs the value of the memory pointer in the value and assigns that value to the memory destinación
-
-usage:
-```
-move 1,0
-set_value_with_value 2,1
-```
-
-### add
-Searchs the value of the memory pointer in the value and adds to the value of the destination that value
-
-usage:
-```
-move 1,24
-move 2,6
-add 1,2
-```
-
-### rest
-Searchs the value of the memory pointer in the value and subs to the value of the destination that value
-
-usage:
-```
-move 1,30
-move 2,6
-rest 1,2
-```
-
-### multiplique
-Searchs the value of the memory pointer in the value and multipliques to the value of the destination that value
-
-usage:
-```
-move 1,2
-move 2,4
-multiplique 1,2
-```
-
-### divide
-Searchs the value of the memory pointer in the value and divides to the value of the destination that value
-
-usage:
-```
-move 1,10
-move 2,2
-divide 1,2
-```
-
-### function
-Defines a function with a number, but dont worry, in this Example will be use a macro for majes that in compilación time the macro will be replace with the real function number
-
-usage:
-```
-MyFunction = 1 ; defines the macro *
-
-function MyFunction
-```
-
-### call_function
-calls a function
-
-usage:
-```
-MyFunction = 1 ; defines the macro *
-
-call_function MyFunction
-
-move 2,1 ; this will be ignored*
-
-function MyFunction
-```
-
-### system_call
-Makes a call to the system
-
-usage:
-```
-move 2,'A'
-system_call 1,2 ; 1 is a call for print a character*
-```
+cada funcion que cree un pool debera retornar la direccion de la variable primaria (la que esta antes del primer elemento que contiene la longitud)
+
+tambien tiene que haber una funcion que libere el pool y sobreescriba todos sus datos con 0 para que al crear uno nuevo se sobreescriba bien y no quede ningun pool suelto
+
+aparte no pueden existir pools que empiezen antes de el slot 2001 ni despues de el slot 4999 de `MemoryAccess`
+
+## parte logica
+
+para la parte de instrucciones logicas la tabla de los opcodes es algo asi
+
+algunas instrucciones no estan por que estan en desuso pero aun asi manten los opcodes exactos en esta tabla para que sea compatible tu implementacion
+
+| instruccion | Codigo de operacion | Resumen |
+|:--------|------:|:--------:|
+| mover | 1   | mueve un valor literal a una variable |
+| sumar | 2   | le suma a una variable el valor de otra variable |
+| restar | 3   | le resta a una variable el valor de otra variable |
+| dividir | 4   | divide una variable con valor de otra variable |
+| multiplicar | 5   | multiplica el valor de una variable con valor de otra variable |
+| incrementar | 6   | incrementa el valor de una variable en 1 |
+| decrementar | 7   | decrementa el valor de una variable en 1 |
+| saltar | 8   | salta a una funcion conservando el program counter , para usarlo en una instruccion de retorno |
+| regresar | 9   | regresa a un punto anterior despues de un salto |
+| declarar funcion | 10   | no tiene utilidad real ni hace nada interesante, solo le indica a una instruccion de salto que ahi hay una funcion y si coincide el numero de la funcion salta a esa funcion |
+| llamada de ayuda | 11   | hace una accion del sistema, la tabla de lo que hace cada accion se mencionara luego en otra seccion del documento |
+| saltar si son iguales | 12 | hace lo mismo que el salto pero solo salta si el slot `256` de memoria tiene como valor 1
+| saltar no son iguales | 15 | hace lo mismo que el salto pero solo salta si el slot `256` de memoria tiene como valor 0
+| asignar una variable con el valor de otra variable | 18 | hace eso
+| trabajar con punteros | 19 | cuando una instruccion detecta que la instruccion anterior la instruccion 19 entonces fuerza al valor 1 a que en vez de ser un valor literal el valor 1 cuando se pasa una instruccion con el parametro 1 tendra que ser forzada a que en vez de por ejemplo utilizar como valor `43` usar el valor de el slot `43` del array de memoria,`MemoryAccess`
+
+todo lo que no sea instrucciones al caracter original se le suma 22 (por ejemplo , si un parametro de una instruccion es 65 en tiempo de compilacion se convierte a 87) y al tiempo de ejecucion se le resta a los parametros 22 asi `87` se restaura a `65`
+
+al ejecutar un programa EBF tiene que empezar con los dos caracteres del magic (`EA` o `MP`) y el caracter 3 debe ser el caracter ascii con el codigo 3 para que se considere un binario de ErickBinaryFormat, el encabezado despues de comprobarlo se debe saltar y pasar con lo que sigue (las instrucciones del programa)
+
+## tabla de colores esperada
+
+negro
+numero: 1
+
+negro claro
+numero: 2
+
+gris oscuro
+numero: 3
+
+gris
+numero: 4
+
+gris claro
+numero: 5
+
+blanco
+numero: 6
+
+rojo oscuro
+numero: 7
+
+rojo
+numero: 8
+
+rojo brillante
+numero: 9
+
+naranja oscuro
+numero: 10
+
+naranja
+numero: 11
+
+naranja brillante
+numero: 12
+
+amarillo oscuro
+numero: 13
+
+amarillo
+numero: 14
+
+amarillo brillante
+numero: 15
+
+verde oscuro
+numero: 16
+
+verde
+numero: 17
+
+verde brillante
+numero: 18
+
+cian oscuro
+numero: 19
+
+cian
+numero: 20
+
+cian brillante
+numero: 21
+
+teal oscuro
+numero: 22
+
+teal
+numero: 23
+
+teal brillante
+numero: 24
+
+azul oscuro
+numero: 25
+
+azul
+numero: 26
+
+azul brillante
+numero: 27
+
+cualquier otra entrada invalida de color se le asigna el color gris
+
+## llamadas al sistema
+
+todas las llamadas tienen reservado el `param 1` para el numero de la llamada y el `param 2` lo usan algunas llamadas para hacer cosas mas interesantes y dinamicas
+
+| Nombre de la llamada | Numero de representacion | Resumen |
+|:--------|------:|:--------:|
+| Imprimir caracter | 1   | Imprime el valor del slot de `MemoryAccess` al que apunta el `param 2` de la instruccion como un caracter unicod |
+| Limpiar pantalla | 2   | Limpia la pantalla |
+| cambiar el fg | 3   | cambia el color de texto de la consola con la tabla de colores esperados |
+| cambiar el bg | 4   | cambia el color del fondo de la consola con la tabla de colores esperados |
+| ajustar posicion x | 5 | cambia el valor de la posicion del cursor de la consola en x con el valor del slot de `MemoryAccess` al que apunta el `param 2` de la instruccion |
+| ajustar posicion y | 7 | cambia el valor de la posicion del cursor de la consola en y con el valor del slot de `MemoryAccess` al que apunta el `param 2` de la instruccion |
+| Imprimir caracter sin actualizar la pantalla | 8   | Imprime el valor del slot de `MemoryAccess` al que apunta el `param 2` de la instruccion como un caracter unicode pero sin actualizar la pantalla |
+| dibujar la pantalla manualmente | 9 | dibuja la pantalla manualmente |
+| esperar | 10 | espera una cantidad de microsegundos, esa cantidad es el valor del slot de `MemoryAccess` al que apunta el `param 2` de la instruccion |
+| esperar hasta que se presione una tecla | 11 | espera hasta que se presione una tecla |
+| leer una tecla | 12 | redirije el codigo de escaneo de la tecla a la variable a la que apunta el `param 2` de la instruccion y el caracter unicode lo guarda en la direccion de memoria a la que apunta el `param 2` sumada por 1 |
+| obtener la fecha | 13 | direccion `param 2` = segundo, direccion `param 2`+1 = minuto, direccion `param 2`+2 = hora, direccion `param 2`+3 = dia, direccion `param 2`+4 = semana, direccion `param 2`+5 = mes, direccion `param 2`+6 = año |
+| crear un pool | 14 | toma la direccion a la que apunta `param 2`+1 como el tamaño y retorna la posicion del pool creado en la variable a la que apunta `param 2` |
+| editar un valor de un pool | 16 | direccion `param 2` = el pool, direccion `param 2`+1 el item que se quiere editar (el primer item es 0), direccion `param 2`+3 = el nuevo valor|
+| obtener un valor de un pool | 17 | direccion `param 2` = el pool, direccion `param 2`+1 el item que se quiere editar (el primer item es 0), direccion `param 2`+3 = donde el valor se retornara|
+| Imprimir numero sin actualizar la pantalla | 18   | Imprime el valor del slot de `MemoryAccess` al que apunta el `param 2` de la instruccion como un numero pero sin actualizar la pantalla |
+| Imprimir numero hexadecimal sin actualizar la pantalla | 19   | Imprime el valor del slot de `MemoryAccess` al que apunta el `param 2` de la instruccion como un numero hexadecimal pero sin actualizar la pantalla |
+| liberar pool | 20 | libera un pool, el pool se supone que esta en la direccion a la que apunta el valor de la variable al que apunta el `param 2` de la instruccion |
+| imprimir pool | 22 | imprime un pool, el pool se supone que esta en la direccion a la que apunta el valor de la variable al que apunta el `param 2` de la instruccion |
+| leer linea | 23 | le pide al usuario ingresar cualquier texto y despues el texto se localiza en un pool y la direccion del pool es retornada a la variable a la que apunta el `param 2` de la instruccion |
+| comparar pools | 24 | compara el pool 1 con el pool 2, el pool 1 se supone que esta en la direccion a la que apunta el valor de la variable al que apunta el `param 2` de la instruccion , el pool 2 se supone que esta en la direccion a la que apunta el valor de la variable al que apunta el `param 2`+1 de la instruccion, la llamada retorna 1 si es igual y 0 si no lo son en el slot `256` de `MemoryAccess` |
+| apagar | 27 | apaga la pc |
+| reiniciar | 28 | reinicia la pc |
+| cambiar fg personalizado | 29 | cambia el fg con un color personalizado, direccion `param 2` = red, direccion `param 2`+1 = green, direccion `param 2`+2 = blue |
+
+hay otras llamadas pero te recomiendo ver el codigo de ErickBinaryFormat.h en el repositorio de github de KellyBootloader por que estoy muy cansado de nombrar todas
+

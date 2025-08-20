@@ -1256,6 +1256,138 @@ editor
 	return L"e";
 }
 
+CHAR16 ToUpper(CHAR16 ch) {
+	if (
+		ch >= L'a' && ch <= L'z'
+		)
+		return ch - (CHAR16)32;
+
+	return ch;
+}
+
+CHAR16* AsStringChar(CHAR16 ch)
+{
+	CHAR16 Ret[2];
+
+	Ret[0] = ch;
+	Ret[1] = L'\0';
+
+	return Ret;
+}
+
+/**
+* acemeditor
+* 
+* a program when you can literaly talk with the PC
+*/
+VOID acemeditor()
+{
+	EFI_INPUT_KEY Key;
+	UINTN Event;
+
+	SetScreenAtribute(0, gray);
+	printc(L"Me? , well, time to talk about any think\n");
+	printc(L"(Use keys for send instructions to the Computer, ESC to exit)\n");
+	printc(L"Every bad instruction... you dont want to know what happen if that\n");
+
+	while (true) {
+
+		gST->BootServices->WaitForEvent(1, &gST->ConIn->WaitForKey, &Event);
+		gST->ConIn->ReadKeyStroke(gST->ConIn, &Key);
+
+		_BINARY instruction[7];
+
+		instruction[0] = L'E';
+		instruction[1] = L'A';
+		instruction[2] = 3;
+
+		instruction[6] = 0;
+
+		if (Key.UnicodeChar != 0) {
+
+			if (Key.UnicodeChar == L'=')
+			{
+				instruction[3] = mov_instruction;
+				gST->BootServices->WaitForEvent(1, &gST->ConIn->WaitForKey, &Event);
+				gST->ConIn->ReadKeyStroke(gST->ConIn, &Key);
+				instruction[4] = Key.UnicodeChar + safetynow_for_up;
+				gST->BootServices->WaitForEvent(1, &gST->ConIn->WaitForKey, &Event);
+				gST->ConIn->ReadKeyStroke(gST->ConIn, &Key);
+				instruction[5] = Key.UnicodeChar + safetynow_for_up;
+			}
+
+			else if (Key.UnicodeChar == L'+') 
+			{
+				instruction[3] = add_instruction;
+				gST->BootServices->WaitForEvent(1, &gST->ConIn->WaitForKey, &Event);
+				gST->ConIn->ReadKeyStroke(gST->ConIn, &Key);
+				instruction[4] = Key.UnicodeChar + safetynow_for_up;
+				gST->BootServices->WaitForEvent(1, &gST->ConIn->WaitForKey, &Event);
+				gST->ConIn->ReadKeyStroke(gST->ConIn, &Key);
+				instruction[5] = Key.UnicodeChar + safetynow_for_up;
+			}
+
+			else if (Key.UnicodeChar == L'-')
+			{
+				instruction[3] = sub_instruction;
+				gST->BootServices->WaitForEvent(1, &gST->ConIn->WaitForKey, &Event);
+				gST->ConIn->ReadKeyStroke(gST->ConIn, &Key);
+				instruction[4] = Key.UnicodeChar + safetynow_for_up;
+				gST->BootServices->WaitForEvent(1, &gST->ConIn->WaitForKey, &Event);
+				gST->ConIn->ReadKeyStroke(gST->ConIn, &Key);
+				instruction[5] = Key.UnicodeChar + safetynow_for_up;
+			}
+
+			else if (Key.UnicodeChar == L'/')
+			{
+				instruction[3] = div_instruction;
+				gST->BootServices->WaitForEvent(1, &gST->ConIn->WaitForKey, &Event);
+				gST->ConIn->ReadKeyStroke(gST->ConIn, &Key);
+				instruction[4] = Key.UnicodeChar + safetynow_for_up;
+				gST->BootServices->WaitForEvent(1, &gST->ConIn->WaitForKey, &Event);
+				gST->ConIn->ReadKeyStroke(gST->ConIn, &Key);
+				instruction[5] = Key.UnicodeChar + safetynow_for_up;
+			}
+
+			else if (Key.UnicodeChar == L'*')
+			{
+				instruction[3] = imul_instruction;
+				gST->BootServices->WaitForEvent(1, &gST->ConIn->WaitForKey, &Event);
+				gST->ConIn->ReadKeyStroke(gST->ConIn, &Key);
+				instruction[4] = Key.UnicodeChar + safetynow_for_up;
+				gST->BootServices->WaitForEvent(1, &gST->ConIn->WaitForKey, &Event);
+				gST->ConIn->ReadKeyStroke(gST->ConIn, &Key);
+				instruction[5] = Key.UnicodeChar + safetynow_for_up;
+			}
+
+			else if (Key.UnicodeChar == L'C')
+			{
+				instruction[3] = interruption_instruction;
+				gST->BootServices->WaitForEvent(1, &gST->ConIn->WaitForKey, &Event);
+				gST->ConIn->ReadKeyStroke(gST->ConIn, &Key);
+				instruction[4] = Key.UnicodeChar + safetynow_for_up;
+				gST->BootServices->WaitForEvent(1, &gST->ConIn->WaitForKey, &Event);
+				gST->ConIn->ReadKeyStroke(gST->ConIn, &Key);
+				instruction[5] = Key.UnicodeChar + safetynow_for_up;
+			}
+			else 
+			{
+				printc(AsStringChar(Key.UnicodeChar));
+			}
+
+			BinaryEx(instruction, 0);
+		}
+		else if (
+			Key.ScanCode == SCAN_ESC
+			)
+		{
+			return;
+		}
+
+		Key.UnicodeChar = 0;
+	}
+}
+
 /**
 * LooksLikeChar16
 * 
@@ -2037,7 +2169,7 @@ VOID CommandPrompt()
 	ClearScreen();
 
 	DrawLogo();
-
+	
 	//
 	// loop
 	//
@@ -2059,6 +2191,8 @@ VOID CommandPrompt()
 		//
 
 		CHAR16* FileName = ReadLineSeriusWorck();
+
+		bool_t NoFreeParams = 1;
 
 		//
 		// next line
@@ -2129,6 +2263,25 @@ VOID CommandPrompt()
 				)
 			{
 				Conio->atributes->size = Atoi(FileName + 5);
+			}
+
+			//
+			// acemeditor
+			// 
+			// a debugger just-at-time
+			//
+			else if (
+				StrCmp(FileName, L"acemeditor") == 0
+				)
+			{
+				acemeditor();
+			}
+
+			else if (
+				StrCmp(FileName, L"lets go chat") == 0
+				)
+			{
+				acemeditor();
 			}
 
 			//
@@ -2225,7 +2378,7 @@ VOID CommandPrompt()
 
 				for (size_t i = pos_n_write; i < (pos_end_write + 1); i++)
 				{
-					FillMemorySpaces(memory_acces[i], memory_acces[i] + memory_acces[memory_acces[i]], 0);
+					FillMemorySpaces(memory_acces[i], (memory_acces[i] + memory_acces[memory_acces[i]]) - 1, 0);
 				}
 			}
 
@@ -2296,6 +2449,9 @@ VOID CommandPrompt()
 */
 VOID BootMenu()
 {
+
+	bool_t ShowAll = 0;
+
 	Conio->atributes->size = 2;
 	UINTN Event;
 	EFI_INPUT_KEY Key;
@@ -2437,8 +2593,11 @@ VOID BootMenu()
 
 			UINTN Len = StrLen(Name);
 
-			if (Len > 4 && StrnCmp(&Name[Len - 4], BinExtension, 4) == 0) {
-
+			if (
+				ShowAll == 0 ?
+				Len > 4 && StrnCmp(&Name[Len - 4], BinExtension, 4) == 0 : 1
+				) {
+				
 				cursorx = 2;
 
 				SetScreenAtribute(1, Background);
@@ -2547,6 +2706,10 @@ VOID BootMenu()
 			)
 		{
 			EstarEnDirecto();
+		}
+		else if (Key.UnicodeChar == L's' || Key.UnicodeChar == L'S') {
+			if (ShowAll == 1) ShowAll = 0;
+			else ShowAll = 1;
 		}
 		else if (Key.ScanCode == SCAN_F3)
 		{

@@ -1,0 +1,307 @@
+# build.erc
+#
+# archivo para compilar el sistema operativo
+
+# uso
+#! ```outpud
+#! ErickCompiler>
+#! bws
+#! Compilador de un OS simple de ejemplo
+#! 
+#! Uso:
+#! --build   : compilar el SO
+#! --about   : ver acerca del proyecto
+#! --h       : mostrar esto
+#! 
+#! cualquier parametro no valido se muestra este mensaje tambien
+#! ```
+#!
+#! # Ejecucion con parametro `--about`
+#!
+#! ```outpud
+#! ErickCompiler>
+#! bws --about
+#! 
+#! esto no busca ser serio ni nada de eso, solo es una base que hice para ver que se podia hacer
+#! el sistema no funciona por algunos bugs de ErickBinaryFormat
+#! ```
+#!
+#! # Ejecucion con parametro `--build`
+#!
+#! ```outpud
+#! ErickCompiler>
+#! bws --build
+#! Compilando el cargador de arranque
+#! (!) The pool _imprimir_texto.str_ have not a FreePool instruction
+#! (!) The pool _crear_boton.texto_ have not a FreePool instruction
+#! (!) Invalid instruction 'echo "Compilando programas"'
+#! (!) Invalid instruction 'compile'
+#! (!) The pool _imprimir_texto.str_ have not a FreePool instruction
+#! (!) The pool _crear_boton.texto_ have not a FreePool instruction
+#! (!) Invalid instruction 'stopScript()'
+#! ErickCompiler>
+#! ```
+
+#
+# definir variables usadas por el script
+#
+
+#
+# Target
+#
+# en donde termina los outpuds
+#
+Target = "EBF"
+
+#
+# TargetPrograms
+#
+# la extension de los programas
+#
+TargetPrograms = "EXE"
+
+#
+# Compiler
+#
+# el compilador que se va a usar
+#
+Compiler = "EASM_Hlvc"
+
+#
+# BootloaderFile
+#
+# el archivo del cargador de arranque
+#
+BootloaderFile = "boot/boot.heasm"
+
+#
+# BuildResultFolder
+#
+# la carpeta donde va el outpud
+#
+BuildResultFolder = "build"
+
+#
+# ProgramsFolder
+#
+# la carpeta de los programas
+#
+ProgramsFolder = "programs"
+
+#
+# Main
+#
+# el main del programa
+#
+function Main
+
+    if ("%ps%"=="--h") then Usage
+    if ("%ps%"=="--build") then Build
+    if ("%ps%"=="--unbuild") then unbuild
+    if ("%ps%"=="--about") then About
+
+    Usage()
+stopScript()
+
+# 
+# About
+#
+# informacion del proyecto
+#
+function About
+    echo "este es un proyecto mostrando como hacer un OS en ErickAssembly HightLevelCompiler"
+    echo ""
+    echo "esto no busca ser serio ni nada de eso, solo es una base que hice para ver que se podia hacer"
+    echo "el sistema no funciona por algunos bugs de ErickBinaryFormat"
+stopScript()
+
+#
+# Usage
+#
+# muestra el uso
+#
+function Usage
+
+    echo "Compilador de un OS simple de ejemplo"
+    echo ""
+    echo "Uso:"
+    echo "--build   : compilar el SO"
+    echo "--about   : ver acerca del proyecto"
+    echo "--h       : mostrar esto"
+    echo ""
+    echo "cualquier parametro no valido se muestra este mensaje tambien"
+
+stopScript()
+
+#
+# unbuild
+#
+# decompila todo lo compilado
+#
+function unbuild
+
+    echo "Compilando la libreria std del SO"
+
+    compile
+
+        # compilar la libreria de dependencias del SO
+        [_Entry]
+            # el nombre del archivo original
+            build "%BuildResultFolder%/LIB64.%Target%"
+
+            # el nombre del archivo del resultado
+            As "unbuilded/LIB64.easm"
+
+            # compilarlo con el HLVC
+            With "EASM_decompiler"
+        [end _Entry]
+    end
+
+    echo "Compilando el cargador de arranque"
+
+    # descompilar sirve para compilar varias entradas
+    compile
+        # construir el archivo del arranque
+        [_Entry]
+            # el nombre del archivo original
+            build "%BuildResultFolder%/BOOT.%Target%"
+
+            # el nombre del archivo del resultado
+            As "unbuilded/BOOT.easm"
+
+            # compilarlo con el HLVC
+            With "EASM_decompiler"
+        [end _Entry]
+    end
+
+    echo "Compilando el interprete de binarios"
+
+    # descompilar el interprete de binarios
+    compile
+
+        # compilar el SimBin (Simple Binary)
+        [_Entry]
+            # el nombre del archivo original
+            build "%BuildResultFolder%/RUN64.%Target%"
+
+            # el nombre del archivo del resultado
+            As "unbuilded/RUN64.easm"
+
+            # compilarlo con el HLVC
+            With "EASM_decompiler"
+        [end _Entry]
+    end
+
+    echo "Compilando programas"
+
+    # descompilar los programas
+    compile
+        # compilar un programa simple
+        [_Entry]
+            # el nombre del archivo original
+            build "%BuildResultFolder%/HOLAMUNDO.%TargetPrograms%"
+
+            # el nombre del archivo del resultado
+            As "unbuilded/HOLAMUNDO.easm"
+
+            # compilarlo con el HLVC
+            With "EASM_decompiler"
+        [end _Entry]
+    end
+
+stopScript()
+
+#
+# Build
+#
+# Funcion para compilarlo
+#
+function Build
+
+    echo "Compilando la libreria std del SO"
+
+    compile
+
+        # compilar la libreria de dependencias del SO
+        [_Entry]
+            # el nombre del archivo original
+            build "dependences/lib/stdlib.heasm"
+
+            # el nombre del archivo del resultado
+            As "%BuildResultFolder%/LIB64.%Target%"
+
+            # compilarlo con el HLVC
+            With "%Compiler%"
+        [end _Entry]
+    end
+
+    echo "Compilando el cargador de arranque"
+
+    # compile sirve para compilar varias entradas
+    compile
+
+        # sabian que se puede compilar en ErickCompilerScript varios archivos de una pasada?
+        # aqui lo hago obio
+
+        # por cierto, la identacion no es necesaria, solo la pongo para que sea mas comodo de leer
+
+        # construir el archivo del arranque
+        [_Entry]
+            # el nombre del archivo original
+            build "boot/boot.heasm"
+
+            # el nombre del archivo del resultado
+            As "%BuildResultFolder%/BOOT.%Target%"
+
+            # compilarlo con el HLVC
+            With "%Compiler% --onlyTranspile"
+        [end _Entry]
+    end
+
+    echo "Compilando el interprete de binarios"
+
+    # compilar el interprete de binarios
+    compile
+
+        # compilar el SimBin (Simple Binary)
+        [_Entry]
+            # el nombre del archivo original
+            build "kernel/simbin.heasm"
+
+            # el nombre del archivo del resultado
+            As "%BuildResultFolder%/RUN64.%Target%"
+
+            # compilarlo con el HLVC
+            With "%Compiler%"
+        [end _Entry]
+    end
+
+    echo "Compilando programas"
+
+    # compilar los programas
+    compile
+        # compilar un programa simple
+        [_Entry]
+            # el nombre del archivo original
+            build "%ProgramsFolder%/HolaMundo.heasm"
+
+            # el nombre del archivo del resultado
+            As "%BuildResultFolder%/HOLAMUNDO.%TargetPrograms%"
+
+            # compilarlo con el HLVC
+            With "%Compiler%"
+        [end _Entry]
+
+        [_Entry]
+            # el nombre del archivo original
+            build "%ProgramsFolder%/UnnamedProyect1.heasm"
+
+            # el nombre del archivo del resultado
+            As "%BuildResultFolder%/UNNAMED1.%TargetPrograms%"
+
+            # compilarlo con el HLVC
+            With "%Compiler%"
+        [end _Entry]
+    end
+
+stopScript()

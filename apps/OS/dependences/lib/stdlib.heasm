@@ -1,0 +1,176 @@
+/**
+* stdlib.heasm
+*
+* @description libreria para el manejo de funciones estandar
+* 
+* pon
+* ```heasm
+* // incluir la libreria del sistema
+* %include
+*     dependences/lib/stdlib.heasm
+* ```
+* en tu archivo heasm para usar estas funciones
+* o incluya uno por uno todos los archivos que necesite
+*
+* uso 
+*
+* un programa que imprime "Hello World!" y espera una tecla con un mensaje
+* ```heasm
+* %include
+*   dependences/lib/stdlib.heasm
+*
+* // la funcion main esta establecida por stdlib.heasm como la funcion a la que salta para saltarse todas
+* // las funciones de la libreria para luego usarlas
+* FUNCTION main
+*   Print "Hello\sWorld!\n"
+*   Print "Press\sany\skey\sto\scontinue...\n"
+*
+*   call WaitForKey
+*
+*   _CallOut 0 0
+*   // +- detener el programa
+* ```
+*/
+
+// esto para que las minusculas se conviertan a mayusculas y se les sume 32 para volverlas minusculas 
+// para que el limite de 106 de CHAR8 no afecte
+_Use ASCII
+
+//
+// llamar a la funcion main
+//
+
+call main
+
+// --------------------------
+//
+// librerias basicas
+//
+// --------------------------
+
+%include
+    dependences/lib/time.heasm
+
+%include
+    dependences/lib/input.heasm
+    
+%include
+    dependences/lib/outpud.heasm
+
+// --------------------------
+//
+// funciones del sistema
+//
+// -------------------------
+
+/**
+* VersionRevision
+*
+* @description representa una revision de version en formato Primary.Secondary.Revision
+*
+* @param Primary la version primaria
+* @param Secondary la version secundaria
+* @param Revision la revision
+*/
+swinc VersionRevision
+{
+    autv Primary::LET;
+    autv Secondary::LET;
+
+    autv Revision::LET;
+}
+
+/**
+* SystemInternal
+*
+* @description representa una estructura del sistema
+*
+* @param SystemVer es un swinc de <VersionRevision> y contiene la version de la instancia del sistema
+* @param SystemName es un array con el nombre del sistema
+*/
+swinc SystemInternal
+{
+    //
+    // variables
+    //
+
+    autv SystemVer::swinc VersionRevision;
+    autv SystemName::Array;
+}
+
+/**
+* System
+*
+* el sistema actual
+*/
+autopbus System::swinc SystemInternal
+
+// --------------------------
+//
+// eran experimentos!
+//
+// -------------------------
+
+#define _StdLib_ 1
+#define _StdVer_ 0002
+
+#define _TerminatorChar_ 0
+
+// --------------------------
+//
+// variables
+//
+// -------------------------
+
+LET __RetVal__
+LET __WorckVar1__
+
+// --------------------------
+//
+// funciones utiles
+//
+// -------------------------
+
+/**
+* _Power_
+*
+* @description potencia
+*
+* @param 0d1 numero
+* @param 0d2 potencia
+* 
+* @returns 0d1 el resultado
+* @returns Exception se queda colgado si es menor a 0 (si es negativo)
+*/
+FUNCTION _Power_
+
+    SetVarWithValue 3 1
+
+    call _PowerLOOP_
+
+    // para que no me esten tambien molestando de que por que no uso la variable de retorno
+    SetVarWithValue __RetVal__ 1
+
+__asm ret
+
+FUNCTION _PowerLOOP_
+
+    // decrementar en cada iteracion la potencia
+    __asm decrement 2
+
+    // multiplicarlo
+    _Math 1 * 3
+
+    SetVarWithValue 7 1
+    SetVar 8 0
+
+    _CallOut 39 7
+
+    SetVar 4 0
+    SetVar 5 __PowerLOOP__
+    SetVar 6 0
+
+    _CallOut 40 4
+
+    // si es 0 ya ejecutara ret, no se preocupen
+__asm ret

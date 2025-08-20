@@ -1,0 +1,101 @@
+/**
+* input.heasm
+*
+* @description libreria para el manejo de funciones de entrada
+*/
+
+// --------------------------
+//
+// Macros globales
+//
+// --------------------------
+
+#define _SCAN_NULL_ 0
+#define _SCAN_UP_ 1
+#define _SCAN_DOWN_ 2
+#define _SCAN_RIGHT_ 3
+#define _SCAN_LEFT_ 4
+#define _SCAN_HOME_ 5
+#define _SCAN_END_ 6
+#define _SCAN_INSERT_ 7
+#define _SCAN_DELETE_ 8
+#define _SCAN_PAGE_UP_ 9
+#define _SCAN_PAGE_DOWN_ 10
+#define _SCAN_F1_ 11
+#define _SCAN_F2_ 12
+#define _SCAN_F3_ 13
+#define _SCAN_F4_ 14
+#define _SCAN_F5_ 15
+#define _SCAN_F6_ 16
+#define _SCAN_F7_ 17
+#define _SCAN_F8_ 18
+#define _SCAN_F9_ 19
+#define _SCAN_F10_ 20
+#define _SCAN_F11_ 21
+#define _SCAN_F12_ 22
+#define _SCAN_ESC_ 23
+
+// --------------------------
+//
+// Tipos de estructuras
+//
+// --------------------------
+
+/**
+* EfiInputKey
+*
+* esto no esta sacado de la nada, es la estructura que devuelve la llamada 12 en orden
+*
+* @param ScanCode el codigo de escaneo de la tecla
+* @param UnicodeChar el caracter unicode
+*/
+swinc EfiInputKey
+{
+    autv ScanCode::LET;
+    autv UnicodeChar::LET;
+}
+
+// --------------------------
+//
+// estructuras globales
+//
+// --------------------------
+
+autopbus __Key::swinc EfiInputKey
+
+
+// --------------------------
+//
+// funciones
+//
+// --------------------------
+
+/**
+* GetKey
+*
+* obtiene la ultima tecla presionada por el usuario
+*
+* @returns __Key sus cosas en la estructura de tecla global
+* @note no haga otra estructura, use la global para que no gaste memoria
+*/
+FUNCTION GetKey
+
+    _CallOut 12 __Key.ScanCode
+
+    __asm ret
+
+/**
+* WaitForKey
+*
+* @description no se rendira hasta que el usuario presione una tecla de una maldita vez
+* @note esto es util para esperar a que el usuario termine de leer un mensaje
+* @note o para esperar a que el usuario presione una tecla para continuar
+*
+* @note: esto con un mensaje de "Presione cualquier tecla para continuar..."
+* @note: es muy util para que el usuario no se quede con la pantalla en blanco y sepa que hacer
+*/
+FUNCTION WaitForKey
+
+    _CallOut 11 0
+
+    __asm ret

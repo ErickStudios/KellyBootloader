@@ -1,0 +1,373 @@
+/**
+* simbin.heasm
+*
+* un ejemplo de un interprete de binarios
+*/
+
+// la direccion del buffer del contenido del programa esta en el registro 25
+#define _BufferProgramPtr_ 25
+
+// la direccion donde esta el valor maximo que tendra el contador de programa esta en el 26
+#define _ProgramCounterMax_ 26
+
+SetVarWithValue 27 _BufferProgramPtr_
+
+// el bootloader hara sus cosas en el mem 0d28 (puse d y no x por que es un numero decimal y no me acuerdo de la tabla hex)
+_CallOut 38 27
+
+// copiar el valor a 26
+SetVarWithValue 26 28
+
+// ahora 27 sera el program counter jaja
+#define _ProgramCounter_ 27
+
+// y ahora 28 sera la instruccion obtenida
+#define _InstructionData_ 28
+
+#define _MoveInstructionCharacter_ 'M'
+#define _AddInstructionCharacter_ '+'
+#define _SubInstructionCharacter_ '-'
+#define _CallInstructionCharacter_ '?'
+
+#define _ConditionalIn_ 30
+
+#define _JumpingInIf_ 35
+#define _JumpingInTo_ 36
+#define _JumpingInSavePC_ 37
+
+#define _Param1Instruction_ 38
+#define _Param2Instruction_ 39
+
+//
+// vamos con el programa
+//
+
+/**
+* _ExecuteBinary_
+*
+* inicializa el entorno
+*/
+FUNCTION _ExecuteBinary_
+    SetVar 1 1
+
+    SetVar 4 10
+
+    // la memoria de los programas empieza en la memoria 100
+    _Math 4 * 4
+
+    // antes , guardar el program counter real del OS, para no lamentarnos despues
+    LET _SavedRealProgramCounter_
+
+    // 10 es el program counter real de ErickBinaryFormat
+    SetVarWithValue _SavedRealProgramCounter_ 10
+
+    //
+    // como el donde se guarda el program counter no se incrementa automaticamente, tenemos que calcular cuantas
+    // instrucciones exactamente hay hasta despues del salto al bucle
+    //
+
+    // segun lo que calcule hay 10 instrucciones despues del backup , esta instruccion, sumarle al pop eso , y el salto
+    SetVar 3 11
+
+    _Math _SavedRealProgramCounter_ + 3
+
+    call _ExecuteBinaryLoop_
+
+    //
+    // poner instrucciones para que haya margen
+    //
+    SetVar 1 0
+    SetVar 1 0
+    SetVar 1 0
+
+    __asm ret
+
+
+/**
+* _ExecuteBinaryLoop_
+*
+* ejecuta un bucle
+*/
+FUNCTION _ExecuteBinaryLoop_
+    //
+    // obtener la instruccion
+    //
+
+    // copiar la direccion del buffer del programa
+    SetVarWithValue _ConditionalIn_ _BufferProgramPtr_
+
+    // obtener el item (la instruccion)
+    SetVarWithValue _ConditionalIn_+1 _ProgramCounter_
+
+    _CallOut 17 _ConditionalIn_
+
+    // redirigirlo a la variable mas facil de entender
+    SetVarWithValue _InstructionData_ _ConditionalIn_+2
+
+    // ahora guardamos la instruccion para las condiciones
+    SetVarWithValue _ConditionalIn_ _InstructionData_
+
+    //
+    // instruccion para mover
+    //
+
+    SetVarWithValue _ConditionalIn_+1 _MoveInstructionCharacter_
+    
+    // comparar los valores
+    _CallOut 39 _ConditionalIn_
+
+    // segun el codigo de ErickBinaryFormat, devuelve 0 si son iguales
+    SetVarWithValue _JumpingInIf_ 0
+    SetVarWithValue _JumpingInTo_ _ExecuteBinaryLoopMov_
+    SetVarWithValue _JumpingInSavePC_ 0
+
+    _CallOut 40 _JumpingInIf_
+
+    //
+    // instruccion para sumar
+    //
+
+    SetVarWithValue _ConditionalIn_+1 _AddInstructionCharacter_
+    
+    // comparar los valores
+    _CallOut 39 _ConditionalIn_
+
+    // segun el codigo de ErickBinaryFormat, devuelve 0 si son iguales
+    SetVarWithValue _JumpingInIf_ 0
+    SetVarWithValue _JumpingInTo_ _ExecuteBinaryLoopAdd_
+    SetVarWithValue _JumpingInSavePC_ 0
+
+    _CallOut 40 _JumpingInIf_
+
+    //
+    // instruccion para restar
+    //
+
+    SetVarWithValue _ConditionalIn_+1 _SubInstructionCharacter_
+    
+    // comparar los valores
+    _CallOut 39 _ConditionalIn_
+
+    // segun el codigo de ErickBinaryFormat, devuelve 0 si son iguales
+    SetVarWithValue _JumpingInIf_ 0
+    SetVarWithValue _JumpingInTo_ _ExecuteBinaryLoopSub_
+    SetVarWithValue _JumpingInSavePC_ 0
+
+    _CallOut 40 _JumpingInIf_
+
+    SetVarWithValue 10 _SavedRealProgramCounter_
+
+FUNCTION _ExecuteBinaryLoopNextInstruction_
+
+/**
+* _ExecuteBinaryLoopMov_
+*
+* asignar
+*/
+FUNCTION _ExecuteBinaryLoopMov_
+
+    //
+    // obtener parametro 1
+    //
+
+    SetVar 1 1
+    _Math _ProgramCounter_ + 1
+
+    // copiar la direccion del buffer del programa
+    SetVarWithValue _ConditionalIn_ _BufferProgramPtr_
+
+    // obtener el item (el parametro 1)
+    SetVarWithValue _ConditionalIn_+1 _ProgramCounter_
+
+    _CallOut 17 _ConditionalIn_
+
+    // obtenerlo
+    SetVarWithValue _Param1Instruction_ _ConditionalIn_+2
+    
+
+    //
+    // obtener parametro 2
+    //
+
+    SetVar 1 1
+    _Math _ProgramCounter_ + 1
+
+    // copiar la direccion del buffer del programa
+    SetVarWithValue _ConditionalIn_ _BufferProgramPtr_
+
+    // obtener el item (el parametro 1)
+    SetVarWithValue _ConditionalIn_+1 _ProgramCounter_
+
+    _CallOut 17 _ConditionalIn_
+
+    // obtenerlo
+    SetVarWithValue _Param2Instruction_ _ConditionalIn_+2
+
+    //
+    // la memoria
+    //
+
+    SetVarWithValue 1 4
+
+    _Math 1 + _Param1Instruction_
+
+    //
+    // modificar esa parte de la memoria
+    //
+    [_Use _WorkWithPointers] _WorkActivity
+    SetVarWithValue 1 _Param2Instruction_
+
+    //
+    // cuando regrese sera la siguiente instruccion
+    //
+    SetVar 1 2
+    _Math _ProgramCounter_ + 1
+
+    // 3 es que salta siempre
+    SetVar _JumpingInIf_ 3
+    SetVar _JumpingInTo_ _ExecuteBinaryLoop_
+    SetVar _JumpingInSavePC_ 0
+
+    _CallOut 40 _JumpingInIf_
+
+/**
+* _ExecuteBinaryLoopAdd_
+*
+* sumar
+*/
+FUNCTION _ExecuteBinaryLoopAdd_
+
+    //
+    // obtener parametro 1
+    //
+
+    SetVar 1 1
+    _Math _ProgramCounter_ + 1
+
+    // copiar la direccion del buffer del programa
+    SetVarWithValue _ConditionalIn_ _BufferProgramPtr_
+
+    // obtener el item (el parametro 1)
+    SetVarWithValue _ConditionalIn_+1 _ProgramCounter_
+
+    _CallOut 17 _ConditionalIn_
+
+    // obtenerlo
+    SetVarWithValue _Param1Instruction_ _ConditionalIn_+2
+    
+
+    //
+    // obtener parametro 2
+    //
+
+    SetVar 1 1
+    _Math _ProgramCounter_ + 1
+
+    // copiar la direccion del buffer del programa
+    SetVarWithValue _ConditionalIn_ _BufferProgramPtr_
+
+    // obtener el item (el parametro 1)
+    SetVarWithValue _ConditionalIn_+1 _ProgramCounter_
+
+    _CallOut 17 _ConditionalIn_
+
+    // obtenerlo
+    SetVarWithValue _Param2Instruction_ _ConditionalIn_+2
+
+    //
+    // la memoria
+    //
+
+    SetVarWithValue 1 4
+
+    _Math 1 + _Param1Instruction_
+
+    //
+    // modificar esa parte de la memoria
+    //
+    [_Use _WorkWithPointers] _WorkActivity
+    _Math 1 + _Param2Instruction_
+
+    //
+    // cuando regrese sera la siguiente instruccion
+    //
+    SetVar 1 2
+    _Math _ProgramCounter_ + 1
+
+    // 3 es que salta siempre
+    SetVar _JumpingInIf_ 3
+    SetVar _JumpingInTo_ _ExecuteBinaryLoop_
+    SetVar _JumpingInSavePC_ 0
+
+    _CallOut 40 _JumpingInIf_
+
+/**
+* _ExecuteBinaryLoopSub_
+*
+* restar
+*/
+FUNCTION _ExecuteBinaryLoopSub_
+
+    //
+    // obtener parametro 1
+    //
+
+    SetVar 1 1
+    _Math _ProgramCounter_ + 1
+
+    // copiar la direccion del buffer del programa
+    SetVarWithValue _ConditionalIn_ _BufferProgramPtr_
+
+    // obtener el item (el parametro 1)
+    SetVarWithValue _ConditionalIn_+1 _ProgramCounter_
+
+    _CallOut 17 _ConditionalIn_
+
+    // obtenerlo
+    SetVarWithValue _Param1Instruction_ _ConditionalIn_+2
+    
+
+    //
+    // obtener parametro 2
+    //
+
+    SetVar 1 1
+    _Math _ProgramCounter_ + 1
+
+    // copiar la direccion del buffer del programa
+    SetVarWithValue _ConditionalIn_ _BufferProgramPtr_
+
+    // obtener el item (el parametro 1)
+    SetVarWithValue _ConditionalIn_+1 _ProgramCounter_
+
+    _CallOut 17 _ConditionalIn_
+
+    // obtenerlo
+    SetVarWithValue _Param2Instruction_ _ConditionalIn_+2
+
+    //
+    // la memoria
+    //
+
+    SetVarWithValue 1 4
+
+    _Math 1 + _Param1Instruction_
+
+    //
+    // modificar esa parte de la memoria
+    //
+    [_Use _WorkWithPointers] _WorkActivity
+    _Math 1 - _Param2Instruction_
+
+    //
+    // cuando regrese sera la siguiente instruccion
+    //
+    SetVar 1 2
+    _Math _ProgramCounter_ + 1
+
+    // 3 es que salta siempre
+    SetVar _JumpingInIf_ 3
+    SetVar _JumpingInTo_ _ExecuteBinaryLoop_
+    SetVar _JumpingInSavePC_ 0
+
+    _CallOut 40 _JumpingInIf_

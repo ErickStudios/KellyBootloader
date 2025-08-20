@@ -1,0 +1,34 @@
+EA
+call_function 0
+function 17
+system_call 13,11
+ret
+function 20
+system_call 12,18
+ret
+function 21
+system_call 11,0
+ret
+function 26
+system_call 5,22
+system_call 7,23
+ret
+function 27
+system_call 3,24
+system_call 4,25
+ret
+function 30
+set_value_with_value 3,1
+call_function 31
+set_value_with_value 28,1
+ret
+function 31
+decrement 2
+multiplique 1,3
+set_value_with_value 7,1
+move 8,0
+system_call 39,7
+move 4,0
+set_value_with_value 5,0
+move 6,0
+system_call 40,4

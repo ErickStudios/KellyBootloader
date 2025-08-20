@@ -1,0 +1,75 @@
+/**
+* outpud.heasm
+*
+* @description libreria para el manejo de funciones de salida
+*/
+
+// --------------------------
+//
+// Tipos de estructuras
+//
+// --------------------------
+
+swinc ConsoleCurPos
+{
+    autv X::LET;
+    autv Y::LET;
+}
+
+swinc ConsoleColor
+{
+    autv Foreground::LET;
+    autv Background::LET;
+}
+
+// --------------------------
+//
+// estructuras globales
+//
+// --------------------------
+
+autopbus __CurPos::swinc ConsoleCurPos
+autopbus __CoutColor::swinc ConsoleColor
+
+
+// --------------------------
+//
+// funciones
+//
+// --------------------------
+
+/**
+* _GoTo_
+*
+* mueve el cursor a una posicion especifica
+*
+* @param __CurPos.X la nueva posicion X
+* @param __CurPos.Y la nueva posicion Y
+*
+* @note esto usa la estructura global __CurPos
+* @note para que no gaste memoria, no haga otra estructura
+*/
+FUNCTION _GoTo_
+
+    _CallOut 5 __CurPos.X
+    _CallOut 7 __CurPos.Y
+
+    __asm ret
+
+/**
+* _SetColor_
+*
+* cambia el color del texto y del fondo
+*
+* @param __CoutColor.Foreground el texto
+* @param __CoutColor.Background el fondo
+*
+* @note esto usa la estructura global __CoutColor
+* @note para que no gaste memoria, no haga otra estructura
+*/
+FUNCTION _SetColor_
+
+    _CallOut 3 __CoutColor.Foreground
+    _CallOut 4 __CoutColor.Background
+
+    __asm ret

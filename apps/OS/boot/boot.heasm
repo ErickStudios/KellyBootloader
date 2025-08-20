@@ -1,25 +1,96 @@
+/**********************************************************************
+* Cargador de Arranque de el sistema operativo
+*
+* Este es un cargador de arranque para un sistema operativo simple
+* que se ejecuta en una arquitectura de 64 bits.
+* dentro de KellyBootloader y ErickBinaryFormat
+*********************************************************************/
 
 _Use ASCII
 
 %include
-    \dependences\kernel.heasm
+    dependences\lib\stdlib.heasm
 
-Print "OWO\sbienvenidos\sa\sHuguinitos!!!!\n"
+/**
+* main
+*
+* funcion principal del cargador de arranque
+*/
+FUNCTION main
 
-call Loop
+    //
+    // configurar variables de entorno
+    //
 
-FUNCTION _DrawPrompt_
+    Array RamAssigned AllocatePool->40
+    // +- reservar 40 bytes de memoria para este proceso temprano y que sea portable
 
-    Print "UnlimitedPower:^/Huguinitos$\s"
+    Array SystemFile AllocatePool->13
+    // +- el nombre del archivo de la shell no puede ser mayor a 13 caracteres
 
-    __asm ret
+    //
+    // incializar el nombre del archivo de la shell
+    //
 
-FUNCTION Loop
+    SystemFile [0] 'S'
+    SystemFile [1] 'H'
+    SystemFile [2] 'E'
+    SystemFile [3] 'L'
+    SystemFile [4] 'L'
+    SystemFile [5] '.'
+    SystemFile [6] 'E'
+    SystemFile [7] 'X'
+    SystemFile [8] 'E'
+    SystemFile [9] 0
 
-    call _DrawPrompt_
+    Print "Loading\s"
+    PrintPool SystemFile
+    Print "...\n"
 
-    BUFFER Line ReadLine
+    //
+    // rutina de arranque
+    //
 
-    FreePool Line
+    #define _TEMPVARRAM_FILEFOUNDED_DIR 0
+    #define _TEMPVARRAM_SUCCESSTATUS_DIR 1
 
-    call Loop
+    ManualAllocation System.SystemName 13
+
+    System.SystemName [0] 'I'
+    System.SystemName [1] 'D'
+    System.SystemName [2] 'K'
+    System.SystemName [3] _TerminatorChar_
+    // +- no se que nombre ponerle
+
+    SetVar System.SystemVer.Primary 0
+    SetVar System.SystemVer.Secondary 1
+    SetVar System.SystemVer.Revision 0
+
+    RamAssigned [_TEMPVARRAM_FILEFOUNDED_DIR] 1
+    RamAssigned [_TEMPVARRAM_SUCCESSTATUS_DIR] 0
+    // +- encontrado
+
+    ExecuteFile SystemFile
+    // +- se supone que el archivo esta en la raiz y ademas nunca regresa, si no lo encuentra es obio que no existe o no es valido
+
+    RamAssigned [_TEMPVARRAM_FILEFOUNDED_DIR] 0
+    // +- 0 = no encontrado
+
+    RamAssigned [_TEMPVARRAM_SUCCESSTATUS_DIR] 14
+    // +- 14 = EFI_NOT_FOUND como retorno
+
+    FreePool System.SystemName
+    
+    FreePool RamAssigned
+    FreePool SystemFile
+
+    call end
+
+/**
+* end
+*
+* termina el arranque
+*/
+FUNCTION end
+
+    _CallOut 0 0

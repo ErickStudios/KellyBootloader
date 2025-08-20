@@ -1,0 +1,39 @@
+/**
+* algo
+*
+* es una prueba, ya la probe y se queda pegado
+*/
+
+_Use ASCII
+
+%include
+    dependences/lib/stdlib.heasm
+
+// definir el programa
+FUNCTION main
+
+    call WaitForKey
+
+    FUNCTION LOOP
+
+        call WaitForKey
+
+        call GetKey
+
+        IF __Key.ScanCode|==|_SCAN_ESC_ THEN End
+
+        Print "A"
+
+    //
+    // repetir el loop pero sin guardar el program counter y no saturando la pila de recuperacion
+    //
+
+    SetVarWithValue 1 3
+    SetVarWithValue 2 LOOP
+    SetVarWithValue 3 0
+
+    _CallOut 40 1
+
+FUNCTION End
+
+    _CallOut 0 0

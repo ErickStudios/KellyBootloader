@@ -1,0 +1,21 @@
+/**
+* HolaMundo.heasm
+*
+* un programa simple para un OS simple
+*/
+
+_Use ASCII
+
+%include
+    dependences/lib/stdlib.heasm
+
+// definir el programa
+FUNCTION main
+
+    Print "Hola\sMundo!\n"
+    Print "Presione\suna\stecla\spara\scontinuar...\n"
+
+    call WaitForKey
+
+    // detener el programa
+    _CallOut 0 0

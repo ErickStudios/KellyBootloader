@@ -1,12 +1,15 @@
-HightLevel[ 
-    
-    /**
-    * KellyBootloader.easm
-    *
-    * KellyBootloader library for apps
-    */
+/**
+* os.heasm
+*
+* funciones del OS para los programas
+*/
 
-    _Use ASCII
+%include
+    dependences\kernel.heasm
+
+call ProgramStart
+
+//region Enums
 
     /**
     * SystemCall
@@ -424,279 +427,19 @@ HightLevel[
         _EnumMember _ConsoleColor_brightblue_ 27
     END
 
-    /**
-    * first_item
-    *
-    * get the first item of the pool
-    */
-    #define ->first_item +1
-    
-    /**
-    * second_item
-    *
-    * get the second item of the pool
-    */
-    #define ->second_item +2
+//endregion Enums
 
-    /**
-    * GetLength()
-    *
-    * the length
-    */
-    #define ->GetLength() +0
+BUFFER _Nan_ _Oauf
 
-    /**
-    * Red   _LEGACY_
-    *
-    * the channel red for a color
-    */
-    #define ->Red +0
-    
-    /**
-    * Green _LEGACY_
-    *
-    * the channel green for a color
-    */
-    #define ->Green +1
-        
-    /**
-    * Blue  _LEGACY_
-    *
-    * the channel blue for a color
-    */
-    #define ->Blue +2
+// si o si debes poner un Main
+// si no, el OS no sabra que hacer
+// muajajajaja xd
+call Main
 
-    /**
-    * SpecialControlsKeys
-    *
-    * represents the special control keys
-    */
-    ENUM SpecialControlsKeys
-        /**
-        * ControlA_Combination
-        *
-        * `Ctr+A` Key
-        */
-        _EnumMember ControlA_Combination 1
-
-        /**
-        * ControlB_Combination
-        *
-        * `Ctr+B` Key
-        */
-        _EnumMember ControlB_Combination 2
-        
-        /**
-        * ControlC_Combination
-        *
-        * `Ctr+C` Key
-        */
-        _EnumMember ControlC_Combination 3
-                
-        /**
-        * ControlD_Combination
-        *
-        * `Ctr+D` Key
-        */
-        _EnumMember ControlD_Combination 4
-                        
-        /**
-        * ControlE_Combination
-        *
-        * `Ctr+E` Key
-        */
-        _EnumMember ControlE_Combination 5
-                                
-        /**
-        * ControlF_Combination
-        *
-        * `Ctr+F` Key
-        */
-        _EnumMember ControlF_Combination 6
-    END
-
-    /**
-    * ParametersId
-    *
-    * the parameters
-    */
-    ENUM ParametersId
-        /**
-        * _ParametersId_Param1_
-        *
-        * the param 1
-        */
-        _EnumMember _ParametersId_Param1_ 3001
-
-        /**
-        * _ParametersId_Param2_
-        *
-        * the param 2
-        */
-        _EnumMember _ParametersId_Param2_ 3002
-        
-        /**
-        * _ParametersId_Param3_
-        *
-        * the param 3
-        */
-        _EnumMember _ParametersId_Param3_ 3003
-                
-        /**
-        * _ParametersId_Param4_
-        *
-        * the param 4
-        */
-        _EnumMember _ParametersId_Param4_ 3004
-                        
-        /**
-        * _ParametersId_Param5_
-        *
-        * the param 5
-        */
-        _EnumMember _ParametersId_Param5_ 3005
-                                
-        /**
-        * _ParametersId_Param6_
-        *
-        * the param 6
-        */
-        _EnumMember _ParametersId_Param6_ 3006
-                                        
-        /**
-        * _ParametersId_Param7_
-        *
-        * the param 7
-        */
-        _EnumMember _ParametersId_Param7_ 3007
-                                                
-        /**
-        * _ParametersId_Param8_
-        *
-        * the param 8
-        */
-        _EnumMember _ParametersId_Param8_ 3008
-                                                        
-        /**
-        * _ParametersId_Param9_
-        *
-        * the param 9
-        */
-        _EnumMember _ParametersId_Param9_ 3009
-    END
-
-    /**
-    * EfiInputKey
-    *
-    * represents a input key
-    */
-    swinc EfiInputKey
-    {
-        /**
-        * ScanCode
-        *
-        * represents the scan code of the key
-        */
-        autv ScanCode::LET;
-        /**
-        * UnicodeChar
-        *
-        * represents the unicode character, for example the key a is 'A'
-        */
-        autv UnicodeChar::LET;
-    }
-
-    /**
-    * EfiTime
-    *
-    * represents the time
-    */
-    swinc EfiTime
-    {
-        /**
-        * Second
-        *
-        * represents the second
-        */
-        autv Second::LET;
-        /**
-        * Minute
-        *
-        * represents the minute
-        */
-        autv Minute::LET;
-        /**
-        * Hour
-        *
-        * represents the hour
-        */
-        autv Hour::LET;
-        /**
-        * Day
-        *
-        * represents the day
-        */
-        autv Day::LET;
-        /**
-        * Month
-        *
-        * represents the month
-        */
-        autv Month::LET;
-        /**
-        * Year
-        *
-        * represents the year
-        */
-        autv Year::LET;
-    }
-
-    /**
-    * EbfException
-    *
-    * represents a exception
-    */
-    swinc EbfException
-    {
-        /**
-        * Reason
-        *
-        * represents the reason of the exception
-        */
-        autv Reason::LET;
-        /**
-        * MemoryRegion
-        *
-        * represents the memory region (the slot) where the exception ocurred
-        */
-        autv MemoryRegion::LET;
-        /**
-        * MemoryRegionNewValue
-        *
-        * represents the new error value of the MemoryRegion
-        */
-        autv MemoryRegionNewValue::LET;
-        /**
-        * InstructionNumber
-        *
-        * represents the instruction number where the exception ocurred
-        */
-        autv InstructionNumber::LET;
-    }
-
-    call PreRuntime
-
-    /**
-    * PreRuntime
-    *
-    * execute some function pre-runtime
-    */
-    FUNCTION PreRuntime
-
-        SetVarWithValue _PtrTo_Param1_ 3001
-        SetVarWithValue _PtrTo_Param2_ 3002
-        SetVarWithValue _PtrTo_Param3_ 3003
-        SetVarWithValue _PtrTo_Param4_ 3004
-        SetVarWithValue _PtrTo_Param5_ 3005
-
- ]HightLevel
+/**
+* RestartProgram
+*
+* reinicia el programa
+*/
+FUNCTION RestartProgram
+    call Main
