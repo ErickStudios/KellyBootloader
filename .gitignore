@@ -1,6 +1,6 @@
 # ignore objects
 *.o
-*.efi
+#*.efi
 *.vhd
 *.sdf
 *.suo
