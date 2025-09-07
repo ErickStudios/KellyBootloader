@@ -28,9 +28,9 @@ FUNCTION main
     // repetir el loop pero sin guardar el program counter y no saturando la pila de recuperacion
     //
 
-    SetVarWithValue 1 3
-    SetVarWithValue 2 LOOP
-    SetVarWithValue 3 0
+    1 = *3
+    2 = *LOOP
+    3 = *0
 
     _CallOut 40 1
 

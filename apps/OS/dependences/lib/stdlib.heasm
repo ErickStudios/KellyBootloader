@@ -3,6 +3,9 @@
 *
 * @description libreria para el manejo de funciones estandar
 * 
+* para estar al dia con el sistema incluyan stdlib.heasm antes de cualquier cosa en el .heasm del programa para que las
+* variables de la System se sincronizen con las del sistema
+* 
 * pon
 * ```heasm
 * // incluir la libreria del sistema
@@ -30,6 +33,9 @@
 *   _CallOut 0 0
 *   // +- detener el programa
 * ```
+*
+* la funcion main si es un tapot debe contener un argumento , solo uno que es la direccion a la estructura de parametros
+* si no el compilador crasheara
 */
 
 // esto para que las minusculas se conviertan a mayusculas y se les sume 32 para volverlas minusculas 
@@ -40,6 +46,11 @@ _Use ASCII
 // llamar a la funcion main
 //
 
+call_tapot main System.System.ShellArgs.argx
+
+//
+// en la logica de hlvc si el tapot no existe entonces no se llama asi que si no se logro llamar entonces ir con el legacy para mantener la compatibilidad
+//
 call main
 
 // --------------------------
@@ -56,6 +67,18 @@ call main
     
 %include
     dependences/lib/outpud.heasm
+
+// --------------------------
+//
+// librerias avanzadas
+//
+// --------------------------
+
+%include
+    dependences/lib/gfx.heasm
+
+%include
+    dependences/lib/shell.heasm
 
 // --------------------------
 //
@@ -96,6 +119,38 @@ swinc SystemInternal
 
     autv SystemVer::swinc VersionRevision;
     autv SystemName::Array;
+
+    //
+    // outpud
+    //
+
+    autv CurPos::swinc ConsoleCurPos;
+    autv CoutColor::swinc ConsoleColor;
+
+    //
+    // entrada
+    //
+
+    autv Key::swinc EfiInputKey;
+
+    //
+    // fua que buenos los graficos
+    //
+
+    autv CurrPixel::swinc Pixel;
+    autv ScreenSize::swinc ScreenSizeConsole;
+
+    //
+    // el tiempo
+    //
+
+    autv Time::swinc EfiTime;
+
+    //
+    // protocolo de la shell
+    //
+
+    autv ShellArgs::swinc ParamsArgs;
 }
 
 /**
@@ -142,16 +197,16 @@ LET __WorckVar1__
 * @returns 0d1 el resultado
 * @returns Exception se queda colgado si es menor a 0 (si es negativo)
 */
-FUNCTION _Power_
+tapot Power (Number,Exponent)
 
-    SetVarWithValue 3 1
+    3 = *Number
 
     call _PowerLOOP_
 
     // para que no me esten tambien molestando de que por que no uso la variable de retorno
-    SetVarWithValue __RetVal__ 1
+    __RetVal__ = *1
 
-__asm ret
+END tapot
 
 FUNCTION _PowerLOOP_
 
@@ -161,14 +216,14 @@ FUNCTION _PowerLOOP_
     // multiplicarlo
     _Math 1 * 3
 
-    SetVarWithValue 7 1
-    SetVar 8 0
+    7 = *2
+    8 = 0
 
     _CallOut 39 7
 
-    SetVar 4 0
-    SetVar 5 __PowerLOOP__
-    SetVar 6 0
+    4 = 0
+    5 = __PowerLOOP__
+    6 = 0
 
     _CallOut 40 4
 

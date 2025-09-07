@@ -1,0 +1,75 @@
+/**
+* gfx.heasm
+*
+* @description fua que buenos los graficos
+*/
+
+// --------------------------
+//
+// Tipos de estructuras
+//
+// --------------------------
+
+/**
+* Color
+*
+* representa un color
+*
+* @param Red Canal rojo
+* @param Green Canal verde
+* @param Blue Canal azul
+*/
+swinc Color
+{
+    autv Red::LET;
+    autv Green::LET;
+    autv Blue::LET;
+}
+
+/**
+* Pixel
+*
+* representa un pixel
+*
+* @param Color el color
+* @param X la posicion en X
+* @param Y la posicion en Y
+*/
+swinc Pixel
+{
+    autv Color::swinc Color;
+    autv X::LET;
+    autv Y::LET;
+}
+
+/**
+* ScreenSizeConsole
+*
+* representa el tamaño de la pantalla de la consola
+*
+* @param Columns la cantidad de columnas
+* @param Rows la cantidad de lineas
+*/
+swinc ScreenSizeConsole
+{
+    autv Columns::LET;
+    autv Rows::LET;
+}
+
+// --------------------------
+//
+// funciones
+//
+// --------------------------
+
+FUNCTION DrawPixel
+
+    _CallOut 34 System.CurrPixel.Color.Red
+
+    __asm ret
+
+FUNCTION ParseConsoleSize
+
+    _CallOut 44 System.ScreenSize.Columns
+
+    __asm ret

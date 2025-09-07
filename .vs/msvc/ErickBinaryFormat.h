@@ -1,7 +1,7 @@
 /**
 * ErickBinaryFormat.h
 * 
-* v: snapshot 35 for the beta 3 
+* v: snapshot 37 for the beta 3 
 * 
 * YAAAY, when i finish the beta 3 i publish the specification
 * 
@@ -9,11 +9,7 @@
 * and coppyed from the S-SUN code
 *
 * Maded by ErickCrafStudios
-* 
-* THIS SPECIFICS ALL THE THINGS SPECIFIQUED IN THE EBF-SPC Specifications Documment
-* AND THERE OF ALL IS APPLYCABLE FOR THE VERSION OF THE BETA 3 OF KellyBootloader and 
-* greater
-* 
+
 * the follow standarts
 * from the Beta 3 (taken as a reference for the Documment) and for upper
 */
@@ -31,6 +27,13 @@
 #define _LauchException(ex) Print(ex); while (true);
 
 #include "Console.h"
+
+/**
+* EbfNullPtr
+* 
+* rerpesents a pointer to nothing in the ram of ErickBinaryFormat
+*/
+#define EbfNullPtr 0
 
 /**
  * REALESE
@@ -204,6 +207,27 @@
 #define invalid_instruction						24
 
 /**
+* or
+*
+* 1 or 2
+*/
+#define or_instruction						25
+
+/**
+* and
+*
+* 1 and 2
+*/
+#define and_instruction						26
+
+/**
+* exclusive_or
+*
+* 1 or 2 but not the two
+*/
+#define xor_instruction						27
+
+/**
 * for indicate a not instruction the character that are greater that this value
 * are not instructions
 */
@@ -234,20 +258,20 @@ typedef _BINARY									EBF_HANDLE;
 * memory_acces
 * 
 * the virtual memory
+*
+* Map of memory:
 * 
-* The EBF-SPC-001 Specificts that the 64 kilobytes of the memory that ErickBinaryFormat provides need to be divide on the next regions
-* 
-* Start:   End:     Description:
-* 000000-000009 - > temporaly registres usted in operations
-* 000011-002000 - > static directionable variables
-* 002001-004999 - > pools buffer and arrays
-* 005000-006000 - > dinamic variables
-* 006001-010000 - > for your kernel code
-* 010001-015000 - > personalizable memory
-* 015001-030000 - > for multitask process
-* 030001-endram - > reserved
+*	- Temp Registers:						0d0 to 0d9
+*	- Program Counter:						0d10
+*	- CHAR8 accesible vars:					0d11 to 0d106
+*	- Comparator result:					0d256
+*	- Arrays and other binaries in the ram: 0d2001 to 0d3000
+*	- Shell params pointers:				0d3001 to (0d3001+shell params count)
+*	- Arrays and other binaries in the ram: (0d3001+shell params count) to 0d30000
+*	- Avaible:								0d30000 to 0d65535
+*	- Accesible by CukysCukysPtr:			0d65534 to 0d8000000
 */
-prototype t16								memory_acces[2000000];
+prototype t16								memory_acces[8000000];
 
 /**
 * ptr_memory_max
@@ -286,12 +310,12 @@ IsFreeSpaceFromTo
 )
 {
 	size_t i = From;
-	while (i < To + 1)
+	while (i < To)
 	{
-		if (memory_acces[i] != NULL) return false;
+		if (memory_acces[i] != NULL) return 0;
 		i++;
 	}
-	return true;
+	return 1;
 }
 
 /**
@@ -313,7 +337,7 @@ AllocateMemory
 	if (
 		size == 0
 		)
-		return 0;
+		StartGroundSequence();
 
 	//
 	// set the buffer variables
@@ -325,10 +349,10 @@ AllocateMemory
 	// search space in the memory
 	//
 
-	for (size_t i = 2001; i < 4000; i++)
+	for (size_t i = 2001; i < 30000; i++)
 	{
 		if (
-			memory_acces[i] == NULL
+			memory_acces[i] == NULL && IsFreeSpaceFromTo(i, i + size)
 			)
 		{
 			Buffer = i;
@@ -398,19 +422,60 @@ LocateMemory
 
 	ch16* Located = AllocatePool(sizeof(ch16) * (size_t)(size + 1));
 
-	u16 reader = StartingAt + 1;
+	t16 reader = StartingAt + 1;
 
 	for (size_t i = 0; i < ((size_t)size); i++)
 	{
-		Print(L"%d %c,",reader, (ch16)memory_acces[reader]);
 		Located[i] = (ch16)memory_acces[reader];
 		reader++;
 	}
 
-	Print(L"Ended\n");
+	//Print(L"Ended\n");
 	Located[size] = 0;
 
 	return Located;
+}
+
+/**
+* FreeArray
+* 
+* frees a array ands return nullptr
+*/
+t16
+FreeArray
+(
+	t16 StartingAt
+)
+{
+
+	//
+	// configure params to free the pool
+	//
+
+	t16 size = memory_acces[StartingAt];
+	t16 Item = 1;
+
+	//
+	// first trashs the header that specifics the index
+	//
+
+	memory_acces[StartingAt] = 0;
+
+	//
+	// free the information
+	//
+
+	while (Item < (size + 1)) 
+	{
+		//Print(L"Writing 0 in %d\n", StartingAt + Item);
+		memory_acces[StartingAt + (Item)] = 0;
+
+		Item++;
+	}
+
+
+	// returns nullptr equivalent in EBF
+	return EbfNullPtr;
 }
 
 /**
@@ -452,6 +517,11 @@ AllocateStringMemory
 	ch16* Str
 )
 {
+	if (Str == NULL)
+	{
+		StartGroundSequence();
+	}
+
 	//
 	// configure vars
 	//
@@ -530,6 +600,19 @@ RecorreRightPool(
 
 	return retval;
 }
+
+/**
+* GetFileContent
+* 
+* gets the file content
+* 
+* @param filename the name of the file
+*/
+CHAR16* 
+GetFileContent
+(
+	ch16* filename
+);
 
 /**
 * BootSpecific
@@ -721,7 +804,7 @@ VOID EstarEnDirecto()
 				//
 				CHAR16 Emm[5];
 				SPrint(Emm, sizeof(Emm), L"%c", memory_acces[i]);
-				printcu(Emm[0] == L'\0' ? L"." : Emm);
+				printcu(Emm[0] == L'\0' ? L"." : (Emm[0] == L'\n' || Emm[0] == L'\r' ? L"." : Emm));
 			}
 			else {
 				//
@@ -801,7 +884,7 @@ VOID EstarEnDirecto()
 			if (editing) memory_acces[EditorPos]++;
 			else EditorPos -= sheetsm;
 
-			Print(L"%d\n", ((EditorPos / sheetsm) - scroll));
+			if (!REALESE) Print(L"%d\n", ((EditorPos / sheetsm) - scroll));
 		}
 
 		///
@@ -950,6 +1033,13 @@ VOID EstarEnDirecto()
 		{
 			if (IsTextView == 1) IsTextView = 0;
 			else  IsTextView = 1;
+
+			scroll = 0;
+
+			while (((EditorPos / sheetsm) - scroll) > (rows_per_page - 1))
+			{
+				scroll++;
+			}
 		}
 		
 		///
@@ -1063,6 +1153,101 @@ VOID EstarEnDirecto()
 			DrawScreen();
 			return;
 		}
+	}
+}
+
+/**
+* GetUsedSpaceEbf
+*
+* gets the used space in the ram
+*/
+size_t GetUsedSpaceEbf()
+{
+	size_t BytesUsed = 2;
+
+	for (size_t i = 0; i < sizeof(memory_acces) / 2; i++)
+	{
+		if (memory_acces[i] != 0)
+		{
+			//
+			// map the ptr to system info
+			//
+			if (i == 2999)
+			{
+
+			}
+
+			//
+			// map pools
+			//
+			else if (i > 2000 && i < 30000)
+			{
+				BytesUsed++;
+
+				BytesUsed += memory_acces[i];
+				i += memory_acces[i];
+			}
+
+			//
+			// map null ptrs
+			//
+			else if (i == 0)
+			{
+			}
+
+			//
+			// map program counter
+			//
+			else if (i == 10)
+			{
+			}
+
+			//
+			// map temporal registers
+			//
+			else if (i < 10)
+			{
+				BytesUsed++;
+			}
+
+			//
+			// map normal variables
+			//
+			else {
+				BytesUsed++;
+
+			}
+		}
+	}
+
+	return BytesUsed * sizeof(memory_acces[0]);
+}
+
+/**
+* EditrHLPart
+* 
+* edit a HL value
+*/
+t16 EditrHLPart(t16 Origin, t8 New, bool EditHigth) {
+	if (EditHigth) {
+		return (Origin & 0x00FF) | (New << 8);
+	}
+	else {
+		return (Origin & 0xFF00) | New;
+	}
+}
+
+/**
+* ReadHLPart
+* 
+* read a HLz
+*/
+t16 ReadHLPart(t16 Value, bool ReadHigth) {
+	if (ReadHigth) {
+		return (Value >> 8) & 0x00FF;
+	}
+	else {
+		return Value & 0x00FF;
 	}
 }
 
@@ -1237,25 +1422,54 @@ BinaryEx
 			memory_acces[10] += 2;
 
 			if (p1 == 10)
-				Print(L"warnning: editing the stack\n");
+				if (!REALESE) Print(L"warnning: editing the stack\n");
 
+			//Print(L"%d = %d\n", p1, p2);
 			memory_acces[p1] = p2;
+		}
+		else if (
+			ch == or_instruction
+			)
+		{
+			//memory_acces[10] += 2;
+
+			memory_acces[p1] = memory_acces[p1] | memory_acces[p2];
+			//Print(L"%d = |%x\n", memory_acces[p1], memory_acces[p2]);
+		}
+		else if (
+			ch == and_instruction
+			)
+		{
+			//memory_acces[10] += 2;
+
+			memory_acces[p1] = memory_acces[p1] & memory_acces[p2];
+			//Print(L"%d = &%x\n", memory_acces[p1], memory_acces[p2]);
+		}
+		else if (
+			ch == xor_instruction
+			)
+		{
+			//memory_acces[10] += 2;
+
+			memory_acces[p1] = memory_acces[p1] ^ memory_acces[p2];
 		}
 		else if (
 			ch == shiftbitsleft_instruction
 			)
 		{
-			memory_acces[10] += 2;
+			//memory_acces[10] += 2;
 
-			memory_acces[p1] = memory_acces[p1] << p2r;
+			//Print(L"Old %d ,",memory_acces[p1]);
+			memory_acces[p1] = memory_acces[p1] << memory_acces[p2];
+			//Print(L"%d = <<%x\n", memory_acces[p1], memory_acces[p2]);
 		}
 		else if (
 			ch == shiftbitsright_instruction
 			)
 		{
-			memory_acces[10] += 2;
+			//memory_acces[10] += 2;
 
-			memory_acces[p1] = memory_acces[p1] >> p2r;
+			memory_acces[p1] = memory_acces[p1] >> memory_acces[p2];
 		}
 		else if (
 			ch == lea_instruction
@@ -1277,6 +1491,7 @@ BinaryEx
 
 			memory_acces[10] += 2;
 
+			//Print(L"CoppyVal %d\n", memory_acces[p2]);
 			memory_acces[p1] = memory_acces[p2];
 		}
 		else if (
@@ -1397,6 +1612,8 @@ BinaryEx
 			ch == incr_instruction
 			)
 		{
+			//memory_acces[10] += 1;
+
 			//
 			// if debuggin
 			// show the instruction in real time
@@ -1418,6 +1635,8 @@ BinaryEx
 			ch == decr_instruction 
 			)
 		{
+			//memory_acces[10] += 1;
+
 			//
 			// if debuggin
 			// show the instruction in real time
@@ -1433,7 +1652,9 @@ BinaryEx
 
 			}
 
+			//Print(L"Old %d ", memory_acces[p1]);
 			memory_acces[p1]--;
+			//Print(L"New %d\n", memory_acces[p1]);
 		}
 		else if (
 			ch == jump_instruction
@@ -1585,14 +1806,10 @@ BinaryEx
 			// show the instruction in real time
 			//
 
-			if (
-				debug
-				)
-			{
+			/*
 				CHAR16 eem[256];
 				SPrint(eem, sizeof(eem), L"system_call %d,(%d/%d)\n", p1, p2, p2r);
-				//printc(eem);
-			}
+				Print(eem);*/
 
 			memory_acces[10] += 2;
 
@@ -1631,9 +1848,9 @@ BinaryEx
 			/// 
 			if (
 				p1 == 2
-				)
+				) {
 				ClearScreen();
-			;
+			}
 
 			///
 			/// 3 - Set foreground color , 4 - Set backgroun color
@@ -1902,7 +2119,7 @@ BinaryEx
 				p1 == 15
 				)
 			{
-				if (1) Print(L"%d [%d] %c\n", memory_acces[p2], memory_acces[p2 + 1], memory_acces[p2 + 2]);
+				if (!REALESE) Print(L"%d [%d] %c\n", memory_acces[p2], memory_acces[p2 + 1], memory_acces[p2 + 2]);
 
 				SetMemoryPool(memory_acces[p2], memory_acces[p2 + 1], memory_acces[p2 + 2]);
 			}
@@ -1926,6 +2143,11 @@ BinaryEx
 				if (!REALESE) Print(L"%d [%d] %c\n", memory_acces[p2], memory_acces[p2 + 1], memory_acces[p2 + 2]);
 
 				SetMemoryPool(memory_acces[p2], memory_acces[p2 + 1], memory_acces[p2 + 2]);
+
+				if (memory_acces[p2 + 1] > memory_acces[memory_acces[p2]])
+				{
+					StartGroundSequence();
+				}
 
 				/*
 				if (
@@ -1956,24 +2178,24 @@ BinaryEx
 				p1 == 17
 				)
 			{
-				u16 BufferToManipule = memory_acces[p2];
-				u16 BufferItem = memory_acces[p2 + 1];
-				u16 RedirectTo = p2 + 2;
+				//Print(L"In 17\n");
 
-				if (
-					1
-					)
+				t16 BufferToManipule = memory_acces[p2];
+				t16 BufferItem = memory_acces[p2 + 1];
+				t16 RedirectTo = p2 + 2;
+
+				
+				if (!REALESE)
 					Print(L"gets the item %d of the buffer %d", BufferItem, BufferToManipule);
 
-				if (
-					memory_acces[(BufferToManipule)] + 1 < BufferItem
-					)
+				memory_acces[RedirectTo] = memory_acces[(BufferToManipule + 1) + BufferItem];
+				//if (!REALESE) Print(L"%c", memory_acces[(BufferToManipule + 1) + BufferItem]);
+				//if (!REALESE) Print(L"Is: %d\n", memory_acces[(BufferToManipule + 1) + BufferItem]);
+
+				if (memory_acces[p2 + 1] > memory_acces[memory_acces[p2]])
 				{
-				}
-				else
-				{
-					memory_acces[RedirectTo] = memory_acces[(BufferToManipule + 1) + BufferItem];
-					Print(L"Is: %d\n", memory_acces[(BufferToManipule + 1) + BufferItem]);
+					//Print(L"Element %d is greater that the length %d", memory_acces[p2 + 1], memory_acces[memory_acces[p2]]);
+					StartGroundSequence();
 				}
 			}
 
@@ -2010,17 +2232,7 @@ BinaryEx
 				p1 == 20
 				)
 			{
-				u16 Buffer = p2r;
-
-				u16 lenght = IMemo(Buffer);
-
-				u16 MemFree = Buffer;
-
-				for (size_t i = 0; i < lenght; i++)
-				{
-					memory_acces[MemFree] = 0;
-					MemFree++;
-				}
+				memory_acces[p2] = FreeArray(memory_acces[p2]);
 			}
 			
 			///
@@ -2032,7 +2244,7 @@ BinaryEx
 			{
 				t16 saved_stack = memory_acces[10];
 
-				BootSpecific(LocateMemory(memory_acces[p2]), debug);
+				BinaryEx(GetFileContent(LocateMemory(memory_acces[p2])), debug);
 
 				memory_acces[10] = saved_stack;
 			}
@@ -2044,7 +2256,8 @@ BinaryEx
 				p1 == 22
 				)
 			{
-				printc(LocateMemory(memory_acces[p2]));
+				//Print(L"%d\n",memory_acces[p2]);
+				printcu(LocateMemory(memory_acces[p2]));
 			}
 
 			///
@@ -2066,12 +2279,13 @@ BinaryEx
 				p1 == 24
 				)
 			{
-				if (!REALESE)
+				/*
+				if (!0)
 				{
-					Print(L"'%s'=='%s': %d\n", LocateMemory(memory_acces[p2]), LocateMemory(memory_acces[p2 + 1]),
+					if (!REALESE) Print(L"'%s'=='%s': %d\n", LocateMemory(memory_acces[p2]), LocateMemory(memory_acces[p2 + 1]),
 						(StrCmp(LocateMemory(memory_acces[p2]), LocateMemory(memory_acces[p2 + 1])) == 0)
 					);
-				}
+				}*/
 				
 				memory_acces[256] = (t16)(StrCmp(LocateMemory(memory_acces[p2]), LocateMemory(memory_acces[p2 + 1])) == 0);
 			}
@@ -2098,7 +2312,7 @@ BinaryEx
 			/// credits : skale001
 			/// 
 			if (p1 == 27) gRT->ResetSystem(EfiResetShutdown, EFI_SUCCESS, 0, 0);
-
+			
 			///
 			/// 28 - reboot
 			/// 
@@ -2146,13 +2360,14 @@ BinaryEx
 				)
 			{
 
-				if (!REALESE)
-					/*
-					Print(L"IF BufferNCmp<%d,%d,%d> THEN %d\n   (\"%s\"==\"%s\")=%d\n",
-						memory_acces[p2], memory_acces[p2 + 1], memory_acces[p2 + 2], (p[r + 4] - safetynow_for_up),
-						LocateMemory(memory_acces[p2]), LocateMemory(memory_acces[p2 + 1]),
-						(StrnCmp(LocateMemory(memory_acces[p2]), LocateMemory(memory_acces[p2 + 1])) == 0)
-					)*/;
+				/*
+				if (!0)
+				{
+					if (!REALESE) Print(L"'%s'=='%s': %d\n", LocateMemory(memory_acces[p2]), LocateMemory(memory_acces[p2 + 1]),
+						(t16)(StrnCmp(LocateMemory(memory_acces[p2]), LocateMemory(memory_acces[p2 + 1]), memory_acces[p2 + 2]) == 0)
+					);
+				}*/
+
 				memory_acces[256] = (t16)(StrnCmp(LocateMemory(memory_acces[p2]), LocateMemory(memory_acces[p2 + 1]), memory_acces[p2 + 2]) == 0);
 			}
 			
@@ -2174,8 +2389,8 @@ BinaryEx
 				p1 == 34
 				)
 			{
-				PIXELCOL Color = { memory_acces[p2 + 3],memory_acces[p2 + 1],memory_acces[p2] , 0 };
-				draw_pixel(gop, memory_acces[32], memory_acces[23], Color);
+				PIXELCOL Color = { memory_acces[p2 + 2],memory_acces[p2 + 1],memory_acces[p2] , 0 };
+				draw_pixel(gop, memory_acces[p2 + 3], memory_acces[p2 + 4], Color);
 			}
 
 			///
@@ -2288,7 +2503,7 @@ BinaryEx
 				else if (Value1 > Value2) memory_acces[256] = 1;
 				else if (Value1 < Value2) memory_acces[256] = 2;
 
-				Print(L"Outpud: %d\n", memory_acces[256]);
+				if (!REALESE) Print(L"Outpud: %d\n", memory_acces[256]);
 			}
 
 			///
@@ -2367,14 +2582,229 @@ BinaryEx
 				t16 RetOnNumber = memory_acces[p2];
 				t16 StrPos = memory_acces[p2 + 1];
 
-				memory_acces[RetOnNumber] = Atoi(LocateMemory(StrPos));
+				memory_acces[RetOnNumber] = ((t16)Atoi(LocateMemory(StrPos)));
+			}
+
+			///
+			/// 42 - save code in the ram
+			/// 
+			if (p1 == 42)
+			{
+				memory_acces[p2] = AllocateStringMemory(p);
+			}
+
+			///
+			/// 43 - load code from the ram
+			/// 
+			if (p1 == 43)
+			{
+				EBF_HANDLE* LoadedImage = LocateMemory(memory_acces[p2]);
+
+				t16 SavedStack = memory_acces[10];
+
+				BinaryEx(LoadedImage, debug);
+
+				memory_acces[10] = SavedStack;
+
+				FreePool(LoadedImage);
+			}
+
+			///
+			/// 44 - parse console size
+			///
+			if (p1 == 44)
+			{
+				memory_acces[p2] = GET_MAX_COL;
+				memory_acces[p2 + 1] = GET_MAX_ROWS;
+			}
+			
+			///
+			/// 45 - get file content
+			/// 
+			if (p1 == 45)
+			{
+				//Print(LocateMemory(memory_acces[p2]));
+				//Print(GetFileContent(LocateMemory(memory_acces[p2])));
+				memory_acces[p2] = AllocateStringMemory(GetFileContent(LocateMemory(memory_acces[p2])));
+			}
+
+			///
+			/// 46 - draw a bitmap image
+			/// 
+			if (p1 == 46)
+			{
+				t16 X = memory_acces[p2];
+				t16 Y = memory_acces[p2 + 1];
+
+				t16 Width = memory_acces[p2 + 2];
+				t16 Heigth = memory_acces[p2 + 3];
+
+				t16 Image = memory_acces[p2 + 4];
+
+				CHAR16* LocatedImage = LocateMemory(Image);
+
+				u64 i = 0;
+
+				u64 FramebufferX = X;
+				u64 FramebufferY = Y;
+
+				while (LocatedImage[i] != 0)
+				{
+					if (FramebufferX <= (X + Width))
+					{
+						FramebufferX = X;
+						FramebufferY++;
+					}
+
+					PIXELCOL PixelColor;
+
+					PixelColor.Red = LocatedImage[i];
+					PixelColor.Green = LocatedImage[i + 1];
+					PixelColor.Blue = LocatedImage[i + 2];
+					PixelColor.Reserved = 0;
+
+					draw_pixel(gop, FramebufferX, FramebufferY, PixelColor);
+
+					FramebufferX++;
+
+					i += 3;
+				}
+			}
+			
+			///
+			/// 47 - convert hex string to number
+			/// 
+			if (p1 == 47)
+			{
+				t16 RetOnNumber = memory_acces[p2];
+				t16 StrPos = memory_acces[p2 + 1];
+
+				//Print(L"%s", LocateMemory(StrPos));
+				memory_acces[RetOnNumber] = ((t16)xtoi(LocateMemory(StrPos)));
+			}
+
+			///
+			/// 48 - draw rectangle
+			/// 
+			if (p1 == 48)
+			{
+				PIXELCOL Color = { memory_acces[p2 + 2],memory_acces[p2 + 1],memory_acces[p2] , 0 };
+				
+				t16 CurrX = 0;
+				t16 CurrY = 0;
+				t16 SizeX = memory_acces[p2 + 5];
+				t16 SizeY = memory_acces[p2 + 6];
+
+				/*
+				Print(L"Draw rectangle in pos %d,%d size %d,%d\n", 
+					memory_acces[p2 + 3], memory_acces[p2 + 4],
+					SizeX,SizeY
+					);*/
+
+				while (1)
+				{
+					if (CurrX >= SizeX)
+					{
+						CurrX = 0;
+						CurrY++;
+					}
+
+					if (CurrY >= SizeY)
+					{
+						break;
+					}
+
+					draw_pixel(gop, (INTN)memory_acces[p2 + 3] + CurrX, (INTN)memory_acces[p2 + 4] + CurrY, Color);
+					CurrX++;
+				}
+			}
+
+			///
+			/// 49 - split
+			/// 
+			if (p1 == 49)
+			{
+				ch16* original_str = LocateMemory(memory_acces[p2]);
+				ch16* split = LocateMemory(memory_acces[p2 + 1]);
+				
+				//Print(L"Split '%s', with '%s'\n", original_str, split);
+
+				UINTN countt = 0;
+
+				ch16** Splited = SplitChs(original_str, &countt, split);
+
+				ch16* ArrayOfStrs = AllocatePool(sizeof(t16) * (countt + 1));
+
+				for (size_t i = 0; i < countt; i++)
+				{
+					ArrayOfStrs[i] = AllocateStringMemory(Splited[i]);
+					//Print(L"%d ", ArrayOfStrs[i]);
+				}
+
+				ArrayOfStrs[countt] = 0;
+
+				memory_acces[p2] = AllocateStringMemory(ArrayOfStrs);
+
+				//Print(L"In %d\n", memory_acces[p2]);
+
+				//FreePool(ArrayOfStrs);
+			}
+
+			///
+			/// 50 - replace
+			/// 
+			if (p1 == 50)
+			{
+				//Print(L"Locating strs\n");
+				ch16* str = LocateMemory(memory_acces[p2]);
+				ch16* str_original = LocateMemory(memory_acces[p2 + 1]);
+				ch16* str_replacer = LocateMemory(memory_acces[p2 + 2]);
+
+				//Print(L"Replacing '%d' by '%s' in '%s'\n", memory_acces[p2 + 1], str_replacer, str);
+				ch16* new_str = StrReplace(str, str_original, str_replacer);
+
+				//Print(L"Allocating\n");
+				memory_acces[p2] = AllocateStringMemory(new_str);
+
+				//FreePool(new_str);
+			}
+
+			///
+			/// 51 - array duplicate
+			/// 
+			if (p1 == 51)
+			{
+				memory_acces[p2] = AllocateStringMemory(LocateMemory(memory_acces[p2]));
+			}
+
+			///
+			/// 52 - in
+			/// 
+			if (p1 == 52)
+			{
+				t16 Device = memory_acces[p2];
+				t16 RetOn = p2 + 1;
+
+				memory_acces[RetOn] = inpw(Device);
+			}
+
+			///
+			/// 53 - out
+			/// 
+			if (p1 == 53)
+			{
+				t16 Device = memory_acces[p2];
+				t16 WriteVal = memory_acces[p2 + 1];
+
+				outpw(Device, WriteVal);
 			}
 		}
+
 		else if (
 			ch == jq_instruction
 			) {
 			if (
-				memory_acces[256] != 0
+				memory_acces[256] == 1
 				)
 			{
 				//
@@ -2392,45 +2822,57 @@ BinaryEx
 
 				}
 
+
 				/**
 				* search_s
 				*
 				* represents the search in program function
 				*/
-				u64 search_s;
+				t16 search_s = 0;
 
 				//
 				// loops
 				//
 				while (
-					(
-						//
-						// you found a function?
-						//
-						p[search_s] != section_instruction &&
-
-						//
-						// are function founded
-						//
-						p[search_s + 1] != p1
-						)
-					&&
-					p[search_s]
+					1
 					)
+				{
 					search_s++
-					;
+						;
+					if (
+						(
+							//
+							// you found a function?
+							//
+							p[search_s] == section_instruction ? ((p[search_s + 1] - safetynow_for_up) == (p1)) : 0
 
-				//
-				// save the before stack
-				//
+							)
+						)
+					{
+						//Print(L"Saving %d point...\n", memory_acces[10] + 1);
+						//
+						// save the before stack
+						//
 
-				stack_pop[curr_popback] = memory_acces[10] + 1;
-				curr_popback++; // next position
+						stack_pop[curr_popback] = memory_acces[10] + 1;
+						curr_popback++; // next position
 
-				//
-				// set the stack position
-				//
-				memory_acces[10] = search_s;
+						//
+						// set the stack position
+						//
+
+						memory_acces[10] = search_s;
+						break;
+					}
+
+					if (
+						p[search_s] == 0
+						)
+					{
+						//while (1);
+						break;
+					}
+				}
 			}
 		}
 		else if (

@@ -1185,6 +1185,13 @@ typedef struct _KELLY_TIME {
 /// !
 
 CHAR16**
+SplitLines
+(
+    CHAR16* text,
+    UINTN* line_count
+);
+
+CHAR16**
 SplitChs
 (
     CHAR16* text,
@@ -1359,6 +1366,42 @@ IsInArrayRange
     u32                                                     ArrayLen
 );
 
+EFI_GUID										VariablesGuid = { 0x5237f6a9, 0x14fa, 0x16bb, { 0xcb, 0x4d, 0xff, 0xb2, 0x3a, 0x51, 0x18, 0x90 } };
+
+VOID StartGroundSequence();
+
+VOID ParseBytes(CHAR16* Str, size_t BytesSize) {
+    double Count = BytesSize;
+    CHAR16 Mark[3] = { L'B', 0, 0 };
+
+    if (BytesSize > 1e9) {
+        Mark[0] = L'G'; Mark[1] = L'B'; Mark[2] = L'\0';
+        Count /= 1e9;
+    }
+    else if (BytesSize > 1000000) {
+        Mark[0] = L'M'; Mark[1] = L'B'; Mark[2] = L'\0';
+        Count /= 1000000;
+    }
+    else if (BytesSize > 1000) {
+        Mark[0] = L'K'; Mark[1] = L'B'; Mark[2] = L'\0';
+        Count /= 1000;
+    }
+
+    CHAR16 StrConverted[30];
+    FloatToString(StrConverted, TRUE, Count);
+
+    SPrint(Str, 30 * sizeof(CHAR16), L"%s %s", StrConverted, Mark);
+}
+
+t64
+ABS
+(
+    t64 value
+)
+{
+    return (value < 0) ? -value : value;
+}
+typedef t16 EBF_DIRECTION;
 
 #define ControlA_Combination 1
 #define ControlB_Combination 2

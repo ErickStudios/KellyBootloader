@@ -16,8 +16,71 @@
 
 #include ".vs/msvc/ErickBinaryFormat.h"
 
-unsigned long ErickCraftStudiosLogo[] = {
-	// 'logoecs', 44x49px
+/**
+* GlobalIoFncs
+* 
+* idk why efi dont include this
+*/
+EFI_DEVICE_IO_INTERFACE* GlobalIoFncs;
+
+/**
+* LanguajeStringDirection
+* 
+* the string that specifics the languaje of the firmware
+*/
+EBF_DIRECTION LanguajeStringDirection = EbfNullPtr;
+
+/**
+* CfgTableVendorGuid
+* 
+* the gST->ConfigurationTable->VendorGuid array propietys
+*/
+EBF_DIRECTION CfgTableVendorGuid = EbfNullPtr;
+
+/**
+* CfgTableVendorGuidData4
+*
+* the gST->ConfigurationTable->VendorGuid->Data4 array propietys
+*/
+EBF_DIRECTION CfgTableVendorGuidData4 = EbfNullPtr;
+
+/**
+* ConfigurationTable
+* 
+* the gST->ConfigurationTable array attributes
+*/
+EBF_DIRECTION ConfigurationTable = EbfNullPtr;
+
+/**
+* FirmwareVendorArray
+* 
+* the str of the firmware vendor
+*/
+EBF_DIRECTION FirmwareVendorArray = EbfNullPtr;
+
+/**
+* SystemInfoArray
+* 
+* the system info array
+* there structure of this array are formed by
+* Array indexes map:
+* 
+*	SystemInfoArray[0] : In Emulator?, 1 if false and 2 if true
+*	SystemInfoArray[1] : Ptr to FirmwareVendorArray
+*	SystemInfoArray[2] : the main version of EBF
+*	SystemInfoArray[3] : the secondary/beta version of EBF
+*	SystemInfoArray[4] : the current snapshot of the version of EBF
+*	SystemInfoArray[5] : the pointer to gST->ConfigurationTable
+*	SystemInfoArray[6] : the pointer to the languaje
+*/
+EBF_DIRECTION SystemInfoArray = EbfNullPtr;
+
+/**
+* ErickCraftStudiosLogo
+* 
+* the low-pixel logo of ErickCraftStudios
+*/
+u32 ErickCraftStudiosLogo[] = {
 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001f1d3e, 0x002c2a49, 0x00373553, 0x00252343, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d,
 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3c, 0x001e1c3c, 0x001e1c3c, 0x001e1c3c, 0x001e1c3c, 0x001e1c3c, 0x001e1c3c, 0x001e1c3c, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d,
 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3c, 0x001e1c3b, 0x001e1c39, 0x001e1c36, 0x001e1d34, 0x001e1d33, 0x001e1d33, 0x001e1d33, 0x001e1d33, 0x001e1d34, 0x001e1c36, 0x001e1c39, 0x001e1c3b, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d,
@@ -69,9 +132,216 @@ unsigned long ErickCraftStudiosLogo[] = {
 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1d3d, 0x00174c45, 0x000ac75c, 0x0019fd6c, 0x0044ff77, 0x0056ff7c, 0x0030ff72, 0x001cff6c, 0x004aff78, 0x0064ff7e, 0x005fff85, 0x0044ffa0, 0x0043ffa0, 0x0061ff84, 0x0062ff83, 0x004aff9a, 0x0040ffa3, 0x005cff88, 0x0065ff80, 0x0066ff7f, 0x0063ff7e, 0x004aff78, 0x001ced69, 0x00108c52, 0x001c2b3f, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d, 0x001e1c3d
 };
 
+
+/**
+* MapEbfMemory
+*
+* maps the ErickBinaryFormat Memory
+*/
+VOID MapEbfMemory(size_t From, size_t Size)
+{
+	size_t PoolId = 1;
+	CHAR16 MemoryInfoSize[30];
+
+	ParseBytes(MemoryInfoSize, sizeof(memory_acces));
+	size_t BytesUsed = 2;
+
+	SetScreenAtribute(0, gray);
+	printc(L"Map of the ErickBinaryFormat ram\nSize (In ram array length): ");
+	printc(MemoryInfoSize);
+
+	printc(L"\n\n");
+
+	for (size_t i = From; i < Size; i++)
+	{
+		if (memory_acces[i] != 0)
+		{
+			SetScreenAtribute(0, gray);
+
+			//
+			// convert to direction
+			//
+
+			CHAR16 MemoryPointerStr[30];
+
+			ValueToHex(MemoryPointerStr, i);
+
+			//
+			// map the ptr to system info
+			//
+			if (i == 2999)
+			{
+
+				SetScreenAtribute(0, bryellow);
+				printcu(L"PtrToSystemInfo");
+				printcu(L" ");
+
+				cursorx = 25;
+
+				SetScreenAtribute(0, gray);
+				printcu(L"At ");
+
+				SetScreenAtribute(0, brgreen);
+				printcu(MemoryPointerStr);
+
+				printcu(L"\n");
+				DrawScreen();
+			}
+
+			//
+			// map pools
+			//
+			else if (i > 2000 && i < 30000)
+			{
+				BytesUsed++;
+
+				CHAR16 ArrayIdStr[30];
+
+				SetScreenAtribute(0, bryellow);
+				if (i == CfgTableVendorGuid)
+				{
+					printcu(L"CfgTableVendorGuid");
+				}
+				else if (i == CfgTableVendorGuidData4)
+				{
+					printcu(L"CfgTVGData4");
+				}
+				else if (i == FirmwareVendorArray)
+				{
+					printcu(L"FirmwareVendorName");
+				}
+				else if (i == SystemInfoArray)
+				{
+					printcu(L"SystemInfo");
+				}
+				else if (i == LanguajeStringDirection)
+				{
+					printcu(L"Lang");
+				}
+				else {
+					printcu(L"Array");
+					ValueToString(ArrayIdStr, 0, PoolId);
+					printcu(ArrayIdStr);
+				}
+				printcu(L" ");
+
+				cursorx = 25;
+
+				SetScreenAtribute(0, gray);
+				printcu(L"At ");
+
+				SetScreenAtribute(0, brgreen);
+				printcu(MemoryPointerStr);
+
+				cursorx = 27 + 16;
+
+				SetScreenAtribute(0, gray);
+				printcu(L" Size ");
+				SetScreenAtribute(0, brblue);
+
+				CHAR16 SizeOfArray[30];
+
+				ValueToHex(SizeOfArray, memory_acces[i]);
+				printcu(SizeOfArray);
+
+				printcu(L"\n");
+				DrawScreen();
+				BytesUsed += memory_acces[i];
+				i += memory_acces[i];
+				PoolId++;
+			}
+
+			//
+			// map null ptrs
+			//
+			else if (i == 0)
+			{
+				SetScreenAtribute(0, bryellow);
+				printcu(L"NullPtr ");
+
+				cursorx = 25;
+
+				SetScreenAtribute(0, gray);
+				printcu(L"At ");
+				SetScreenAtribute(0, brgreen);
+				printcu(L"0\n");
+				DrawScreen();
+
+			}
+
+			//
+			// map program counter
+			//
+			else if (i == 10)
+			{
+				SetScreenAtribute(0, bryellow);
+				printcu(L"ProgramCounter ");
+
+				cursorx = 25;
+
+				SetScreenAtribute(0, gray);
+				printcu(L"At ");
+				SetScreenAtribute(0, brgreen);
+				printcu(L"A\n");
+				DrawScreen();
+
+			}
+
+			//
+			// map temporal registers
+			//
+			else if (i < 10)
+			{
+				BytesUsed++;
+				SetScreenAtribute(0, bryellow);
+				printcu(L"TempRegister");
+				printcu(MemoryPointerStr);
+				printcu(L" ");
+				cursorx = 25;
+
+				SetScreenAtribute(0, gray);
+				printcu(L"At ");
+				SetScreenAtribute(0, brgreen);
+				printcu(MemoryPointerStr);
+				printcu(L"\n");
+				DrawScreen();
+			}
+
+			//
+			// map normal variables
+			//
+			else {
+				BytesUsed++;
+
+				SetScreenAtribute(0, bryellow);
+				printcu(L"StandartValueData");
+				printcu(MemoryPointerStr);
+				printcu(L" ");
+				cursorx = 25;
+
+				SetScreenAtribute(0, gray);
+				printcu(L"At ");
+				SetScreenAtribute(0, brgreen);
+				printcu(MemoryPointerStr);
+				printcu(L"\n");
+				DrawScreen();
+			}
+		}
+	}
+
+	CHAR16 BytesUsedStr[30];
+
+	ParseBytes(BytesUsedStr, BytesUsed * sizeof(memory_acces[0]));
+
+	SetScreenAtribute(0, gray);
+	printc(L"Space used: ");
+	printc(BytesUsedStr);
+	printc(L"\n");
+}
+
 EFI_GRAPHICS_OUTPUT_BLT_PIXEL LongToPixel(unsigned long color) {
 	EFI_GRAPHICS_OUTPUT_BLT_PIXEL pixel;
-
+	
 	pixel.Blue = color & 0xFF;
 	pixel.Green = (color >> 8) & 0xFF;
 	pixel.Red = (color >> 16) & 0xFF;
@@ -193,11 +463,13 @@ VOID WriteFile(CHAR16* Name,UINTN Size ,VOID* Content)
 		EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE | EFI_FILE_MODE_CREATE,
 		0
 	);
+
 	if (EFI_ERROR(Status)) {
-		Print(L"Error opening %r", Status);
+		Print(L"Error opening %r\n", Status);
 		return; }
 
 	Status = NewFile->Write(NewFile, Size, Content);
+	NewFile->Flush(NewFile);
 
 	Print(L"Writing : %r\n", Status);
 
@@ -1080,33 +1352,22 @@ editor
 					MenuOption == 0
 					)
 				{
-					///
-					/// preconfigure the file id
-					/// 
-					INT16 file_id;
-
-					///
-					/// if is not saved
-					/// 
-					if (
-						FileSavedIn == false
-						)
-					{
-					}
-
-					///
-					/// if the file have a destination
-					/// 
-					else {
-						file_id = FileSave;
-					}
 
 					///
 					/// write the file
 					/// 
 
-					printc(L"saving changes...\n");
+					gotoxy(0, MaxRows - 1);
+					SetScreenAtribute(1, editorcol1);
+					SetScreenAtribute(0, editorcol2);
+					printcu(taskbar);
+					gotoxy(0, MaxRows - 1);
+					SetScreenAtribute(0, gray);
+					printc(L"Name: ");
 
+					CHAR16* Content = StrDuplicate(text);
+
+					WriteFile(ReadLineSeriusWorck(), (sizeof(CHAR16) * (StrLen(Content) + 1)), Content);
 				}
 
 				///
@@ -1132,6 +1393,21 @@ editor
 						CHAR16* Doc = StrDuplicate(text);
 
 						BinaryEx(AssambleProgram(Doc), false);
+						SystemTable->BootServices->WaitForEvent(1, &SystemTable->ConIn->WaitForKey, &Event);
+						gST->ConIn->ReadKeyStroke(gST->ConIn, &Key);
+					}
+
+					///
+					/// .etm
+					/// 
+					/// Summary:
+					/// 
+					///		a documment
+					/// 
+					else if (documment_type == DocType_etm) {
+						CHAR16* Doc = StrDuplicate(text);
+
+						EtmProcess(Doc);
 						SystemTable->BootServices->WaitForEvent(1, &SystemTable->ConIn->WaitForKey, &Event);
 						gST->ConIn->ReadKeyStroke(gST->ConIn, &Key);
 					}
@@ -1372,6 +1648,7 @@ VOID acemeditor()
 			}
 			else 
 			{
+				while (1);
 				printc(AsStringChar(Key.UnicodeChar));
 			}
 
@@ -1673,6 +1950,9 @@ VOID ListFiles()
 	// read the root
 	//
 
+	SetScreenAtribute(0, gray);
+	printc(L"List of files in the root:\n\n  ");
+
 	while (TRUE) {
 		//
 		// configure info
@@ -1709,9 +1989,20 @@ VOID ListFiles()
 
 		UINTN Len = StrLen(Name);
 
-		SetScreenAtribute(0, brblue);
+		CHAR16* BinExtension = L".ebf";
+		CHAR16* AltNameForEx = Name;
+
+		CHAR16* Content = GetFileContent(Name);
+			
+		SetScreenAtribute(0, gray);
+		if (Len > 4 && StrnCmp(&AltNameForEx[Len - 4], BinExtension, 4) == 0) {
+			SetScreenAtribute(0, brgreen);
+		}
+		else if (IsBinaryApp(Content)) {
+			SetScreenAtribute(0, brcyan);
+		}
 		printc(Name);
-		printc(L"\n");
+		printc(L"\n  ");
 
 		//
 		// free the info
@@ -1719,6 +2010,8 @@ VOID ListFiles()
 
 		FreePool(FileInfo);
 	}
+
+	printc(L"\n");
 
 	//
 	// if the root is open close it
@@ -1930,201 +2223,62 @@ VOID BootSpecific(ch16* filename, bool_t debugger)
 	printc(L"File not founded\n");
 }
 
-CHAR16* GetFileContent(ch16* filename)
+CHAR16* GetFileContent(CHAR16* filename)
 {
-	//
-	// configure the status variable
-	//
 	EFI_STATUS Status;
-
-	//
-	// configure the files
-	//
-
 	EFI_FILE_PROTOCOL* Root;
-	EFI_FILE_PROTOCOL* FoundFile = NULL;
+	EFI_FILE_PROTOCOL* FoundFile;
 	EFI_SIMPLE_FILE_SYSTEM_PROTOCOL* FileSystem;
-	EFI_FILE_INFO* FileInfo;
-
-	//
-	// configure others
-	//
-
-	UINTN BufferSize;
-	CHAR16* BinExtension = L".ebf";
-
-	//
-	// locate fs
-	//
 
 	Status = gBS->LocateProtocol(&gEfiSimpleFileSystemProtocolGuid, NULL, (VOID**)&FileSystem);
-	if (EFI_ERROR(Status)) return;
-
-	//
-	// open fs
-	//
+	if (EFI_ERROR(Status)) return NULL;
 
 	Status = FileSystem->OpenVolume(FileSystem, &Root);
-	if (EFI_ERROR(Status)) return;
+	if (EFI_ERROR(Status)) return NULL;
 
-	//
-	// read the root
-	//
-
-	while (TRUE) {
-		//
-		// configure info
-		//
-
-		BufferSize = SIZE_OF_EFI_FILE_INFO + 512;
-		FileInfo = AllocateZeroPool(BufferSize);
-
-		//
-		// if not file info
-		//
-
-		if (!FileInfo) break;
-
-		//
-		// makes the read file
-		//
-
-		Status = Root->Read(Root, &BufferSize, FileInfo);
-		if (EFI_ERROR(Status) || BufferSize == 0) {
-			FreePool(FileInfo);
-			break;
-		}
-
-		//
-		// set the name
-		//
-
-		CHAR16* Name = FileInfo->FileName;
-
-		//
-		// configure lenght
-		//
-
-		UINTN Len = StrLen(Name);
-
-		//
-		// configure size
-		//
-
-		if (StrCmp(Name, filename) == 0) {
-
-			//
-			// open the file
-			//
-
-			Status = Root->Open(Root, &FoundFile, Name, EFI_FILE_MODE_READ, 0);
-
-			//
-			// if the file is founded
-			//
-
-			if (!EFI_ERROR(Status) && FoundFile) {
-
-				//
-				// get file size
-				//
-
-				UINTN FileSize = (UINTN)FileInfo->FileSize;
-				_BINARY* Buffer = AllocatePool(FileSize);
-
-				//
-				// close if not valid
-				//
-
-				if (!Buffer) {
-					FoundFile->Close(FoundFile);
-					FreePool(FileInfo);
-					break;
-				}
-
-				//
-				// read the content
-				//
-
-				Status = FoundFile->Read(FoundFile, &FileSize, Buffer);
-
-				//
-				// if not errors
-				//
-
-				if (!EFI_ERROR(Status)) {
-
-					//
-					// looks like char16?
-					//
-
-					BOOLEAN IsChar16 = LooksLikeChar16(Buffer, FileSize);
-
-					//
-					// if is char16
-					//
-
-					if (IsChar16) {
-
-						//
-						// execute it
-						//
-
-						return (CHAR16*)Buffer;
-					}
-
-					//
-					// if is a char8
-					//
-
-					else {
-						//
-						// convert it
-						//
-						CHAR16* Converted = AsciiToChar16((UINT8*)Buffer, FileSize);
-
-						//
-						// and execute it
-						//
-
-						return Converted;
-					}
-
-				}
-
-				//
-				// free the buffer
-				//
-
-				FreePool(Buffer);
-
-				//
-				// close file and delete the info
-				//
-
-				FoundFile->Close(FoundFile);
-				FreePool(FileInfo);
-				return;
-			}
-		}
-
-		//
-		// free the info
-		//
-
-		FreePool(FileInfo);
+	Status = Root->Open(Root, &FoundFile, filename, EFI_FILE_MODE_READ, 0);
+	if (EFI_ERROR(Status)) {
+		Root->Close(Root);
+		return NULL;
 	}
 
-	//
-	// if the root is open close it
-	//
+	// Obtener tamaño del archivo
+	UINTN InfoSize = SIZE_OF_EFI_FILE_INFO + 512;
+	EFI_FILE_INFO* FileInfo = AllocateZeroPool(InfoSize);
+	Status = FoundFile->GetInfo(FoundFile, &gEfiFileInfoGuid, &InfoSize, FileInfo);
+	if (EFI_ERROR(Status)) {
+		FoundFile->Close(FoundFile);
+		Root->Close(Root);
+		return NULL;
+	}
 
-	if (Root) Root->Close(Root);
+	UINTN FileSize = (UINTN)FileInfo->FileSize;
+	VOID* Buffer = AllocatePool(FileSize);
+	if (!Buffer) {
+		FreePool(FileInfo);
+		FoundFile->Close(FoundFile);
+		Root->Close(Root);
+		return NULL;
+	}
 
-	SetScreenAtribute(0, brred);
-	printc(L"File not founded\n");
+	Status = FoundFile->Read(FoundFile, &FileSize, Buffer);
+	if (EFI_ERROR(Status)) {
+		FreePool(Buffer);
+		FreePool(FileInfo);
+		FoundFile->Close(FoundFile);
+		Root->Close(Root);
+		return NULL;
+	}
+
+	BOOLEAN IsChar16 = LooksLikeChar16(Buffer, FileSize);
+	CHAR16* Result = IsChar16 ? (CHAR16*)Buffer : AsciiToChar16((UINT8*)Buffer, FileSize);
+
+	FreePool(FileInfo);
+	FoundFile->Close(FoundFile);
+	Root->Close(Root);
+
+	return Result;
 }
-
 
 /**
 * DrawLogo
@@ -2227,6 +2381,58 @@ VOID CommandPrompt()
 				ClearScreen();
 				printc(L"\n");
 
+			}
+
+			//
+			// map
+			// 
+			// map the ebf memory
+			//
+			else if (
+				StrCmp(FileName, L"map") == 0
+				)
+			{
+				MapEbfMemory(0, sizeof(memory_acces) / 2);
+				printc(L"\n");
+			}
+
+			//
+			// map --sp
+			// 
+			// prints the bytes used
+			//
+			else if (
+				StrCmp(FileName, L"map --sp") == 0
+				)
+			{
+				CHAR16 Str[30];
+
+				ParseBytes(Str, GetUsedSpaceEbf());
+				
+				printc(Str);
+				printc(L"\n");
+
+			}
+
+			//
+			// map [From:X] [Size:X]
+			// 
+			// map a specific part of memory
+			//
+			else if (
+				StrnCmp(FileName, L"map ", 4) == 0
+				)
+			{
+
+				//
+				// configure params
+				//
+
+				UINTN ParamsCount = 0;
+				CHAR16** Params = SplitChs(FileName + 4, &ParamsCount, L" ");
+
+				MapEbfMemory(xtoi(Params[0]), xtoi(Params[1]));
+				printc(L"\n");
 			}
 
 			//
@@ -2369,16 +2575,25 @@ VOID CommandPrompt()
 				// boot the file
 				//
 
-				BootSpecific(FileName + 2, FALSE);
-				printc(L"\n\n");
+				CHAR16* FileContent = GetFileContent(Params[0]);
+
+				if (FileContent == NULL)
+				{
+					SetScreenAtribute(0, brred);
+					printc(L"File not founded\n");
+				}
+				else {
+					BinaryEx(FileContent, FALSE);
+					printc(L"\n\n");
+				}
 
 				//
 				// free the pools
 				//
 
-				for (size_t i = pos_n_write; i < (pos_end_write + 1); i++)
+				for (size_t i = pos_n_write; i < (pos_end_write); i++)
 				{
-					FillMemorySpaces(memory_acces[i], (memory_acces[i] + memory_acces[memory_acces[i]]) - 1, 0);
+					memory_acces[i] = FreeArray(memory_acces[i]);
 				}
 			}
 
@@ -2394,7 +2609,7 @@ VOID CommandPrompt()
 				//
 
 				UINTN ParamsCount = 0;
-				CHAR16** Params = SplitChs(FileName + 2, &ParamsCount, L" ");
+				CHAR16** Params = SplitChs(FileName + 6, &ParamsCount, L" ");
 
 				//
 				// configure the vars
@@ -2426,21 +2641,69 @@ VOID CommandPrompt()
 				// boot the file
 				//
 
-				BootSpecific(FileName + 6, TRUE);
-				printc(L"\n\n");
+				CHAR16* FileContent = GetFileContent(Params[0]);
+
+				if (FileContent == NULL)
+				{
+					SetScreenAtribute(0, brred);
+					printc(L"File not founded\n");
+				}
+				else {
+					BinaryEx(FileContent, TRUE);
+					printc(L"\n\n");
+				}
 
 				//
 				// free the pools
 				//
 
-				for (size_t i = pos_n_write; i < (pos_end_write + 1); i++)
+				for (size_t i = pos_n_write; i < (pos_end_write); i++)
 				{
-					FillMemorySpaces(memory_acces[i], memory_acces[i] + memory_acces[memory_acces[i]], 0);
+					memory_acces[i] = FreeArray(memory_acces[i]);
 				}
 			}
 		}
 	}
 }
+
+/*
+VOID ATestXd() {
+
+	Vec3 cubeVertices[8] = {
+	{-50, -50, -50}, {50, -50, -50},
+	{50,  50, -50}, {-50, 50, -50},
+	{-50, -50,  50}, {50, -50,  50},
+	{50,  50,  50}, {-50, 50,  50}
+	};
+
+	UINTN edges[12][2] = {
+	{0,1},{1,2},{2,3},{3,0},
+	{4,5},{5,6},{6,7},{7,4},
+	{0,4},{1,5},{2,6},{3,7}
+	};
+
+	t64 camX = 0, camY = 0, camZ = -200;
+	UINTN Event;
+	EFI_INPUT_KEY Key;
+
+	while (1) {
+		ClearScreenCu();
+
+		Draw3dThing(cubeVertices, 8, edges, 12, camX, camY, camZ, brblue);
+
+		DrawScreen();
+
+		gST->BootServices->WaitForEvent(1, &gST->ConIn->WaitForKey, &Event);
+		gST->ConIn->ReadKeyStroke(gST->ConIn, &Key);
+
+		if (Key.ScanCode == SCAN_UP) camY -= 10;
+		else if (Key.ScanCode == SCAN_DOWN) camY += 10;
+		else if (Key.ScanCode == SCAN_LEFT) camX -= 10;
+		else if (Key.ScanCode == SCAN_RIGHT) camX += 10;
+		else if (Key.UnicodeChar == L'W' || Key.UnicodeChar == L'w') camZ += 10;
+		else if (Key.UnicodeChar == L'S' || Key.UnicodeChar == L's') camZ -= 10;
+	}
+}*/
 
 /**
 * BootMenu
@@ -2766,12 +3029,17 @@ VOID BootMenu()
 	}
 }
 
+VOID StartGroundSequence()
+{
+	if (!REALESE) while (1);
+}
+
 /**
 * efi_main
 * 
 * the main point of the bootloader
 */
-EFI_STATUS efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
+EFI_STATUS efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE* SystemTable)
 {
 	//
 	// configure vars
@@ -2785,6 +3053,26 @@ EFI_STATUS efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
 	//
 
 	InitializeLib(ImageHandle, SystemTable);
+
+	EFI_GUID DeviceIoProtocolGuid = EFI_DEVICE_IO_PROTOCOL_GUID;
+
+	ISO_639_2* LangEfi = LibGetVariable(VarLanguage, &EfiGlobalVariable);
+
+	EFI_DEVICE_PATH* DevicePath;
+	Status = gBS->HandleProtocol(
+		ImageHandle,
+		&gEfiDevicePathProtocolGuid,
+		(VOID**)&DevicePath
+	);
+
+	CHAR8* ErrorStr = "Device IO initialization failed";
+
+	Status = InitializeGlobalIoDevice(
+		DevicePath,
+		&DeviceIoProtocolGuid,
+		ErrorStr,
+		&GlobalIoFncs
+	);
 
 	//
 	// set global params
@@ -2800,6 +3088,42 @@ EFI_STATUS efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
 	Status = gBS->SetWatchdogTimer(0, 0, 0, NULL);
 
 	//
+	// initialize varius things of ebf
+	//
+
+	CfgTableVendorGuid = AllocateMemory(4);
+	CfgTableVendorGuidData4 = AllocateMemory(8);
+	LanguajeStringDirection = AllocateStringMemory(AsciiToChar16(LangEfi, AsciiStrLen(LangEfi) + 1));
+
+	//  gST->ConfigurationTable->VendorGuid.Data
+	SetMemoryPool(CfgTableVendorGuid, 0, gST->ConfigurationTable->VendorGuid.Data1);
+	SetMemoryPool(CfgTableVendorGuid, 1, gST->ConfigurationTable->VendorGuid.Data2);
+	SetMemoryPool(CfgTableVendorGuid, 2, gST->ConfigurationTable->VendorGuid.Data3);
+	SetMemoryPool(CfgTableVendorGuid, 3, CfgTableVendorGuidData4);
+
+	//  gST->ConfigurationTable->VendorGuid.Data4
+	SetMemoryPool(CfgTableVendorGuidData4, 0, gST->ConfigurationTable->VendorGuid.Data4[0]);
+	SetMemoryPool(CfgTableVendorGuidData4, 1, gST->ConfigurationTable->VendorGuid.Data4[1]);
+	SetMemoryPool(CfgTableVendorGuidData4, 2, gST->ConfigurationTable->VendorGuid.Data4[2]);
+	SetMemoryPool(CfgTableVendorGuidData4, 3, gST->ConfigurationTable->VendorGuid.Data4[3]);
+	SetMemoryPool(CfgTableVendorGuidData4, 4, gST->ConfigurationTable->VendorGuid.Data4[4]);
+	SetMemoryPool(CfgTableVendorGuidData4, 5, gST->ConfigurationTable->VendorGuid.Data4[5]);
+	SetMemoryPool(CfgTableVendorGuidData4, 6, gST->ConfigurationTable->VendorGuid.Data4[6]);
+	SetMemoryPool(CfgTableVendorGuidData4, 7, gST->ConfigurationTable->VendorGuid.Data4[7]);
+
+	FirmwareVendorArray = AllocateStringMemory(gST->FirmwareVendor);
+	SystemInfoArray = AllocateMemory(7); // 5 = the size of the info
+	memory_acces[2999] = SystemInfoArray; // a know direction that the programs can acces because we dont know the direction of the array, 2999 is a ptr to the SystemInfo
+
+	SetMemoryPool(SystemInfoArray, 0, 1); // obiusly this is the a directly run of EBF , and not a emulator (1 = false, 2 = true)
+	SetMemoryPool(SystemInfoArray, 1, FirmwareVendorArray); // the firmware vendor direction
+	SetMemoryPool(SystemInfoArray, 2, 0); 
+	SetMemoryPool(SystemInfoArray, 3, 3);
+	SetMemoryPool(SystemInfoArray, 4, 37);
+	SetMemoryPool(SystemInfoArray, 5, CfgTableVendorGuid);
+	SetMemoryPool(SystemInfoArray, 6, LanguajeStringDirection);
+
+	//
 	// prepare the grapichs outpud for the console custom colors
 	//
 
@@ -2812,16 +3136,15 @@ EFI_STATUS efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
 	// get the gop
 	Status = uefi_call_wrapper(BS->LocateProtocol, 3, &gEfiGraphicsOutputProtocolGuid, NULL, (VOID**)&gop);
 
-	// The platform logo may still be displayed → remove it
-	SystemTable->ConOut->ClearScreen(SystemTable->ConOut);
+	//SystemTable->ConOut->ClearScreen(SystemTable->ConOut);
 
 	gop->SetMode(gop, 1);
 
 	ChangeToTextMode();
 
 	PrintLineWithBackground(SystemTable, L"KellyBootloader anti display bugs text", 0, EFI_BLACK, EFI_BACKGROUND_LIGHTGRAY);
-	gST->ConOut->ClearScreen(gST->ConOut);
-
+	//gST->ConOut->ClearScreen(gST->ConOut);
+	
 	//
 	// initializes the virtual screen
 	//
@@ -2865,8 +3188,17 @@ EFI_STATUS efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
 
 	printc(L"\n");
 
-	BootMenu();
+	//ATestXd();
 
+	t16 Emm = 0;
+
+	Emm = EditrHLPart(Emm, 15, 1);
+	Emm = EditrHLPart(Emm, 15, 0);
+
+	Print(L"%x", Emm);
+
+	BootMenu();
+	
 	/*
 	while (true)
 	{

@@ -18,15 +18,12 @@ _Use ASCII
 */
 FUNCTION main
 
-    //
-    // configurar variables de entorno
-    //
+    SetVar System.CoutColor.Background _ConsoleColor_black_
+    SetVar System.CoutColor.Foreground _ConsoleColor_green_
 
-    Array RamAssigned AllocatePool->40
-    // +- reservar 40 bytes de memoria para este proceso temprano y que sea portable
+    call _SetColor_
 
-    Array SystemFile AllocatePool->13
-    // +- el nombre del archivo de la shell no puede ser mayor a 13 caracteres
+    Array SystemFile AllocatePool->9
 
     //
     // incializar el nombre del archivo de la shell
@@ -41,20 +38,12 @@ FUNCTION main
     SystemFile [6] 'E'
     SystemFile [7] 'X'
     SystemFile [8] 'E'
-    SystemFile [9] 0
 
     Print "Loading\s"
     PrintPool SystemFile
     Print "...\n"
 
-    //
-    // rutina de arranque
-    //
-
-    #define _TEMPVARRAM_FILEFOUNDED_DIR 0
-    #define _TEMPVARRAM_SUCCESSTATUS_DIR 1
-
-    ManualAllocation System.SystemName 13
+    ManualAllocation System.SystemName 4
 
     System.SystemName [0] 'I'
     System.SystemName [1] 'D'
@@ -62,26 +51,13 @@ FUNCTION main
     System.SystemName [3] _TerminatorChar_
     // +- no se que nombre ponerle
 
-    SetVar System.SystemVer.Primary 0
-    SetVar System.SystemVer.Secondary 1
-    SetVar System.SystemVer.Revision 0
-
-    RamAssigned [_TEMPVARRAM_FILEFOUNDED_DIR] 1
-    RamAssigned [_TEMPVARRAM_SUCCESSTATUS_DIR] 0
-    // +- encontrado
-
-    ExecuteFile SystemFile
+    _CallOut 45 SystemFile
     // +- se supone que el archivo esta en la raiz y ademas nunca regresa, si no lo encuentra es obio que no existe o no es valido
 
-    RamAssigned [_TEMPVARRAM_FILEFOUNDED_DIR] 0
-    // +- 0 = no encontrado
-
-    RamAssigned [_TEMPVARRAM_SUCCESSTATUS_DIR] 14
-    // +- 14 = EFI_NOT_FOUND como retorno
+    _CallOut 43 SystemFile
 
     FreePool System.SystemName
     
-    FreePool RamAssigned
     FreePool SystemFile
 
     call end

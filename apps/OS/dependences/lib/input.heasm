@@ -57,15 +57,6 @@ swinc EfiInputKey
 
 // --------------------------
 //
-// estructuras globales
-//
-// --------------------------
-
-autopbus __Key::swinc EfiInputKey
-
-
-// --------------------------
-//
 // funciones
 //
 // --------------------------
@@ -75,12 +66,12 @@ autopbus __Key::swinc EfiInputKey
 *
 * obtiene la ultima tecla presionada por el usuario
 *
-* @returns __Key sus cosas en la estructura de tecla global
+* @returns Key sus cosas en la estructura de tecla global
 * @note no haga otra estructura, use la global para que no gaste memoria
 */
 FUNCTION GetKey
 
-    _CallOut 12 __Key.ScanCode
+    _CallOut 12 System.Key.ScanCode
 
     __asm ret
 

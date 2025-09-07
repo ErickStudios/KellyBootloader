@@ -1,0 +1,28 @@
+/**
+* shell.heasm
+*
+* @description protocolo de la shell
+*/
+
+// --------------------------
+//
+// Tipos de estructuras
+//
+// --------------------------
+
+/**
+* ParamsArgs
+*
+* los argumentos
+*/
+swinc ParamsArgs
+{
+    /// [reference-to: "Boolean"] argx: si siquiera se llamo desde la shell
+    autv argx::LET;
+    
+    /// [reference-to: "Number"] argc: la cantidad de parametros
+    autv argc::LET;
+
+    /// [reference-to: "String[]"] argv: el array de la direccion de cada parametro
+    autv argv::Array;
+}

@@ -1,0 +1,13 @@
+EA
+;
+Declare variable Juan.Name
+;*
+Juan.Name = 11
+;
+Declare variable Juan.Age
+;*
+Juan.Age = 12
+;
+Declare variable Juan.Job.Salary
+;*
+Juan.Job.Salary = 13

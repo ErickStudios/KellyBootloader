@@ -22,15 +22,35 @@ swinc ConsoleColor
     autv Background::LET;
 }
 
-// --------------------------
-//
-// estructuras globales
-//
-// --------------------------
-
-autopbus __CurPos::swinc ConsoleCurPos
-autopbus __CoutColor::swinc ConsoleColor
-
+ENUM _StdoutColors_
+    _EnumMember _ConsoleColor_black_ 1
+    _EnumMember _ConsoleColor_lightblack_ 2
+    _EnumMember _ConsoleColor_darkgray_ 3
+    _EnumMember _ConsoleColor_gray_ 4
+    _EnumMember _ConsoleColor_lightgray_ 5
+    _EnumMember _ConsoleColor_white_ 6
+    _EnumMember _ConsoleColor_darkred_ 7
+    _EnumMember _ConsoleColor_red_ 8
+    _EnumMember _ConsoleColor_brightred_ 9
+    _EnumMember _ConsoleColor_darkorange_ 10
+    _EnumMember _ConsoleColor_orange_ 11
+    _EnumMember _ConsoleColor_brightorange_ 12
+    _EnumMember _ConsoleColor_darkyellow_ 13
+    _EnumMember _ConsoleColor_yellow_ 14
+    _EnumMember _ConsoleColor_brightyellow_ 15
+    _EnumMember _ConsoleColor_darkgreen_ 16
+    _EnumMember _ConsoleColor_green_ 17
+    _EnumMember _ConsoleColor_brightgreen_ 18
+    _EnumMember _ConsoleColor_darkcyan_ 19
+    _EnumMember _ConsoleColor_cyan_ 20
+    _EnumMember _ConsoleColor_brightcyan_ 21
+    _EnumMember _ConsoleColor_darkteal_ 22
+    _EnumMember _ConsoleColor_teal_ 23
+    _EnumMember _ConsoleColor_brightteal_ 24
+    _EnumMember _ConsoleColor_darkblue_ 25
+    _EnumMember _ConsoleColor_blue_ 26
+    _EnumMember _ConsoleColor_brightblue_ 27
+END ENUM
 
 // --------------------------
 //
@@ -43,16 +63,16 @@ autopbus __CoutColor::swinc ConsoleColor
 *
 * mueve el cursor a una posicion especifica
 *
-* @param __CurPos.X la nueva posicion X
-* @param __CurPos.Y la nueva posicion Y
+* @param System.CurPos.X la nueva posicion X
+* @param System.CurPos.Y la nueva posicion Y
 *
 * @note esto usa la estructura global __CurPos
 * @note para que no gaste memoria, no haga otra estructura
 */
 FUNCTION _GoTo_
 
-    _CallOut 5 __CurPos.X
-    _CallOut 7 __CurPos.Y
+    _CallOut 5 System.CurPos.X
+    _CallOut 7 System.CurPos.Y
 
     __asm ret
 
@@ -61,15 +81,15 @@ FUNCTION _GoTo_
 *
 * cambia el color del texto y del fondo
 *
-* @param __CoutColor.Foreground el texto
-* @param __CoutColor.Background el fondo
+* @param System.CoutColor.Foreground el texto
+* @param System.CoutColor.Background el fondo
 *
 * @note esto usa la estructura global __CoutColor
 * @note para que no gaste memoria, no haga otra estructura
 */
 FUNCTION _SetColor_
 
-    _CallOut 3 __CoutColor.Foreground
-    _CallOut 4 __CoutColor.Background
+    _CallOut 3 System.CoutColor.Foreground
+    _CallOut 4 System.CoutColor.Background
 
     __asm ret

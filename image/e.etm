@@ -1,0 +1,35 @@
+#ETM
+
+#
+# main
+#
+# representa la pagina main
+#
+
+# pagina de inicio
+p: main
+
+:tit pagina principal
+:nli a
+
+:sut Subtitulo
+:nli a
+
+:txt Texto
+:nli a
+
+:sxt Texto pequenio
+:nli a
+
+:lnk link:#page2
+
+# pagina 2
+p: page2
+
+:tit pagina 2
+
+:lnk volver:#main
+:txt  a la pagina principal
+
+:nli d
+:txt este es un texto en la pagina 2

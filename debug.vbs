@@ -9,7 +9,7 @@
 ' Modify these variables as needed
 QEMU_PATH  = "C:\Program Files\qemu\"
 ' You can add something like "-S -gdb tcp:127.0.0.1:1234" if you plan to use gdb to debug
-QEMU_OPTS  = "-net none -monitor none -parallel none"
+QEMU_OPTS  = "-net none -monitor none -parallel none -audiodev dsound,id=Sound -device intel-hda -device hda-output,audiodev=Sound"
 ' Set to True if you need to download a file that might be cached locally
 NO_CACHE   = False
 
@@ -145,4 +145,4 @@ Call fso.CopyFile(WScript.Arguments(0), "image\efi\boot\" & BOOT_NAME, True)
 ' NB: We mount the UEFI firmware as -drive rather than -bios so that we can
 ' persist NV Variables, such as Secure Boot ones, into the firmware file.
 ' However, we use -bios for ARM images as -drive doesn't work there
-Call shell.Run("""" & QEMU_PATH & QEMU_EXE & """ " & QEMU_OPTS & " -L . " & BIOS_OPT & " " & FW_FILE & " -hda fat:rw:image")
+Call shell.Run("""" & QEMU_PATH & QEMU_EXE & """ " & QEMU_OPTS & " -L . " & BIOS_OPT & " " & FW_FILE & " -hda fat:rw:image", 1, true)

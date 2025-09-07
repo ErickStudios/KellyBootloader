@@ -1,7 +1,7 @@
 # build.erc
 #
 # archivo para compilar el sistema operativo
-
+#
 # uso
 #! ```outpud
 #! ErickCompiler>
@@ -252,9 +252,21 @@ function Build
 
             # el nombre del archivo del resultado
             As "%BuildResultFolder%/BOOT.%Target%"
+            
+            # compilarlo con el HLVC
+            With "%Compiler%"
+        [end _Entry]
+
+        # construir la shell
+        [_Entry]
+            # el nombre del archivo original
+            build "kernel/shell.heasm"
+
+            # el nombre del archivo del resultado
+            As "%BuildResultFolder%/SHELL.%TargetPrograms%"
 
             # compilarlo con el HLVC
-            With "%Compiler% --onlyTranspile"
+            With "%Compiler%"
         [end _Entry]
     end
 

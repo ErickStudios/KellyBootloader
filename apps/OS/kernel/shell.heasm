@@ -1,0 +1,192 @@
+/********************************************************
+* shell.heasm
+*
+* esta shell es parte del kernel y sirve para darle un control
+* al usuario sobre el sistema
+*
+********************************************************/
+
+%include
+    dependences/lib/stdlib.heasm
+
+//
+// estructuras para el funcionamiento de la shell
+//
+
+swinc ShellSerices
+{
+    //
+    // comandos para controlar la consola
+    //
+
+    autv ClearCommand::Array;
+    autv EchoCommand::Array;
+    autv WritelCommand::Array;
+
+    //
+    // comandos basicos
+    //
+
+    autv ExitCommand::Array;
+    autv GuideCommand::Array;
+}
+
+//
+// variables locales
+//
+
+autopbus ShellSerices::swinc ShellSerices
+
+//
+// funciones
+//
+
+FUNCTION _loop_
+
+    System.CoutColor.Foreground = _ConsoleColor_brightyellow_
+    call _SetColor_
+
+    Print "OS>\s"
+
+    System.CoutColor.Foreground = _ConsoleColor_gray_
+    call _SetColor_
+
+    Array Line ReadLine
+
+    IF BufferCmp<Line,ShellSerices.ExitCommand> THEN ShellServices.Implementations.Exit
+    IF BufferCmp<Line,ShellSerices.ClearCommand> THEN ShellServices.Implementations.Clear
+    IF BufferNCmp<Line,ShellSerices.EchoCommand,5> THEN ShellServices.Implementations.Echo
+    IF BufferNCmp<Line,ShellSerices.WritelCommand,7> THEN ShellServices.Implementations.Write
+
+    FreePool Line
+
+    Print "\n"
+
+    4 = 3
+    5 = _loop_
+    6 = 0
+
+    _CallOut 40 4
+
+    __asm ret
+
+FUNCTION main
+    
+    call init
+
+    call _loop_
+
+    _CallOut 0 0
+
+/**
+* init
+*
+* funcion para inicializar la shell y todo eso
+*/
+FUNCTION init
+
+    //
+    // crear comandos
+    //
+
+    ManualAllocation ShellSerices.ClearCommand 3
+    ManualAllocation ShellSerices.EchoCommand 5
+    ManualAllocation ShellSerices.WritelCommand 7
+
+    ManualAllocation ShellSerices.ExitCommand 4
+    ManualAllocation ShellSerices.GuideCommand 1
+
+    //
+    // asignar los keywords
+    //
+
+    ShellSerices.WritelCommand [0] 'w'
+    ShellSerices.WritelCommand [1] 'r'
+    ShellSerices.WritelCommand [2] 'i'
+    ShellSerices.WritelCommand [3] 't'
+    ShellSerices.WritelCommand [4] 'e'
+    ShellSerices.WritelCommand [5] 'l'
+    ShellSerices.WritelCommand [6] '\s'
+
+    ShellSerices.ClearCommand [0] 'c'
+    ShellSerices.ClearCommand [1] 'l'
+    ShellSerices.ClearCommand [2] 's'
+
+    ShellSerices.ExitCommand [0] 'e'
+    ShellSerices.ExitCommand [1] 'x'
+    ShellSerices.ExitCommand [2] 'i'
+    ShellSerices.ExitCommand [3] 't'
+    
+    ShellSerices.GuideCommand [0] '?'
+    
+    ShellSerices.EchoCommand [0] 'e'
+    ShellSerices.EchoCommand [1] 'c'
+    ShellSerices.EchoCommand [2] 'h'
+    ShellSerices.EchoCommand [3] 'o'
+    ShellSerices.EchoCommand [4] '\s'
+
+    __asm ret
+
+FUNCTION _cleanup_
+
+    //
+    // liberar variables del input
+    //
+
+    FreePool Line
+
+    //
+    // liberara los comandos
+    //
+
+    FreePool ShellSerices.ClearCommand
+    FreePool ShellSerices.ExitCommand
+    FreePool ShellSerices.GuideCommand
+    FreePool ShellSerices.EchoCommand
+    FreePool ShellSerices.WritelCommand
+
+    __asm ret
+
+FUNCTION ShellServices.Implementations.Exit
+
+    call _cleanup_
+
+    _CallOut 0 0
+
+FUNCTION ShellServices.Implementations.Clear
+
+    _CallOut 2 0
+
+    __asm ret
+
+FUNCTION ShellServices.Implementations.Write
+
+    4 = *Line
+
+    1 = *Line
+    2 = 7
+
+    _CallOut 33 1
+
+    _CallOut 22 1
+
+    FreePool 1
+
+    __asm ret
+
+FUNCTION ShellServices.Implementations.Echo
+
+    Print "\n"
+
+    4 = *Line
+
+    1 = *Line
+    2 = 5
+
+    _CallOut 33 1
+
+    _CallOut 22 1
+
+    FreePool 1
+
+    __asm ret

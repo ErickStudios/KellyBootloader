@@ -44,14 +44,6 @@ swinc EfiTime
 
 // --------------------------
 //
-// estructuras globales
-//
-// --------------------------
-
-autopbus __Time::swinc EfiTime
-
-// --------------------------
-//
 // funciones
 //
 // --------------------------
@@ -61,11 +53,11 @@ autopbus __Time::swinc EfiTime
 *
 * @description obtiene la hora actual del sistema
 * 
-* @param __Time el tiempo
-* @returns __Time el tiempo actual
+* @param System.Time el tiempo
+* @returns System.Time el tiempo actual
 */
 FUNCTION GetTime
 
-    _CallOut 13 __Time.Second
+    _CallOut 13 System.Time.Second
 
     __asm ret

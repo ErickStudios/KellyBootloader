@@ -9,6 +9,17 @@
 
 #pragma pack(1)
 
+VOID
+DrawBitMapImage
+(
+    unsigned long array_[],
+    u64 witdh,
+    u64 hight,
+    u64 x,
+    u64 y,
+    u64 length
+);
+
 /**
 * Pixels
 * 
@@ -1781,9 +1792,8 @@ DrawScreen
         SMODE == 0 // if in textmode
         ) {
         if (
-            screenscroll < verticalResolution // if you need to scroll
+            screenscroll > 0 // if you need to scroll
             ) {
-
             // draw the bg
             DrawRectangle(gop, 0, 0, horizontalResolution, verticalResolution, (Conio->atributes->BG));
         }
@@ -1805,12 +1815,17 @@ DrawScreen
 
         int sizex = 1;
 
-        /*
         int PopI = i;
         int PopXpos = xpos;
         i++;
 
-        while (bufferscreen[i].x == (xpos + 1))
+        while (
+            bufferscreen[i].x == (xpos + 1) && bufferscreen[i].y == (ypos) && (
+                (bufferscreen[i].color.Red == color.Red) &&
+                (bufferscreen[i].color.Green == color.Green) &&
+                (bufferscreen[i].color.Blue == color.Blue)
+                )
+            )
         {
             sizex++;
             xpos++;
@@ -1818,10 +1833,10 @@ DrawScreen
         }
    
         xpos = PopXpos;
-        i = PopI;*/
+        i = PopI;
 
         if (
-            SMODE == 0 && screenscroll < verticalResolution // if text mode
+            SMODE == 0 && screenscroll < gop->Mode->Info->VerticalResolution // if text mode
             ) {
             if (((ypos - screenscroll)) > 0) {
                 gop->Blt(
@@ -1968,8 +1983,6 @@ printf
             if (
                 TEXT[TEXTLETTER] == L'\n'
                 && TEXT[TEXTLETTER + 1] == L'\r'
-                // "dont call me "honey""
-                //       -bea brawl stars
                 )
             {
                 TEXTLETTER++;
@@ -2337,6 +2350,721 @@ YNConfirmation
         }
     }
 }
+
+VOID
+EtmProcess
+(
+    CHAR16* Docummenta
+)
+{
+    //
+    // configure variables
+    //
+
+    ch16* Documment = StrDuplicate(Docummenta);
+    CHAR16                              H_Page[20] = L"Main";
+    u64                                 DocLines = 0;
+    CHAR16** DocParts = SplitLines(Documment, &DocLines);
+
+    bool_t                              InMenu = FALSE;
+    u64                                 MenuTabulator = 0;
+    u64                                 Tabulator = 0;
+
+    /*
+    TagType
+
+    The possible tags in the Etm
+    */
+    enum TagType {
+
+        /*
+        T_TITLE (tit)
+
+        a title (brblue)
+        */
+        T_TITLE = 0,
+
+        /*
+        T_SUBTITLE (sut)
+
+        a sub-title (brgree)
+        */
+        T_SUBTITLE = 1,
+
+        /*
+        T_TEXT (txt)
+
+        a text (gray)
+        */
+        T_TEXT = 2,
+
+        /*
+        T_SMALL_TEXT (sxt)
+
+        a small text (darkgray)
+        */
+        T_SMALL_TEXT = 3,
+
+        /*
+        T_LINK (lnk)
+
+        a link (blue when not actived and brblue when actived)
+        */
+        T_LINK = 4,
+
+        /*
+        T_MENU_BAR_LINK (mlk)
+
+        a link in the menu bar (blue when not actived and brblue when actived)
+        */
+        T_MENU_BAR_LINK = 5,
+
+        /*
+        T_MENU_BAR_TEXT (bxt)
+
+        a text in the menu bar (brcyan)
+        */
+        T_MENU_BAR_TEXT = 6,
+
+        /*
+        T_LINE_SEPARATOR (nli)
+
+        a \n
+        */
+        T_LINE_SEPARATOR = 7
+    };
+
+    /*
+    _LinkDirection
+
+    Summary:
+        represents a link direction
+    */
+    struct _LinkDirection
+    {
+        /*
+        ToHPage
+
+        Summary:
+            if the link changes the page
+        */
+        bool_t                          ToHPage;
+
+        /*
+        Page
+
+        Summary:
+            the page to redirect
+        */
+        ch16                            Page[20];
+
+        /*
+        ToATab
+
+        Summary:
+            if the link redirects to a tab
+        */
+        bool_t                          ToATab;
+
+        /*
+        Tab
+
+        the tabulator to redirect
+        */
+        u64                             Tab;
+    };
+
+    /*
+    _DocElement
+
+    Summary:
+        represents a documment element
+    */
+    struct _DocElement {
+        /*
+        ItemType
+
+        Summary:
+            the type of the item
+        */
+        enum TagType ItemType;
+
+        /*
+        DisplayText
+
+        Summary:
+            the text that displays
+        */
+        ch16* DisplayText;
+
+        /*
+        Link
+
+        Summary:
+            if is a type of link there is used
+        */
+        ch16* Link;
+
+        /*
+        Tabulator
+
+        Summary:
+            represents the tabulator, in menu or in the page body
+        */
+        u64 Tabulator;
+
+        /*
+        page
+
+        Summary:
+            represents the page where the element is founded
+        */
+        ch16* page;
+    };
+
+    typedef struct _DocElement DCM_I;
+
+    //
+    // check the documment before use
+    //
+
+    u64                                 Items = 0;
+
+    for (size_t i = 0; i < DocLines; i++)
+    {
+        ch16* Line = DocParts[i];
+
+        if (
+            Line[0] == L':'
+            )
+        {
+            Items++;
+        }
+    }
+
+    //
+    // interpreter the lines
+    //
+
+    ch16* PageToSet;
+    u64                                 CurrentItem = 0;
+    DCM_I* DItems;
+
+    u64                                 CmMenuTabs = 0;
+    u64                                 CmTabs = 0;
+
+    DItems = AllocatePool(sizeof(struct _DocElement) * Items);
+
+    for (size_t i = 0; i < DocLines; i++)
+    {
+        ch16* Line = StrTrim(DocParts[i]);
+
+        if (
+            Line[0] == L'#'
+            )
+        {
+
+        }
+        else if (
+            Line[0] == L':'
+            )
+        {
+            DItems[CurrentItem].page = StrDuplicate(PageToSet);
+            DItems[CurrentItem].DisplayText = Line + 5;
+
+            ch16 em[] = { Line[1] , Line[2] , Line[3] };
+
+            if (
+                em[0] == L't' &&
+                em[1] == L'i' &&
+                em[2] == L't'
+                )
+                DItems[CurrentItem].ItemType = T_TITLE;
+
+            if (
+                em[0] == L's' &&
+                em[1] == L'u' &&
+                em[2] == L't'
+                )
+                DItems[CurrentItem].ItemType = T_SUBTITLE;
+
+
+            if (
+                em[0] == L't' &&
+                em[1] == L'x' &&
+                em[2] == L't'
+                )
+                DItems[CurrentItem].ItemType = T_TEXT;
+
+
+            if (
+                em[0] == L's' &&
+                em[1] == L'x' &&
+                em[2] == L't'
+                )
+                DItems[CurrentItem].ItemType = T_SMALL_TEXT;
+
+            if (
+                em[0] == L'n' &&
+                em[1] == L'l' &&
+                em[2] == L'i'
+                )
+                DItems[CurrentItem].ItemType = T_LINE_SEPARATOR;
+
+            if (
+                em[0] == L'b' &&
+                em[1] == L'x' &&
+                em[2] == L't'
+                )
+                DItems[CurrentItem].ItemType = T_MENU_BAR_TEXT;
+
+            if (
+                em[0] == L'm' &&
+                em[1] == L'l' &&
+                em[2] == L'k'
+                )
+            {
+                u64 Cnt = 0;
+                CHAR16** chs = SplitChs((Line + 5), &Cnt, L":");
+
+                DItems[CurrentItem].DisplayText = chs[0];
+                DItems[CurrentItem].Link = (chs[1]);
+
+                DItems[CurrentItem].ItemType = T_MENU_BAR_LINK;
+                DItems[CurrentItem].Tabulator = CmMenuTabs;
+                CmMenuTabs++;
+            }
+
+            if (
+                em[0] == L'l' &&
+                em[1] == L'n' &&
+                em[2] == L'k'
+                )
+            {
+                u64 Cnt = 0;
+                ch16* eem = Line + 5;
+                CHAR16** chs = SplitChs(eem, &Cnt, L":");
+
+                DItems[CurrentItem].DisplayText = chs[0];
+                DItems[CurrentItem].Link = (chs[1]);
+
+                DItems[CurrentItem].ItemType = T_LINK;
+                DItems[CurrentItem].Tabulator = CmTabs;
+                CmTabs++;
+            }
+
+            CurrentItem++;
+        }
+        else if (
+            StrnCmp(Line, L"p: ", 3) == 0
+            )
+        {
+            CmMenuTabs = 0;
+            CmTabs = 0;
+            PageToSet = Line + 3;
+        }
+    }
+
+    u64 MenuTab = 0;
+    u64 PageTab = 0;
+    ch16* page = L"main";
+    bool_t InMenuA = FALSE;
+    u64 scroll = 0;
+
+    while (true) {
+
+        int MenuXm = 0;
+
+        ClearScreen();
+
+        gotoxy(1, 1);
+
+        gotoxy(0, 3 - scroll);
+
+        for (size_t i = 0; i < Items; i++)
+        {
+
+            if (
+                StrCmp(DItems[i].page, page) == 0
+                )
+            {
+                int PopX = cursorx;
+                int PopY = cursory;
+
+                switch (DItems[i].ItemType)
+                {
+                case T_TITLE:
+                    SetScreenAtribute(0, brblue);
+                    break;
+
+                case T_SUBTITLE:
+                    SetScreenAtribute(0, brgreen);
+                    break;
+
+                case T_TEXT:
+                    SetScreenAtribute(0, gray);
+                    break;
+
+                case T_SMALL_TEXT:
+                    SetScreenAtribute(0, darkgray);
+                    break;
+
+                case T_LINK:
+                    SetScreenAtribute(0, blue);
+
+                    if (
+                        DItems[i].Tabulator == Tabulator
+                        )
+                    {
+                        SetScreenAtribute(0, brblue);
+                    }
+                    break;
+
+                case T_LINE_SEPARATOR:
+                    printcu(L"\n");
+                    break;
+
+                case T_MENU_BAR_TEXT:
+                    SetScreenAtribute(0, brcyan);
+
+                    cursorx = MenuXm;
+                    cursory = 1;
+
+                    gotoxy(MenuXm, 1);
+                    break;
+
+                case T_MENU_BAR_LINK:
+                    SetScreenAtribute(0, blue);
+
+                    if (
+                        DItems[i].Tabulator == MenuTab
+                        )
+                    {
+                        SetScreenAtribute(0, brblue);
+                    }
+
+                    cursorx = MenuXm;
+                    cursory = 1;
+                    break;
+                default:
+                    SetScreenAtribute(0, gray);
+                    break;
+                }
+
+                if (
+                    DItems[i].ItemType != T_LINE_SEPARATOR
+                    )
+                {
+                    if (
+                        cursory > 2
+                        )
+                        printcu(DItems[i].DisplayText);
+                    else if (
+                        (DItems[i].ItemType == T_MENU_BAR_TEXT || DItems[i].ItemType == T_MENU_BAR_LINK)
+                        )
+                        printcu(DItems[i].DisplayText);
+                }
+
+                if (
+                    DItems[i].ItemType == T_MENU_BAR_TEXT || DItems[i].ItemType == T_MENU_BAR_LINK
+                    )
+                {
+                    MenuXm = cursorx + 1;
+
+                    cursorx = PopX;
+                    cursory = PopY;
+                }
+            }
+        }
+
+        DrawScreen();
+
+        gBS->WaitForEvent(1, &gST->ConIn->WaitForKey, 1);
+
+        EFI_INPUT_KEY Key;
+
+        gST->ConIn->ReadKeyStroke(gST->ConIn, &Key);
+
+        if (
+            Key.ScanCode == SCAN_LEFT
+            )
+        {
+            if (
+                InMenuA
+                )
+                MenuTab--;
+            else
+                Tabulator--;
+        }
+        else if (
+            Key.ScanCode == SCAN_RIGHT
+            )
+        {
+            if (
+                InMenuA
+                )
+                MenuTab++;
+            else
+                Tabulator++;
+        }
+        else if (
+            Key.ScanCode == SCAN_UP
+            )
+        {
+            scroll--;
+        }
+        else if (
+            Key.ScanCode == SCAN_DOWN
+            )
+        {
+            scroll++;
+        }
+        else if (
+            Key.ScanCode == SCAN_F10
+            )
+        {
+            if (InMenuA == TRUE) InMenuA = FALSE;
+            else if (InMenuA == FALSE) InMenuA = TRUE;
+
+        }
+        else if (
+            Key.UnicodeChar == CHAR_CARRIAGE_RETURN
+            )
+        {
+            ch16* link = L"=NULL";
+
+            for (size_t i = 0; i < Items; i++)
+            {
+                if (
+                    StrCmp(DItems[i].page, page) == 0
+                    )
+                {
+                    if (
+                        DItems[i].ItemType == T_MENU_BAR_LINK
+                        )
+                    {
+                        if (
+                            DItems[i].Tabulator == MenuTab && InMenuA == TRUE
+                            )
+                        {
+                            link = DItems[i].Link;
+                            break;
+                        }
+                    }
+                    else {
+                        if (
+                            DItems[i].Tabulator == Tabulator && InMenuA == TRUE
+                            )
+                        {
+                            link = DItems[i].Link;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            Print(link);
+
+            if (
+                link[0] == L'#'
+                )
+            {
+                ch16* lm = link + 1;
+                page = StrDuplicate(lm);
+                Print(page);
+            }
+        }
+        else if (
+            Key.ScanCode == SCAN_ESC
+            )
+        {
+            FreePool(DItems);
+            return;
+        }
+    }
+}
+
+/**
+* DrawLineBetweenPoints
+* 
+* draw a line
+*/
+VOID
+DrawLineBetweenPoints
+(
+    t64 x0,
+    t64 y0,
+    t64 x1,
+    t64 y1,
+    PIXELCOL Color
+)
+{
+    t64 dx = ABS(x1 - x0);
+    t64 dy = ABS(y1 - y0);
+    t64 sx = (x0 < x1) ? 1 : -1;
+    t64 sy = (y0 < y1) ? 1 : -1;
+    t64 err = dx - dy;
+
+    while (TRUE)
+    {
+        draw_pixel(gop, x0, y0, Color);
+        
+        if (x0 == x1 && y0 == y1)
+            break;
+
+        t64 e2 = 2 * err;
+        if (e2 > -dy) {
+            err -= dy;
+            x0 += sx;
+        }
+        if (e2 < dx) {
+            err += dx;
+            y0 += sy;
+        }
+    }
+}
+
+/**
+* DrawDeformableSquare
+* 
+* draw a custom squeare without filled
+*/
+VOID DrawDeformableSquare(
+    t64 x0, t64 y0,
+    t64 x1, t64 y1,
+    t64 x2, t64 y2,
+    t64 x3, t64 y3,
+    PIXELCOL Color
+)
+{
+    DrawLineBetweenPoints(x0, y0, x1, y1, Color);
+    DrawLineBetweenPoints(x1, y1, x2, y2, Color);
+    DrawLineBetweenPoints(x2, y2, x3, y3, Color);
+    DrawLineBetweenPoints(x3, y3, x0, y0, Color);
+}
+
+/**
+* Swap
+* 
+* a swapper
+*/
+VOID Swap(t64* a, t64* b) {
+    t64 temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+/**
+* FillTriangle
+* 
+* fill a triangle
+*/
+VOID FillTriangle(t64 x0, t64 y0, t64 x1, t64 y1, t64 x2, t64 y2, PIXELCOL Color) {
+    if (y0 > y1) { Swap(&y0, &y1); Swap(&x0, &x1); }
+    if (y1 > y2) { Swap(&y1, &y2); Swap(&x1, &x2); }
+    if (y0 > y1) { Swap(&y0, &y1); Swap(&x0, &x1); }
+
+    t64 total_height = y2 - y0;
+    if (total_height == 0) return;
+
+    for (t64 y = y0; y <= y2; y++) {
+        bool_t second_half = y > y1 || y1 == y0;
+        t64 segment_height = second_half ? y2 - y1 : y1 - y0;
+        if (segment_height == 0) continue;
+
+        t64 alpha = (t64)(y - y0) * 1000 / total_height;
+        t64 beta = (t64)(y - (second_half ? y1 : y0)) * 1000 / segment_height;
+
+        t64 Ax = x0 + ((x2 - x0) * alpha) / 1000;
+        t64 Bx = second_half
+            ? x1 + ((x2 - x1) * beta) / 1000
+            : x0 + ((x1 - x0) * beta) / 1000;
+
+        if (Ax > Bx) Swap(&Ax, &Bx);
+
+        for (t64 x = Ax; x <= Bx; x++) {
+            draw_pixel(gop, x, y, Color);
+        }
+    }
+}
+
+/**
+* DrawDeformableSquareFilled
+* 
+* draw a custom square but filled
+*/
+VOID
+DrawDeformableSquareFilled
+(
+    t64 x0, t64 y0,
+    t64 x1, t64 y1,
+    t64 x2, t64 y2,
+    t64 x3, t64 y3,
+    PIXELCOL Color
+)
+{
+    FillTriangle(x0, y0, x1, y1, x2, y2, Color);
+    FillTriangle(x0, y0, x2, y2, x3, y3, Color);
+
+    DrawLineBetweenPoints(x0, y0, x1, y1, Color);
+    DrawLineBetweenPoints(x1, y1, x2, y2, Color);
+    DrawLineBetweenPoints(x2, y2, x3, y3, Color);
+    DrawLineBetweenPoints(x3, y3, x0, y0, Color);
+}
+
+/**
+* Vec3
+* 
+* how? a 3d in uefi?
+*/
+typedef struct {
+    t64 x, y, z;
+} Vec3;
+
+/**
+* Project3dPoint
+* 
+* projects a 3d point
+*/
+VOID 
+Project3dPoint
+(
+    Vec3 point, 
+    t64 camX, t64 camY, t64 camZ, 
+    t64* outX, t64* outY
+) 
+{
+    t64 scale = 256;
+    t64 z = point.z - camZ;
+    if (z == 0) z = 1;
+
+    *outX = (point.x - camX) * scale / z + horizontalResolution / 2;
+    *outY = (point.y - camY) * scale / z + verticalResolution / 2;
+}
+
+/**
+* Draw3dThing
+* 
+* draws a 3d thing
+*/
+VOID
+Draw3dThing(
+    Vec3* Vertexs,
+    size_t VertexsCount,
+    UINTN edges[][2],
+    size_t edgesCount,
+    t64 camX, t64 camY, t64 camZ,
+    PIXELCOL color
+)
+{
+    for (size_t i = 0; i < edgesCount; i++) {
+        t64 x0, y0, x1, y1;
+        Project3dPoint(Vertexs[edges[i][0]], camX, camY, camZ, &x0, &y0);
+        Project3dPoint(Vertexs[edges[i][1]], camX, camY, camZ, &x1, &y1);
+        DrawLineBetweenPoints(x0, y0, x1, y1, color);
+    }
+}
+
 // ----------------------------------------------------------------------------------------------
 // END functions
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

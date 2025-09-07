@@ -391,6 +391,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\debug.vbs" />
+    <None Include="lowlevel.asm" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BitMaps.h" />
