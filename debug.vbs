@@ -9,7 +9,7 @@
 ' Modify these variables as needed
 QEMU_PATH  = "C:\Program Files\qemu\"
 ' You can add something like "-S -gdb tcp:127.0.0.1:1234" if you plan to use gdb to debug
-QEMU_OPTS  = "-net none -monitor none -parallel none -audiodev dsound,id=Sound -device intel-hda -device hda-output,audiodev=Sound"
+QEMU_OPTS  = "-net none -monitor none -parallel none -audiodev dsound,id=Sound -device intel-hda -device hda-output,audiodev=Sound -m 512M"
 ' Set to True if you need to download a file that might be cached locally
 NO_CACHE   = False
 

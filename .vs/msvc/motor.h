@@ -288,8 +288,9 @@ typedef u8                                                  ch8;
 /// !
 /// !
 
-
+#if defined(_M_X64) || defined(__x86_64__) || defined(__amd64__)
 typedef u64                                                 size_t;
+#endif
 
 /// !
 /// !
@@ -1402,6 +1403,17 @@ ABS
     return (value < 0) ? -value : value;
 }
 typedef t16 EBF_DIRECTION;
+typedef VOID function;
+
+/**
+* GlobalIoFncs
+* 
+* idk why efi dont include this
+*/
+EFI_DEVICE_IO_INTERFACE* GlobalIoFncs;
+
+extern unsigned short inw(unsigned short port);
+extern unsigned short outw(unsigned short port, unsigned short value);
 
 #define ControlA_Combination 1
 #define ControlB_Combination 2
@@ -1409,3 +1421,161 @@ typedef t16 EBF_DIRECTION;
 #define ControlD_Combination 4
 #define ControlE_Combination 5
 #define ControlF_Combination 6
+
+#ifndef __cplusplus
+// in c
+#define constexpr const
+#define auto VOID*
+#define and &
+#define or |
+#define xor ^
+#endif // !__cplusplus
+
+#define PciConfigAdrr(bus, device, function, offset) \
+    ((UINTN)(bus << 16) | (device << 11) | (function << 8) | (offset & 0xFC))
+
+EFI_STATUS 
+SafeWrite(
+    u16 Port,
+    t16 Value
+)
+{
+    // check if the write is not nullptr
+    if (GlobalIoFncs->Io.Write == NULL) return EFI_NOT_FOUND;
+
+    // try to write
+    outpw(Port, Value);
+
+    // return succes
+    return EFI_SUCCESS;
+}
+
+t16
+SafeRead(
+    t16 Port
+)
+{
+    // check if the read is not nullptr
+    if (GlobalIoFncs->Io.Read == NULL) return 0;
+
+    // try to read
+    return inpw(Port);
+}
+
+
+EFI_STATUS
+SafePciWrite(
+    UINTN Port,
+    t16 Value
+)
+{
+    // check if the write is not nullptr
+    if (GlobalIoFncs->Pci.Write == NULL) return EFI_NOT_FOUND;
+
+    // try to write
+    writepci16(Port, Value);
+
+    // return succes
+    return EFI_SUCCESS;
+}
+
+t16
+SafePciRead(
+    UINTN Port
+)
+{
+    // check if the read is not nullptr
+    if (GlobalIoFncs->Pci.Read == NULL) return 0;
+
+    // try to read
+    return readpci16(Port);
+}
+
+UINTN
+EbfJoin4ShortsFor64(
+    t16 a,
+    t16 b,
+    t16 c,
+    t16 d
+)
+{
+    UINTN result = 0;
+
+    result |= ((UINTN)(a & 0xFFFF)) << 48;
+    result |= ((UINTN)(b & 0xFFFF)) << 32;
+    result |= ((UINTN)(c & 0xFFFF)) << 16;
+    result |= ((UINTN)(d & 0xFFFF));
+
+    return result;
+}
+
+function
+EbfReturnINT64DividedInParts(
+    UINTN packed,
+    t16 out[5]
+)
+{
+    out[0] = (t16)((packed >> 48) & 0xFFFF);
+    out[1] = (t16)((packed >> 32) & 0xFFFF);
+    out[2] = (t16)((packed >> 16) & 0xFFFF);
+    out[3] = (t16)(packed & 0xFFFF);
+    out[4] = 0;
+}
+
+EFI_STATUS 
+SearchPciRegisterWithFirstChildOf(
+    UINT8 TargetClass,
+    UINTN Register,
+    UINTN* Out
+)
+{
+
+    //
+    // declare variables
+    //
+
+    EFI_HANDLE*             HandleBuffer;
+    UINTN                   HandleCount;
+    EFI_PCI_IO_PROTOCOL*    PciIo;
+    PCI_TYPE00              Pci;
+    UINTN                   Index;
+
+    //
+    // handle buffer
+    //
+
+    gBS->LocateHandleBuffer(ByProtocol, &gEfiPciIoProtocolGuid, NULL, &HandleCount, &HandleBuffer);
+
+    //
+    // search all, happy browsing :)
+    //
+
+    for (Index = 0; Index < HandleCount; Index++)
+    {
+        // handle the protocol
+        gBS->HandleProtocol(HandleBuffer[Index], &gEfiPciIoProtocolGuid, (VOID**)&PciIo);
+        
+        // reac the pci
+        PciIo->Pci.Read(PciIo, EfiPciIoWidthUint8, 0, sizeof(Pci), &Pci);
+        
+        //Print(L"%x %x %x\n", Pci.Hdr.ClassCode[0], Pci.Hdr.ClassCode[1],Pci.Hdr.ClassCode[2]);
+
+        // check the type
+        if (Pci.Hdr.ClassCode[2] == TargetClass)
+        {
+            UINTN Segment, Bus, Device, Function;
+
+            // return it
+            PciIo->GetLocation(PciIo, &Segment, &Bus, &Device, &Function);
+
+            // make it
+            *Out = PciConfigAdrr(Bus, Device, Function, Register);
+
+            // make it succes
+            return EFI_SUCCESS;
+        }
+    }
+
+    // if not founded return not found
+    return EFI_NOT_FOUND;
+}

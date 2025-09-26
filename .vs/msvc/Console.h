@@ -9,6 +9,8 @@
 
 #pragma pack(1)
 
+size_t FromPixelToDraw = 0;
+
 VOID
 DrawBitMapImage
 (
@@ -889,6 +891,7 @@ ClearScreenCu
 (
 )
 {
+    FromPixelToDraw = 0;
     cursorx = 0;
     cursory = 0;
     bufferlines = 0;
@@ -915,6 +918,7 @@ ClearScreen
 )
 {
     cursorx = 0;
+    FromPixelToDraw = 0;
     cursory = 0;
     bufferlines = 0;
     // Limpiar el buffer
@@ -1800,7 +1804,7 @@ DrawScreen
     }
 
     for (
-        UINTN i = 0;  // the pixel render
+        UINTN i = (0 ?  FromPixelToDraw : 0);  // the pixel render
         i < pixels; // the pixels count to render
         i++ // sum the render
         ) {
@@ -1921,6 +1925,20 @@ DrawScreen
         }
         */
 
+        /*
+        if (
+            SMODE == 0
+            )
+        {
+            if (
+                (ypos) > (gop->Mode->Info->VerticalResolution + screenscroll)
+                )
+            {
+                break;
+            }
+        }*/
+
+        FromPixelToDraw = i;
     }
 }
 

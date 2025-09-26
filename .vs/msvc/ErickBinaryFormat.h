@@ -17,15 +17,6 @@
 #ifndef ErickBinaryFormat
 #define ErickBinaryFormat
 
-#define _EBFApi
-#define _UnsafePool
-#define _UnsafeBetaFunction
-
-#define _Unused
-#define _Exception()
-
-#define _LauchException(ex) Print(ex); while (true);
-
 #include "Console.h"
 
 /**
@@ -34,6 +25,72 @@
 * rerpesents a pointer to nothing in the ram of ErickBinaryFormat
 */
 #define EbfNullPtr 0
+
+/**
+* LanguajeStringDirection
+*
+* the string that specifics the languaje of the firmware
+*/
+EBF_DIRECTION LanguajeStringDirection = EbfNullPtr;
+
+/**
+* CfgTableVendorGuid
+*
+* the gST->ConfigurationTable->VendorGuid array propietys
+*/
+EBF_DIRECTION CfgTableVendorGuid = EbfNullPtr;
+
+/**
+* CfgTableVendorGuidData4
+*
+* the gST->ConfigurationTable->VendorGuid->Data4 array propietys
+*/
+EBF_DIRECTION CfgTableVendorGuidData4 = EbfNullPtr;
+
+/**
+* ConfigurationTable
+*
+* the gST->ConfigurationTable array attributes
+*/
+EBF_DIRECTION ConfigurationTable = EbfNullPtr;
+
+/**
+* FirmwareVendorArray
+*
+* the str of the firmware vendor
+*/
+EBF_DIRECTION FirmwareVendorArray = EbfNullPtr;
+
+/**
+* EventsSemiMultiTask
+* 
+* the semi-multitask events pointer
+*/
+EBF_DIRECTION EventsSemiMultiTask = EbfNullPtr;
+
+/**
+* StatusDirecion
+* 
+* the last status direcction of a operation
+*/
+EBF_DIRECTION StatusDirecion = 512;
+
+/**
+* SystemInfoArray
+*
+* the system info array
+* there structure of this array are formed by
+* Array indexes map:
+*
+*	SystemInfoArray[0] : In Emulator?, 1 if false and 2 if true
+*	SystemInfoArray[1] : Ptr to FirmwareVendorArray
+*	SystemInfoArray[2] : the main version of EBF
+*	SystemInfoArray[3] : the secondary/beta version of EBF
+*	SystemInfoArray[4] : the current snapshot of the version of EBF
+*	SystemInfoArray[5] : the pointer to gST->ConfigurationTable
+*	SystemInfoArray[6] : the pointer to the languaje
+*/
+EBF_DIRECTION SystemInfoArray = EbfNullPtr;
 
 /**
  * REALESE
@@ -228,6 +285,12 @@
 #define xor_instruction						27
 
 /**
+* module
+*
+* mdoule
+*/
+#define mod_instruction						28
+/**
 * for indicate a not instruction the character that are greater that this value
 * are not instructions
 */
@@ -269,9 +332,12 @@ typedef _BINARY									EBF_HANDLE;
 *	- Shell params pointers:				0d3001 to (0d3001+shell params count)
 *	- Arrays and other binaries in the ram: (0d3001+shell params count) to 0d30000
 *	- Avaible:								0d30000 to 0d65535
-*	- Accesible by CukysCukysPtr:			0d65534 to 0d8000000
+*	- Accesible by CukysCukysPtr:			0d65534 to 0d64000000
+* 
+* You can point to more memory than 32767 with some functions that if you dont have the EBFlib you need to build by yourself
+* each block have a length of 32767 items
 */
-prototype t16								memory_acces[8000000];
+ t16										memory_acces[64000000];
 
 /**
 * ptr_memory_max
@@ -281,12 +347,24 @@ prototype t16								memory_acces[8000000];
 */
 u64											ptr_memory_max = 0;
 
+VOID
+BinaryEx
+(
+	_BINARY* p,
+	BOOLEAN debug
+);
+
+t16
+GetArrayLength
+(
+	t16 StartingAt
+);
+
 /**
 * IMemo
 * 
 * locate a memory
 */
-_EBFApi
 ch16
 IMemo
 (
@@ -301,7 +379,6 @@ IMemo
 *
 * check if there is free space in registers
 */
-_EBFApi
 bool_t
 IsFreeSpaceFromTo
 (
@@ -323,7 +400,6 @@ IsFreeSpaceFromTo
 *
 * allocate a memory and returns where its allocated
 */
-_EBFApi
 t16
 AllocateMemory
 (
@@ -411,7 +487,6 @@ AllocateMemory
 * 
 * @param StartingAt: is where the buffer starts
 */
-_EBFApi
 ch16*
 LocateMemory
 (
@@ -447,7 +522,6 @@ FreeArray
 	t16 StartingAt
 )
 {
-
 	//
 	// configure params to free the pool
 	//
@@ -467,13 +541,36 @@ FreeArray
 
 	while (Item < (size + 1)) 
 	{
-		//Print(L"Writing 0 in %d\n", StartingAt + Item);
 		memory_acces[StartingAt + (Item)] = 0;
 
 		Item++;
 	}
-
-
+	
+	// *OS getting the max power*
+	// KellyBootloader: you can free all this FreeArray, we are trashed
+	// OS: uh oh i forget a thing but where its, hmmm, i lose it forever ahhhhhhh
+	//
+	if (
+		StartingAt == SystemInfoArray
+		) SystemInfoArray = EbfNullPtr;
+	else if (
+		StartingAt == LanguajeStringDirection
+		) LanguajeStringDirection = EbfNullPtr;
+	else if (
+		StartingAt == CfgTableVendorGuid
+		) CfgTableVendorGuid = EbfNullPtr;
+	else if (
+		StartingAt == CfgTableVendorGuidData4
+		) CfgTableVendorGuidData4 = EbfNullPtr;
+	else if (
+		StartingAt == ConfigurationTable
+		) ConfigurationTable = EbfNullPtr;
+	else if (
+		StartingAt == FirmwareVendorArray
+		) FirmwareVendorArray = EbfNullPtr;
+	else if (
+		StartingAt == EventsSemiMultiTask
+		) EventsSemiMultiTask = EbfNullPtr;
 	// returns nullptr equivalent in EBF
 	return EbfNullPtr;
 }
@@ -487,7 +584,6 @@ FreeArray
 * @param Index: is the item to modifie
 * @param Value: is the new value for the new item
 */
-_EBFApi
 VOID
 SetMemoryPool
 (
@@ -510,7 +606,6 @@ SetMemoryPool
 * 
 * allocates a string in memory and checks it
 */
-_EBFApi
 t16
 AllocateStringMemory
 (
@@ -554,7 +649,6 @@ AllocateStringMemory
 * 
 * @returns the content of that location in the pool
 */
-_EBFApi
 t16
 GetMemoryPool
 (
@@ -572,7 +666,6 @@ Gen__Directo___szy
 
 /**
 */
-_EBFApi
 VOID
 FillMemorySpaces
 (
@@ -582,6 +675,47 @@ FillMemorySpaces
 )
 {
 	for (u64 i=0;i<(To+1);i++)memory_acces[i]=NewValue;
+}
+
+UINTN
+ArrayL4To64bitInt
+(
+	t16 StartingAt
+)
+{
+	// avoid out of range access
+	if (GetArrayLength(StartingAt) != 4) return 0;
+
+	// divide in parts
+	t16 Part1 = GetMemoryPool(StartingAt, 0);
+	t16 Part2 = GetMemoryPool(StartingAt, 1);
+	t16 Part3 = GetMemoryPool(StartingAt, 2);
+	t16 Part4 = GetMemoryPool(StartingAt, 3);
+
+	// make the 64 bit int
+	return EbfJoin4ShortsFor64(Part1, Part2, Part3, Part4);
+}
+
+EBF_DIRECTION
+Push64BitIntOnArray(
+	UINTN Number
+)
+{
+	// creates the parts
+	t16 Arr[5];
+	// create the array
+	EBF_DIRECTION Array = AllocateMemory(4);
+
+	// get parts
+	EbfReturnINT64DividedInParts(Number, Arr);
+
+	// make the array
+	SetMemoryPool(Array, 0, Arr[0]);
+	SetMemoryPool(Array, 1, Arr[1]);
+	SetMemoryPool(Array, 2, Arr[2]);
+	SetMemoryPool(Array, 3, Arr[3]);
+
+	return Array;
 }
 
 t16
@@ -615,6 +749,19 @@ GetFileContent
 );
 
 /**
+* WriteFile
+* 
+* writes a file
+*/
+VOID
+WriteFile
+(
+	CHAR16* Name,
+	UINTN Size,
+	VOID* Content
+);
+
+/**
 * BootSpecific
 *
 * try to boot a specific file
@@ -627,6 +774,87 @@ BootSpecific
 	ch16* filename,
 	bool_t debugger
 );
+
+t16
+GetArrayLength
+(
+	t16 StartingAt
+)
+{
+	return memory_acces[StartingAt];
+}
+
+/**
+* ExecuteAllEvents
+* 
+* execute multitask events
+*/
+EFI_STATUS
+ExecuteAllEvents
+(
+)
+{
+	//
+	// declare variables
+	//
+
+	t16 EventsCount;
+
+	//
+	// check if the events array exists
+	//
+
+	if (!EventsSemiMultiTask) return EFI_NOT_FOUND;
+
+	//
+	// get params
+	//
+
+	EventsCount = GetArrayLength(EventsSemiMultiTask);
+
+	//
+	// execute any for any
+	//
+	for (size_t i = 0; i < EventsCount; i++)
+	{
+		// get event
+		EBF_DIRECTION Event = GetMemoryPool(EventsSemiMultiTask, (t16)i);
+
+		//
+		// check all
+		//
+
+		// return if not event
+		if (!Event) return EFI_INVALID_PARAMETER;
+	
+		// the events only can be {RegisterToTrue, PtrToCode}
+		if (GetArrayLength(Event) != 2) return EFI_INVALID_PARAMETER;
+
+		//
+		// execute the code
+		//
+
+		// get the code that points the event
+		ch16* CodeToExecute = LocateMemory(GetMemoryPool(Event, 1));
+
+		// invalid code
+		if (!CodeToExecute) return EFI_NOT_FOUND;
+
+		// save the stack
+		t16 SavedStack = memory_acces[10];
+
+		// execute the code
+		BinaryEx(CodeToExecute, 0);
+
+		// pop the stack
+		memory_acces[10] = SavedStack;
+
+		// free the code
+		FreePool(CodeToExecute);
+	}
+
+	return EFI_SUCCESS;
+}
 
 /**
 * EstarEnDirecto
@@ -704,9 +932,6 @@ VOID EstarEnDirecto()
 
 	EFI_INPUT_KEY Key;
 	u64 Event;
-
-	// changes to grapich mode
-	SMODE = 1;
 
 	//
 	// set screen attributes
@@ -1258,7 +1483,6 @@ t16 ReadHLPart(t16 Value, bool ReadHigth) {
 * 
 * @param p: is that program
 */
-_EBFApi
 VOID
 BinaryEx
 (
@@ -1333,7 +1557,7 @@ BinaryEx
 	* for the differents ret
 	*/
 	t16 stack_pop[100];
-
+	
 	/**
 	* curr_popback
 	* 
@@ -1471,6 +1695,14 @@ BinaryEx
 
 			memory_acces[p1] = memory_acces[p1] >> memory_acces[p2];
 		}
+		
+		else if (
+			ch == mod_instruction
+			)
+		{
+			if (memory_acces[p2] != 0)
+			memory_acces[p1] = memory_acces[p1] % memory_acces[p2];
+		}
 		else if (
 			ch == lea_instruction
 			)
@@ -1583,7 +1815,10 @@ BinaryEx
 
 			memory_acces[10] += 2;
 
-			memory_acces[p1] /= p2r;
+			if (p2r != 0)
+				memory_acces[p1] /= p2r;
+			else 
+				while (1);
 		}
 		else if (
 			ch == imul_instruction 
@@ -2272,6 +2507,7 @@ BinaryEx
 				memory_acces[p2] = AllocateStringMemory(Line);
 			}
 
+
 			///
 			/// 24 - pool comparate
 			///
@@ -2400,7 +2636,8 @@ BinaryEx
 				p1 == 35
 				)
 			{
-				t16 ValueTo = memory_acces[p2 + 1];
+				
+				u16 ValueTo = memory_acces[p2 + 1];
 				t16 Operation = memory_acces[p2];
 
 				switch (Operation) {
@@ -2450,9 +2687,10 @@ BinaryEx
 						break;
 
 					default:
-						while (true);	// colgate, ErickBinaryFormat merece lo mejor
-										// ajamk le hablaba al programa no lo hagas en casa
+						break;
 				}
+
+				//Print(L"%x\n", ptr_memory_max);
 			}
 
 			///
@@ -2472,6 +2710,7 @@ BinaryEx
 				p1 == 37
 				)
 			{
+				//Print(L"%d", memory_acces[p2]);
 				memory_acces[ptr_memory_max] = memory_acces[p2];
 			}
 
@@ -2695,8 +2934,8 @@ BinaryEx
 				t16 SizeX = memory_acces[p2 + 5];
 				t16 SizeY = memory_acces[p2 + 6];
 
-				/*
-				Print(L"Draw rectangle in pos %d,%d size %d,%d\n", 
+				
+				/*Print(L"Draw rectangle in pos %d,%d size %d,%d\n",
 					memory_acces[p2 + 3], memory_acces[p2 + 4],
 					SizeX,SizeY
 					);*/
@@ -2760,9 +2999,9 @@ BinaryEx
 				ch16* str_original = LocateMemory(memory_acces[p2 + 1]);
 				ch16* str_replacer = LocateMemory(memory_acces[p2 + 2]);
 
-				//Print(L"Replacing '%d' by '%s' in '%s'\n", memory_acces[p2 + 1], str_replacer, str);
+				//Print(L"Replacing '%s' by '%s' in '%s'\n", memory_acces[p2 + 1], str_replacer, str);
 				ch16* new_str = StrReplace(str, str_original, str_replacer);
-
+				
 				//Print(L"Allocating\n");
 				memory_acces[p2] = AllocateStringMemory(new_str);
 
@@ -2784,8 +3023,8 @@ BinaryEx
 			{
 				t16 Device = memory_acces[p2];
 				t16 RetOn = p2 + 1;
-
-				memory_acces[RetOn] = inpw(Device);
+				memory_acces[RetOn] = SafeRead(Device);
+				//while (1);			
 			}
 
 			///
@@ -2795,9 +3034,203 @@ BinaryEx
 			{
 				t16 Device = memory_acces[p2];
 				t16 WriteVal = memory_acces[p2 + 1];
-
-				outpw(Device, WriteVal);
+								
+				memory_acces[StatusDirecion] = SafeWrite(Device, WriteVal);
+				//while (1);
 			}
+
+			///
+			/// 54 - writefile
+			/// 
+			if (p1 == 54)
+			{
+				ch16* Name = LocateMemory(memory_acces[p2]);
+				ch16* Content = LocateMemory(memory_acces[p2 + 1]);
+				
+				CHAR16* PersistentText;
+				EFI_STATUS Status = gBS->AllocatePool(EfiBootServicesData, StrSize(Content), (VOID**)&PersistentText);
+				if (!EFI_ERROR(Status)) {
+					StrCpy(PersistentText, Content);
+					WriteFile(Name , sizeof(CHAR16) * StrLen(PersistentText), PersistentText);
+					gBS->FreePool(PersistentText);
+				}
+
+				WriteFile(Name, (StrLen(Content) + 1) * 2, Content);
+
+				FreePool(Name);
+				FreePool(Content);
+			}
+
+			if (p1 == 55)
+			{
+				t16 ArrayPos = memory_acces[p2];
+				t16 OldSize = memory_acces[p2 + 1];
+				t16 NewSize = memory_acces[p2 + 2];
+
+				if (ArrayPos == FirmwareVendorArray);
+				else if (ArrayPos == CfgTableVendorGuid);
+				else if (ArrayPos == CfgTableVendorGuidData4);
+				else if (ArrayPos == ConfigurationTable);
+				else if (ArrayPos == SystemInfoArray);
+				else {
+					// create array
+					t16 NewArray = AllocateMemory(NewSize);
+
+					// make the array
+					for (size_t i = 0; i < OldSize; i++)
+					{
+						SetMemoryPool(
+							NewArray,
+							i,
+							memory_acces[(ArrayPos + 1) + i]
+						);
+
+						if ((i + 1) > NewSize) break;
+					}
+
+					if (
+						ArrayPos == SystemInfoArray
+						) {
+						SystemInfoArray = NewArray;
+					}
+					else if (
+						ArrayPos == LanguajeStringDirection
+						) LanguajeStringDirection = NewArray;
+					else if (
+						ArrayPos == CfgTableVendorGuid
+						) CfgTableVendorGuid = NewArray;
+					else if (
+						ArrayPos == CfgTableVendorGuidData4
+						) CfgTableVendorGuidData4 = NewArray;
+					else if (
+						ArrayPos == ConfigurationTable
+						) ConfigurationTable = NewArray;
+					else if (
+						ArrayPos == FirmwareVendorArray
+						) FirmwareVendorArray = NewArray;
+					else if (
+						ArrayPos == EventsSemiMultiTask
+						)
+					{
+						EventsSemiMultiTask = NewArray;
+						if (SystemInfoArray != EbfNullPtr) SetMemoryPool(SystemInfoArray, 8, EventsSemiMultiTask);
+
+					}
+
+					// and we dont need you
+					FreeArray(ArrayPos);
+
+					// set the array new
+					memory_acces[p2] = NewArray;
+				}
+			}
+			
+			if (p1 == 56)
+			{
+				t16 Device = memory_acces[p2];
+				t16 RetOn = p2 + 1;
+
+				Print(L"%x\n", ArrayL4To64bitInt(Device));
+				memory_acces[RetOn] = SafePciRead(ArrayL4To64bitInt(Device));
+			}
+
+			if (p1 == 57)
+			{
+				t16 Device = memory_acces[p2];
+				t16 Data = memory_acces[p2 + 1];
+
+				// return the status
+				memory_acces[StatusDirecion] = SafePciWrite(ArrayL4To64bitInt(Device), Data);
+			}
+
+			if (p1 == 58)
+			{
+				t16 TypeOfPciChild = memory_acces[p2];
+				t16 RegisterToFound = memory_acces[p2 + 1];
+				t16 RetOn = p2 + 2;
+
+				UINTN Direction;
+
+				SearchPciRegisterWithFirstChildOf(
+					(UINT8)TypeOfPciChild,
+					(UINTN)RegisterToFound,
+					&Direction
+				);
+
+				//Print(L"Type: %d, RegisterToFound: %d, Dir: %x\n", TypeOfPciChild, RegisterToFound ,Direction);
+
+				memory_acces[RetOn] = Push64BitIntOnArray(Direction);
+			}
+
+			if (p1 == 59)
+			{
+				t16 Number = memory_acces[p2];
+				t16 CifresCount = memory_acces[p2 + 1];
+				t16 ReturnOn = p2 + 2;
+
+				CHAR16 CifresLimit[19];
+				bool_t LimitHexNumCifres = TRUE;
+
+				if (CifresCount == 0)
+				{
+					LimitHexNumCifres = FALSE;
+					CHAR16 Valu[30];
+
+					ValueToHex(Valu, Number);
+
+					CHAR16* Valu2 = Valu;
+					memory_acces[ReturnOn] = AllocateStringMemory(Valu2);
+				}
+				else {
+					SPrint(CifresLimit, sizeof(CifresLimit), L"%%0%dllx", CifresCount);
+
+					CHAR16 Valu[30];
+					SPrint(Valu, sizeof(Valu), CifresLimit, Number);
+
+					CHAR16* Valu2 = Valu;
+					memory_acces[ReturnOn] = AllocateStringMemory(Valu2);
+				}
+
+				if (p1 == 60)
+				{
+					t16 Number = memory_acces[p2];
+					t16 Comma = memory_acces[p2 + 1];
+					t16 ReturnOn = p2 + 2;
+
+					CHAR16 Valu[30];
+
+					ValueToString(Valu, Comma ,Number);
+
+					CHAR16* Valu2 = Valu;
+					memory_acces[ReturnOn] = AllocateStringMemory(Valu2);
+				}
+			}
+
+			if (p1 == 61)
+			{
+				t16 RetOn = p2;
+
+#if defined(_M_X64) || defined(__x86_64__) || defined(__amd64__)
+				memory_acces[RetOn] = 0;
+#elif defined(_M_IX86) || defined(__i386__)
+				memory_acces[RetOn] = 1;
+#elif defined(_M_IA64) || defined(__ia64__)
+				memory_acces[RetOn] = 2;
+#elif defined (_M_ARM64) || defined(__aarch64__)
+				memory_acces[RetOn] = 3;
+#elif defined (_M_ARM) || defined(__arm__)
+				memory_acces[RetOn] = 4;
+#elif defined (_M_MIPS64) || defined(__mips64__) || defined(__mips64)
+				memory_acces[RetOn] = 5;
+#elif defined (__riscv) && __riscv_xlen == 64
+				memory_acces[RetOn] = 6;
+#elif defined (__loongarch64)
+				memory_acces[RetOn] = 7;
+#else
+				while (TRUE);
+#endif
+			}
+
 		}
 
 		else if (
@@ -3109,6 +3542,8 @@ BinaryEx
 		}
 
 		memory_acces[10]++; // next instruction
+
+		ExecuteAllEvents();
 	}
 }
 

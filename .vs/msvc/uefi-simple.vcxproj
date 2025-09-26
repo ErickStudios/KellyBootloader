@@ -173,7 +173,7 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <Link>
-      <AdditionalDependencies>gnu-efi.lib;libcmtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>gnu-efi.lib;libcmtd.lib;$(ProjectDir)lowlevel.obj;%(AdditionalDependencies)</AdditionalDependencies>
       <DataExecutionPrevention>false</DataExecutionPrevention>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
       <EntryPointSymbol>efi_main</EntryPointSymbol>
@@ -182,6 +182,9 @@
       <OptimizeReferences>true</OptimizeReferences>
       <RandomizedBaseAddress />
     </Link>
+    <PreBuildEvent>
+      <Command>"$(ProjectDir)ml64.exe" /c /Fo"$(ProjectDir)lowlevel.obj" "$(ProjectDir)lowlevel.asm"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

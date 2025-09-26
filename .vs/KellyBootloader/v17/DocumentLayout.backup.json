@@ -3,68 +3,90 @@
   "WorkspaceRootPath": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\main.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|solutionrelative:main.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\ErickBinaryFormat.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|solutionrelative:.vs\\msvc\\ErickBinaryFormat.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\GNU-EFI\\INC\\EFILIB.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|solutionrelative:GNU-EFI\\INC\\EFILIB.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\main.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|solutionrelative:main.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\motor.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|solutionrelative:.vs\\msvc\\motor.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\lib\\str.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|solutionrelative:gnu-efi\\lib\\str.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\lib\\boxdraw.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|solutionrelative:gnu-efi\\lib\\boxdraw.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\lib\\crc.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|solutionrelative:gnu-efi\\lib\\crc.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\GNU-EFI\\INC\\LIBSMBIOS.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|solutionrelative:GNU-EFI\\INC\\LIBSMBIOS.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|C:\\USERS\\ERICK\\ONEDRIVE\\ERICKCRAFTSTUDIOSMGRCHANNEL\\SAVED PROYECTS\\KELLYBOOTLOADERCODE\\KELLYBOOTLOADER\\GNU-EFI\\INC\\EFIGPT.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|solutionrelative:GNU-EFI\\INC\\EFIGPT.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\GNU-EFI\\INC\\LIB.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|solutionrelative:GNU-EFI\\INC\\LIB.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|C:\\PROGRAM FILES\\MICROSOFT VISUAL STUDIO\\2022\\COMMUNITY\\VC\\TOOLS\\MSVC\\14.44.35207\\INCLUDE\\VCRUNTIME.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\lib\\runtime\\efirtlib.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|solutionrelative:gnu-efi\\lib\\runtime\\efirtlib.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\protocol\\efivar.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:gnu-efi\\inc\\protocol\\efivar.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\lowlevel.asm||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|solutionrelative:.vs\\msvc\\lowlevel.asm||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\Console.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|solutionrelative:.vs\\msvc\\Console.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\BitMaps.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|solutionrelative:.vs\\msvc\\BitMaps.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\GNU-EFI\\INC\\PROTOCOL\\INTLOAD.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|solutionrelative:GNU-EFI\\INC\\PROTOCOL\\INTLOAD.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\debug.vbs||{A52A054C-5228-4819-B568-E5B8040801B5}",
       "RelativeMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|solutionrelative:debug.vbs||{A52A054C-5228-4819-B568-E5B8040801B5}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\GNU-EFI\\INC\\EFISHELL.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|solutionrelative:GNU-EFI\\INC\\EFISHELL.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\lib\\boxdraw.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|solutionrelative:gnu-efi\\lib\\boxdraw.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\GNU-EFI\\INC\\EFILIB.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|solutionrelative:GNU-EFI\\INC\\EFILIB.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\lib\\crc.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|solutionrelative:gnu-efi\\lib\\crc.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\lib\\cmdline.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|solutionrelative:gnu-efi\\lib\\cmdline.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\GNU-EFI\\INC\\EFISHELL.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|solutionrelative:GNU-EFI\\INC\\EFISHELL.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|C:\\USERS\\ERICK\\ONEDRIVE\\ERICKCRAFTSTUDIOSMGRCHANNEL\\SAVED PROYECTS\\KELLYBOOTLOADERCODE\\KELLYBOOTLOADER\\GNU-EFI\\INC\\EFIPROT.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|solutionrelative:GNU-EFI\\INC\\EFIPROT.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|C:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\INCLUDE\\10.0.26100.0\\UCRT\\CORECRT.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\GNU-EFI\\INC\\EFIAPI.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|solutionrelative:GNU-EFI\\INC\\EFIAPI.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\motor.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|solutionrelative:.vs\\msvc\\motor.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\BitMaps.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|solutionrelative:.vs\\msvc\\BitMaps.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\Console.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{DFA0BA98-D0BA-4176-9A34-B5BA6355B1DE}|.vs\\msvc\\uefi-simple.vcxproj|solutionrelative:.vs\\msvc\\Console.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\GNU-EFI\\INC\\EFI.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|solutionrelative:GNU-EFI\\INC\\EFI.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\GNU-EFI\\INC\\LIBSMBIOS.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3135D563-9596-4584-9ED6-616ADEC52974}|.vs\\msvc\\gnu-efi.vcxproj|solutionrelative:GNU-EFI\\INC\\LIBSMBIOS.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -74,20 +96,33 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "main.c",
-              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\main.c",
-              "RelativeDocumentMoniker": "main.c",
-              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\main.c",
-              "RelativeToolTip": "main.c",
-              "ViewState": "AgIAABUMAAAAAAAAAAAuwCwMAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
-              "WhenOpened": "2025-07-08T18:03:47.585Z",
+              "DocumentIndex": 3,
+              "Title": "lib.h",
+              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\lib.h",
+              "RelativeDocumentMoniker": "gnu-efi\\inc\\lib.h",
+              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\lib.h",
+              "RelativeToolTip": "gnu-efi\\inc\\lib.h",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAACUAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-05T00:40:53.273Z",
               "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "efigpt.h",
+              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\efigpt.h",
+              "RelativeDocumentMoniker": "gnu-efi\\inc\\efigpt.h",
+              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\efigpt.h",
+              "RelativeToolTip": "gnu-efi\\inc\\efigpt.h",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAAACwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-25T23:31:32.009Z",
               "EditorCaption": ""
             },
             {
@@ -100,175 +135,146 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "efilib.h",
-              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\efilib.h",
-              "RelativeDocumentMoniker": "gnu-efi\\inc\\efilib.h",
-              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\efilib.h",
-              "RelativeToolTip": "gnu-efi\\inc\\efilib.h",
-              "ViewState": "AgIAAIEAAAAAAAAAAAAcwIoAAAAZAAAAAAAAAA==",
+              "DocumentIndex": 14,
+              "Title": "efiprot.h",
+              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\efiprot.h",
+              "RelativeDocumentMoniker": "gnu-efi\\inc\\efiprot.h",
+              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\efiprot.h",
+              "RelativeToolTip": "gnu-efi\\inc\\efiprot.h",
+              "ViewState": "AgIAALoFAAAAAAAAAAAAABQFAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-05T22:47:56.124Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "boxdraw.c",
-              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\lib\\boxdraw.c",
-              "RelativeDocumentMoniker": "gnu-efi\\lib\\boxdraw.c",
-              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\lib\\boxdraw.c",
-              "RelativeToolTip": "gnu-efi\\lib\\boxdraw.c",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
-              "WhenOpened": "2025-09-05T22:47:34.954Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "crc.c",
-              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\lib\\crc.c",
-              "RelativeDocumentMoniker": "gnu-efi\\lib\\crc.c",
-              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\lib\\crc.c",
-              "RelativeToolTip": "gnu-efi\\lib\\crc.c",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
-              "WhenOpened": "2025-09-05T22:47:33.42Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "lib.h",
-              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\lib.h",
-              "RelativeDocumentMoniker": "gnu-efi\\inc\\lib.h",
-              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\lib.h",
-              "RelativeToolTip": "gnu-efi\\inc\\lib.h",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAACYAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-05T00:40:53.273Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "efirtlib.c",
-              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\lib\\runtime\\efirtlib.c",
-              "RelativeDocumentMoniker": "gnu-efi\\lib\\runtime\\efirtlib.c",
-              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\lib\\runtime\\efirtlib.c",
-              "RelativeToolTip": "gnu-efi\\lib\\runtime\\efirtlib.c",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKoAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
-              "WhenOpened": "2025-09-05T00:39:55.507Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "str.c",
-              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\lib\\str.c",
-              "RelativeDocumentMoniker": "gnu-efi\\lib\\str.c",
-              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\lib\\str.c",
-              "RelativeToolTip": "gnu-efi\\lib\\str.c",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABEAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
-              "WhenOpened": "2025-08-30T01:10:19.011Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "efivar.h",
-              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\protocol\\efivar.h",
-              "RelativeDocumentMoniker": "gnu-efi\\inc\\protocol\\efivar.h",
-              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\protocol\\efivar.h",
-              "RelativeToolTip": "gnu-efi\\inc\\protocol\\efivar.h",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAAAGUAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-07-14T21:37:06.75Z"
+              "WhenOpened": "2025-09-25T22:46:48.972Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ErickBinaryFormat.h",
-              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\ErickBinaryFormat.h",
-              "RelativeDocumentMoniker": ".vs\\msvc\\ErickBinaryFormat.h",
-              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\ErickBinaryFormat.h",
-              "RelativeToolTip": ".vs\\msvc\\ErickBinaryFormat.h",
-              "ViewState": "AgIAAJ4BAAAAAAAAAAAwwKYBAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-07-08T18:05:56.66Z"
+              "Title": "main.c",
+              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\main.c",
+              "RelativeDocumentMoniker": "main.c",
+              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\main.c",
+              "RelativeToolTip": "main.c",
+              "ViewState": "AgIAAG4LAAAAAAAAAAAAAHcLAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-07-08T18:03:47.585Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "motor.h",
-              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\motor.h",
-              "RelativeDocumentMoniker": ".vs\\msvc\\motor.h",
-              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\motor.h",
-              "RelativeToolTip": ".vs\\msvc\\motor.h",
-              "ViewState": "AgIAABcBAAAAAAAAAAAewBsBAAAFAAAAAAAAAA==",
+              "DocumentIndex": 16,
+              "Title": "efiapi.h",
+              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\efiapi.h",
+              "RelativeDocumentMoniker": "gnu-efi\\inc\\efiapi.h",
+              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\efiapi.h",
+              "RelativeToolTip": "gnu-efi\\inc\\efiapi.h",
+              "ViewState": "AgIAAH8AAAAAAAAAAAAcwJAAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-07-15T17:37:21.076Z"
+              "WhenOpened": "2025-09-10T17:57:35.22Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "BitMaps.h",
-              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\BitMaps.h",
-              "RelativeDocumentMoniker": ".vs\\msvc\\BitMaps.h",
-              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\BitMaps.h",
-              "RelativeToolTip": ".vs\\msvc\\BitMaps.h",
-              "ViewState": "AgIAACABAAAAAAAAAAAwwDQBAAAMAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "vcruntime.h",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\include\\vcruntime.h",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\include\\vcruntime.h",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\include\\vcruntime.h",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\include\\vcruntime.h",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-07-22T16:04:04.829Z"
+              "WhenOpened": "2025-09-19T20:45:48.89Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 15,
+              "Title": "corecrt.h",
+              "DocumentMoniker": "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.26100.0\\ucrt\\corecrt.h",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.26100.0\\ucrt\\corecrt.h",
+              "ToolTip": "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.26100.0\\ucrt\\corecrt.h",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.26100.0\\ucrt\\corecrt.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-19T20:45:46.932Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ErickBinaryFormat.h",
+              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\ErickBinaryFormat.h",
+              "RelativeDocumentMoniker": ".vs\\msvc\\ErickBinaryFormat.h",
+              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\ErickBinaryFormat.h*",
+              "RelativeToolTip": ".vs\\msvc\\ErickBinaryFormat.h*",
+              "ViewState": "AgIAAJoDAAAAAAAAAAAawKYDAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-07-08T18:05:56.66Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
               "Title": "efi.h",
               "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\efi.h",
               "RelativeDocumentMoniker": "gnu-efi\\inc\\efi.h",
               "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\efi.h",
               "RelativeToolTip": "gnu-efi\\inc\\efi.h",
-              "ViewState": "AgIAAEUAAAAAAAAAAAAAAFQAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAACsAAAAAAAAAAAAAAD4AAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-07-17T18:36:42.999Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "efishell.h",
-              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\efishell.h",
-              "RelativeDocumentMoniker": "gnu-efi\\inc\\efishell.h",
-              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\efishell.h",
-              "RelativeToolTip": "gnu-efi\\inc\\efishell.h",
-              "ViewState": "AgIAAJgBAAAAAAAAAAAAADkAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 18,
+              "Title": "BitMaps.h",
+              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\BitMaps.h",
+              "RelativeDocumentMoniker": ".vs\\msvc\\BitMaps.h",
+              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\BitMaps.h",
+              "RelativeToolTip": ".vs\\msvc\\BitMaps.h",
+              "ViewState": "AgIAAIkBAAAAAAAAAAAwwKUBAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-07-17T18:39:17.197Z"
+              "WhenOpened": "2025-07-22T16:04:04.829Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "libsmbios.h",
-              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\libsmbios.h",
-              "RelativeDocumentMoniker": "gnu-efi\\inc\\libsmbios.h",
-              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\libsmbios.h",
-              "RelativeToolTip": "gnu-efi\\inc\\libsmbios.h",
-              "ViewState": "AgIAAEUAAAAAAAAAAAAAACAAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-07-13T00:02:56.667Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 19,
               "Title": "Console.h",
               "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\Console.h",
               "RelativeDocumentMoniker": ".vs\\msvc\\Console.h",
               "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\Console.h",
               "RelativeToolTip": ".vs\\msvc\\Console.h",
-              "ViewState": "AgIAADwHAAAAAAAAAAAswEAHAAAUAAAAAAAAAA==",
+              "ViewState": "AgIAAM4GAAAAAAAAAAAqwDsHAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-07-10T15:50:00.068Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 6,
+              "Title": "lowlevel.asm",
+              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\lowlevel.asm",
+              "RelativeDocumentMoniker": ".vs\\msvc\\lowlevel.asm",
+              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\lowlevel.asm",
+              "RelativeToolTip": ".vs\\msvc\\lowlevel.asm",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-09-08T20:53:23.685Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "intload.h",
+              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\protocol\\intload.h",
+              "RelativeDocumentMoniker": "gnu-efi\\inc\\protocol\\intload.h",
+              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\protocol\\intload.h",
+              "RelativeToolTip": "gnu-efi\\inc\\protocol\\intload.h",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-17T22:39:33.028Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "debug.vbs",
               "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\debug.vbs",
               "RelativeDocumentMoniker": "debug.vbs",
@@ -276,7 +282,110 @@
               "RelativeToolTip": "debug.vbs",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADQSURBVDhPpZJRDsIwDENfEAfrzebezDtZ\u002BFg7SleEgEjTujR2HGchKfkxtG3cASTF5XJBPNbZTiLeFiaZR769bSdw1vbv24CDBpYU1ApSUiu2s5SCJEaSE7A6z50l5ajirQLg7IyUpZSWEu384teVIDORgm0DKWz3m5jBzASSQrUeJF2BTSO5mA3z3GPuny0AqFaA0Ys\u002BzuctjM6fgMzlFp4dO9Eh\u002BQAPY3wcQVJISu97Nw0isJ3e9\u002BUKYW1i7zQ/L9EVhIaf5dsopRAr9m/iAT9Q1k796Ae/AAAAAElFTkSuQmCC",
-              "WhenOpened": "2025-07-08T20:59:43.834Z"
+              "WhenOpened": "2025-07-08T20:59:43.834Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "boxdraw.c",
+              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\lib\\boxdraw.c",
+              "RelativeDocumentMoniker": "gnu-efi\\lib\\boxdraw.c",
+              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\lib\\boxdraw.c",
+              "RelativeToolTip": "gnu-efi\\lib\\boxdraw.c",
+              "ViewState": "AgIAAJgAAAAAAAAAAAD4vxcAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-09-05T22:47:34.954Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "efilib.h",
+              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\efilib.h",
+              "RelativeDocumentMoniker": "gnu-efi\\inc\\efilib.h",
+              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\efilib.h",
+              "RelativeToolTip": "gnu-efi\\inc\\efilib.h",
+              "ViewState": "AgIAAD4EAAAAAAAAAAArwEcEAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-05T22:47:56.124Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "motor.h",
+              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\motor.h",
+              "RelativeDocumentMoniker": ".vs\\msvc\\motor.h",
+              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\.vs\\msvc\\motor.h",
+              "RelativeToolTip": ".vs\\msvc\\motor.h",
+              "ViewState": "AgIAAMkFAAAAAAAAAAAAANIFAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-07-15T17:37:21.076Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "crc.c",
+              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\lib\\crc.c",
+              "RelativeDocumentMoniker": "gnu-efi\\lib\\crc.c",
+              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\lib\\crc.c",
+              "RelativeToolTip": "gnu-efi\\lib\\crc.c",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAAAEcAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-09-05T22:47:33.42Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "cmdline.c",
+              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\lib\\cmdline.c",
+              "RelativeDocumentMoniker": "gnu-efi\\lib\\cmdline.c",
+              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\lib\\cmdline.c",
+              "RelativeToolTip": "gnu-efi\\lib\\cmdline.c",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAwwBsAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-09-17T22:40:18.126Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "efirtlib.c",
+              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\lib\\runtime\\efirtlib.c",
+              "RelativeDocumentMoniker": "gnu-efi\\lib\\runtime\\efirtlib.c",
+              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\lib\\runtime\\efirtlib.c",
+              "RelativeToolTip": "gnu-efi\\lib\\runtime\\efirtlib.c",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAAAKQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-09-05T00:39:55.507Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "efishell.h",
+              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\efishell.h",
+              "RelativeDocumentMoniker": "gnu-efi\\inc\\efishell.h",
+              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\efishell.h",
+              "RelativeToolTip": "gnu-efi\\inc\\efishell.h",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-07-17T18:39:17.197Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "libsmbios.h",
+              "DocumentMoniker": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\libsmbios.h",
+              "RelativeDocumentMoniker": "gnu-efi\\inc\\libsmbios.h",
+              "ToolTip": "C:\\Users\\erick\\OneDrive\\ErickCraftStudiosMgrChannel\\Saved Proyects\\KellyBootloaderCode\\KellyBootloader\\gnu-efi\\inc\\libsmbios.h",
+              "RelativeToolTip": "gnu-efi\\inc\\libsmbios.h",
+              "ViewState": "AgIAAIEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-07-13T00:02:56.667Z"
             }
           ]
         },
