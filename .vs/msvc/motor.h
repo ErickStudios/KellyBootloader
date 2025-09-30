@@ -1579,3 +1579,244 @@ SearchPciRegisterWithFirstChildOf(
     // if not founded return not found
     return EFI_NOT_FOUND;
 }
+
+
+EFI_STATUS
+SearchPciRegisterWithFirstChildOfList(
+    UINT8 TargetClass,
+    UINTN Register,
+    UINTN** Out,
+    UINTN* CountPtrRet
+)
+{
+
+    //
+    // declare variables
+    //
+
+    EFI_HANDLE* HandleBuffer;
+    UINTN                   HandleCount;
+    EFI_PCI_IO_PROTOCOL* PciIo;
+    PCI_TYPE00              Pci;
+    UINTN                   Index;
+    UINTN                   Count = 0;
+
+    //
+    // handle buffer
+    //
+
+    gBS->LocateHandleBuffer(ByProtocol, &gEfiPciIoProtocolGuid, NULL, &HandleCount, &HandleBuffer);
+
+    //
+    // search all, happy browsing :)
+    //
+
+    for (Index = 0; Index < HandleCount; Index++)
+    {
+        // handle the protocol
+        gBS->HandleProtocol(HandleBuffer[Index], &gEfiPciIoProtocolGuid, (VOID**)&PciIo);
+
+        // reac the pci
+        PciIo->Pci.Read(PciIo, EfiPciIoWidthUint8, 0, sizeof(Pci), &Pci);
+
+        //Print(L"%x %x %x\n", Pci.Hdr.ClassCode[0], Pci.Hdr.ClassCode[1],Pci.Hdr.ClassCode[2]);
+
+        // check the type
+        if (Pci.Hdr.ClassCode[2] == TargetClass)
+        {
+            UINTN Segment, Bus, Device, Function;
+
+            // return it
+            PciIo->GetLocation(PciIo, &Segment, &Bus, &Device, &Function);
+
+            // make it
+            *Out[Count++] = PciConfigAdrr(Bus, Device, Function, Register);
+        }
+    }
+
+    *CountPtrRet = Count;
+
+    // if not founded return not found
+    return EFI_SUCCESS;
+}
+
+EFI_STATUS
+SearchPciRegisterWithFirstChildOfListIds(
+    UINT8 TargetClass,
+    UINTN** Out,
+    UINTN* CountPtrRet
+)
+{
+
+    //
+    // declare variables
+    //
+
+    EFI_HANDLE* HandleBuffer;
+    UINTN                   HandleCount;
+    EFI_PCI_IO_PROTOCOL* PciIo;
+    PCI_TYPE00              Pci;
+    UINTN                   Index;
+    UINTN                   Count = 0;
+
+    //
+    // handle buffer
+    //
+
+    gBS->LocateHandleBuffer(ByProtocol, &gEfiPciIoProtocolGuid, NULL, &HandleCount, &HandleBuffer);
+
+    //
+    // search all, happy browsing :)
+    //
+
+    for (Index = 0; Index < HandleCount; Index++)
+    {
+        // handle the protocol
+        gBS->HandleProtocol(HandleBuffer[Index], &gEfiPciIoProtocolGuid, (VOID**)&PciIo);
+
+        // reac the pci
+        PciIo->Pci.Read(PciIo, EfiPciIoWidthUint8, 0, sizeof(Pci), &Pci);
+
+        //Print(L"%x %x %x\n", Pci.Hdr.ClassCode[0], Pci.Hdr.ClassCode[1],Pci.Hdr.ClassCode[2]);
+
+        // check the type
+        if (Pci.Hdr.ClassCode[2] == TargetClass)
+        {
+            UINTN Segment, Bus, Device, Function;
+
+            // return it
+            PciIo->GetLocation(PciIo, &Segment, &Bus, &Device, &Function);
+
+            // make it
+            *Out[Count++] = Index;
+        }
+    }
+
+    *CountPtrRet = Count;
+
+    // if not founded return not found
+    return EFI_SUCCESS;
+}
+
+EFI_STATUS
+ListAllPciDevicesIds(
+    UINTN** Out,
+    UINTN* CountPtrRet
+)
+{
+
+    //
+    // declare variables
+    //
+
+    EFI_HANDLE* HandleBuffer;
+    UINTN                   HandleCount;
+    EFI_PCI_IO_PROTOCOL* PciIo;
+    PCI_TYPE00              Pci;
+    UINTN                   Index;
+    UINTN                   Count = 0;
+
+    //
+    // handle buffer
+    //
+
+    gBS->LocateHandleBuffer(ByProtocol, &gEfiPciIoProtocolGuid, NULL, &HandleCount, &HandleBuffer);
+
+    //
+    // search all, happy browsing :)
+    //
+
+    for (Index = 0; Index < HandleCount; Index++)
+    {
+        // handle the protocol
+        gBS->HandleProtocol(HandleBuffer[Index], &gEfiPciIoProtocolGuid, (VOID**)&PciIo);
+
+        // reac the pci
+        PciIo->Pci.Read(PciIo, EfiPciIoWidthUint8, 0, sizeof(Pci), &Pci);
+
+        //Print(L"%x %x %x\n", Pci.Hdr.ClassCode[0], Pci.Hdr.ClassCode[1],Pci.Hdr.ClassCode[2]);
+
+        UINTN Segment, Bus, Device, Function;
+
+        // return it
+        PciIo->GetLocation(PciIo, &Segment, &Bus, &Device, &Function);
+
+        // make it
+        *Out[Count++] = Index;
+    }
+
+    *CountPtrRet = Count;
+
+    // if not founded return not found
+    return EFI_SUCCESS;
+}
+
+EFI_STATUS
+GetPciById(
+    UINT8 Id,
+    UINTN Register,
+    UINTN* Out
+)
+{
+
+    //
+    // declare variables
+    //
+
+    EFI_HANDLE* HandleBuffer;
+    UINTN                   HandleCount;
+    EFI_PCI_IO_PROTOCOL* PciIo;
+    PCI_TYPE00              Pci;
+    UINTN                   Index;
+    UINTN                   Count = 0;
+
+    //
+    // handle buffer
+    //
+
+    gBS->LocateHandleBuffer(ByProtocol, &gEfiPciIoProtocolGuid, NULL, &HandleCount, &HandleBuffer);
+
+    //
+    // search all, happy browsing :)
+    //
+
+    for (Index = 0; Index < HandleCount; Index++)
+    {
+        // handle the protocol
+        gBS->HandleProtocol(HandleBuffer[Index], &gEfiPciIoProtocolGuid, (VOID**)&PciIo);
+
+        // reac the pci
+        PciIo->Pci.Read(PciIo, EfiPciIoWidthUint8, 0, sizeof(Pci), &Pci);
+
+        //Print(L"%x %x %x\n", Pci.Hdr.ClassCode[0], Pci.Hdr.ClassCode[1],Pci.Hdr.ClassCode[2]);
+
+        // check the type
+        if (Index == Id)
+        {
+            UINTN Segment, Bus, Device, Function;
+
+            // return it
+            PciIo->GetLocation(PciIo, &Segment, &Bus, &Device, &Function);
+
+            // make it
+            *Out = PciConfigAdrr(Bus, Device, Function, Register);
+        }
+    }
+
+    // if not founded return not found
+    return EFI_SUCCESS;
+}
+
+#define COM1_PORT 0x3F8
+
+void WriteSerial(char c) {
+    // Espera a que el buffer esté libre
+    while ((inp(COM1_PORT + 5) & 0x20) == 0);
+    outp(COM1_PORT, c);
+}
+
+void PrintSerial(const char* str) {
+    while (*str) {
+        WriteSerial(*str++);
+    }
+}

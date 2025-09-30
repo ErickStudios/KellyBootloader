@@ -3453,6 +3453,7 @@ VOID BootMenu()
 
 INTN Random(INTN seed)
 {
+	
 	// Algoritmo de generación simple (Linear Congruential Generator - LCG)
 	return (seed * 1103515245 + 12345) & 0x7FFFFFFF;
 }
@@ -3534,13 +3535,22 @@ EFI_STATUS efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE* SystemTable)
 
 	InitializeLib(ImageHandle, SystemTable);
 
+	// init the device protocol for dont have to init after
+	// well, all for the educative things
 	EFI_GUID DeviceIoProtocolGuid = EFI_DEVICE_IO_PROTOCOL_GUID;
 
+	// why you want to know the uefi languaje? idk
 	ISO_639_2* LangEfi = LibGetVariable(VarLanguage, &EfiGlobalVariable);
 
+	// the handles
 	EFI_HANDLE* IoHandles;
+
+	// the count of handles
 	UINTN IoHandleCount;
 
+	// this locates the buffer for init the
+	// IoHandles for make it find the PCi protocols
+	// and init GlobalIoFncs
 	Status = gBS->LocateHandleBuffer(
 		ByProtocol,
 		&DeviceIoProtocolGuid,
@@ -3549,23 +3559,23 @@ EFI_STATUS efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE* SystemTable)
 		&IoHandles
 	);
 
+	// check if the status and if have a error
+	// make it display
 	if (!EFI_ERROR(Status)) {
+		// make the handle for get the status
+		// of the operation xd
 		Status = gBS->HandleProtocol(
 			IoHandles[0],
 			&DeviceIoProtocolGuid,
 			(VOID**)&GlobalIoFncs
 		);
+
+		// status
 		Print(L"Status on direct DeviceIoProtocol: %r\n", Status);
+
+		// or its it, or nothing, bad UEFI implementations of *piiiiip*
 		if (EFI_ERROR(Status)) while (1);
 	}
-
-	UINTN Dir = 0;
-
-	SearchPciRegisterWithFirstChildOf(PCI_CLASS_DISPLAY_CTRL, 0x0, &Dir);
-
-	Print(L"Addr: %x\n", Dir);
-
-	//Print(L"Io.Read pointer: %p\n", GlobalIoFncs->Io.Read);
 
 	//
 	// set global params
@@ -3574,27 +3584,39 @@ EFI_STATUS efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE* SystemTable)
 	globalimagehandle = ImageHandle;
 	globalsystemtable = SystemTable;
 
-	//
-	// makes that the watchdog dont fucking me every day
-	//
-
+	// the dog every day can be fuck to any user "osea joderlo para los espanioles"
+	// si jaja en realidad hablo espanol, but the dog every day restes the system
+	// for security reasons for avoid system crashs and saves the UEFI , but the
+	// bootloader dont end and dont have a exit option
 	Status = gBS->SetWatchdogTimer(0, 0, 0, NULL);
 
-	//
-	// initialize varius things of ebf
-	//
+	// initialize all the bootservices things
+	// for the user uses it, there its not a ExitBS built-in
+	// function for ErickBinaryFormat but dont worry, there
+	// is in EbfDevelopmentTools library 
+	
+	// or in a any thridy party library of ErickBinaryFormat, 
+	// but well, EBF dont have popularity so, the one lib are 
+	// EbfDevelopment tools
 
 	CfgTableVendorGuid = AllocateMemory(4);
 	CfgTableVendorGuidData4 = AllocateMemory(8);
 	LanguajeStringDirection = AllocateStringMemory(AsciiToChar16(LangEfi, AsciiStrLen(LangEfi) + 1));
+	FirmwareVendorArray = AllocateStringMemory(gST->FirmwareVendor);
+	SystemInfoArray = AllocateMemory(8); // 8 = the size of the info
+	EventsSemiMultiTask = AllocateMemory(1); // 1 nothing
 
-	//  gST->ConfigurationTable->VendorGuid.Data
+	// initializes the gST->ConfigurationTable->VendorGuid.Data table for map
+	// the config table of the system, reason? no reason
+
 	SetMemoryPool(CfgTableVendorGuid, 0, gST->ConfigurationTable->VendorGuid.Data1);
 	SetMemoryPool(CfgTableVendorGuid, 1, gST->ConfigurationTable->VendorGuid.Data2);
 	SetMemoryPool(CfgTableVendorGuid, 2, gST->ConfigurationTable->VendorGuid.Data3);
 	SetMemoryPool(CfgTableVendorGuid, 3, CfgTableVendorGuidData4);
 
-	//  gST->ConfigurationTable->VendorGuid.Data4
+	// initializes the gST->ConfigurationTable->VendorGuid.Data4 table that are in
+	// idk
+
 	SetMemoryPool(CfgTableVendorGuidData4, 0, gST->ConfigurationTable->VendorGuid.Data4[0]);
 	SetMemoryPool(CfgTableVendorGuidData4, 1, gST->ConfigurationTable->VendorGuid.Data4[1]);
 	SetMemoryPool(CfgTableVendorGuidData4, 2, gST->ConfigurationTable->VendorGuid.Data4[2]);
@@ -3604,11 +3626,12 @@ EFI_STATUS efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE* SystemTable)
 	SetMemoryPool(CfgTableVendorGuidData4, 6, gST->ConfigurationTable->VendorGuid.Data4[6]);
 	SetMemoryPool(CfgTableVendorGuidData4, 7, gST->ConfigurationTable->VendorGuid.Data4[7]);
 
-	FirmwareVendorArray = AllocateStringMemory(gST->FirmwareVendor);
-	SystemInfoArray = AllocateMemory(8); // 8 = the size of the info
-	EventsSemiMultiTask = AllocateMemory(1); // 1 nothing
-
-	memory_acces[2999] = SystemInfoArray; // a know direction that the programs can acces because we dont know the direction of the array, 2999 is a ptr to the SystemInfo
+	// initializes the main BootServices table, there is for get info about the system
+	// the reasons for free this table and other bootservices arrays are NULL but
+	// if you are making a OS and need all the space of the world you can exit from the
+	// bootservices to clean all the data, but if you want to get a info of the system
+	// your lose it forever, for that reason do you need to make security coppy of the
+	// data that your need only, but not coppy all the table, or well, you can
 
 	SetMemoryPool(SystemInfoArray, 0, 1); // obiusly this is the a directly run of EBF , and not a emulator (1 = false, 2 = true)
 	SetMemoryPool(SystemInfoArray, 1, FirmwareVendorArray); // the firmware vendor direction
@@ -3619,46 +3642,55 @@ EFI_STATUS efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE* SystemTable)
 	SetMemoryPool(SystemInfoArray, 6, LanguajeStringDirection);
 	SetMemoryPool(SystemInfoArray, 7, EventsSemiMultiTask);
 
-	//
-	// prepare the grapichs outpud for the console custom colors
-	//
+	// make the pointer to the BootServices table for make a know direction to the pointer
+	// to the array, xd, the library of ErickBinaryFormat gets the table automatically before
+	// make the program execution, and you get it if there is not free by the exit bootservices
+	// function, in that case you need to use your own table for get the data that you svae
+	// before the ExitBS function
+	memory_acces[2999] = SystemInfoArray; 
+
+	// make the own framebuffer of KellyBootloader worcks, this is because there have his own
+	// console font for display text with his own colo scheme
 
 	EFI_PHYSICAL_ADDRESS FrameBufferBase = gop->Mode->FrameBufferBase;
 	UINTN FrameBufferSize = gop->Mode->FrameBufferSize;
 
-	// set the screen size
+	// get the mode
 	SystemTable->ConOut->QueryMode(SystemTable->ConOut, SystemTable->ConOut->Mode->Mode, &horizontalResolution, &verticalResolution);
-
-	// get the gop
+	
+	// locate it
 	Status = uefi_call_wrapper(BS->LocateProtocol, 3, &gEfiGraphicsOutputProtocolGuid, NULL, (VOID**)&gop);
 
-	//SystemTable->ConOut->ClearScreen(SystemTable->ConOut);
-
+	// set the smallest mode, well your PC can have 4K screen or 8K screen but why you need it in the low-level
 	gop->SetMode(gop, 1);
 
+	// initializes the textmod
 	ChangeToTextMode();
 
+	// avoid bugs in real hardware printing this
 	PrintLineWithBackground(SystemTable, L"KellyBootloader anti display bugs text", 0, EFI_BLACK, EFI_BACKGROUND_LIGHTGRAY);
-	//gST->ConOut->ClearScreen(gST->ConOut);
 	
-	//
-	// initializes the virtual screen
-	//
+	// initializes the virtual console for the KellyBootloader that have his own color scheme and
+	// his own font
 
 	PIXELCOL Background = { 39, 55, 36, 0 };
 
+	// initializes the console
 	initializeMoonScreen();
-	//ShowCredits();
 
-	StartGroundSequence();
-
+	// make it have a background color
 	SetScreenAtribute(1,Background);
+
+	// clear the screen for aply
 	ClearScreen();
 
+	// draw the logo
 	DrawLogo();
 
+	// go to the 0 pos
 	gotoxy(0, 0);
 
+	// print the text
 	SetScreenAtribute(0, gray);
 	printc(L"\nWelcome to the ");
 	SetScreenAtribute(0, brgreen);
@@ -3669,86 +3701,30 @@ EFI_STATUS efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE* SystemTable)
 	printc(L"ErickCraftStudios\n\n");
 	SetScreenAtribute(0, gray);
 
+	// this credits are for avoid that the Jerry go to my house in a helicopter
+	// xddd, idk if that is true
 	printc(L"Includes code from GNU-EFI\nCopyright (C) 1999-2023 David Mosberger-Tang and other contributors\nCopyright (C) 2013 Jerry Hoemann <jerry.hoemann@hp.com>\nLicensed under the GNU General Public License v2.0 or later (GPL-2.0+)\n\n");
 
+	// init the key
 	EFI_INPUT_KEY Key;
 
+	// wait a second
 	gBS->Stall(1000000);
 
+	// read the key
 	gST->ConIn->ReadKeyStroke(gST->ConIn, &Key);
 
-	if (Key.ScanCode != SCAN_ESC)
-	TryBootErickBinarie();
+	// if the boot dont stop boot the .ebf
+	if (Key.ScanCode != SCAN_ESC) TryBootErickBinarie();
 
+	// sow the message of nothing to boot , *sadface*
 	SetScreenAtribute(0, yellow);
 	printc(L"\nNothing to boot :(\n");
-
-	/*
-	SystemTable->ConIn->Reset(SystemTable->ConIn, FALSE);
-	SystemTable->BootServices->WaitForEvent(1, &SystemTable->ConIn->WaitForKey, &Event);
-	*/
-
 	printc(L"\n");
 
-	//ATestXd();
-
-	t16 Emm = 0;
-
-	Emm = EditrHLPart(Emm, 15, 1);
-	Emm = EditrHLPart(Emm, 15, 0);
-
-	Print(L"%x", Emm);
-
+	// launch the bootloader
 	BootMenu();
 	
-	/*
-	while (true)
-	{
-		SetScreenAtribute(0, brgreen);
-		printc(L"Kelly");
-		SetScreenAtribute(0, brblue);
-		printc(L"Bootloader");
-		SetScreenAtribute(0, gray);
-		printc(L"> ");
-
-		CHAR16* FileName = ReadLineSeriusWorck();
-
-		printc(L"\n");
-
-		if (StrCmp(FileName, L"") != 0) {
-			if (StrCmp(FileName, L"ls") == 0) {
-				ListFiles();
-			}
-			else if (
-				StrCmp(FileName, L"cls") == 0
-				)
-			{
-				ClearScreen();
-				printc(L"\n");
-
-			}
-			else if (
-				StrCmp(FileName, L"retry") == 0
-				)
-			{
-				SetScreenAtribute(0, gray);
-				TryBootErickBinarie();
-			}
-			else if (
-				StrCmp(FileName, L"reboot") == 0
-				)
-			{
-				gRT->ResetSystem(EfiResetWarm, EFI_SUCCESS, 0, 0);
-			}
-			else if (StrnCmp(FileName,L"./",2) == 0) {
-				BootSpecific(FileName + 2, FALSE);
-			}
-			else if (StrnCmp(FileName, L"debug ", 6) == 0) {
-				BootSpecific(FileName + 6, TRUE);
-			}
-		}
-	}
-	*/
-
+	// return Succes when the bootloader finish, well the bootloader dont stop for work
 	return EFI_SUCCESS;
 }

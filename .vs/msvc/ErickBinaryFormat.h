@@ -347,6 +347,13 @@ typedef _BINARY									EBF_HANDLE;
 */
 u64											ptr_memory_max = 0;
 
+/**
+* ExceptionEbf
+* 
+* launch a exception
+*/
+VOID										ExceptionEbf(u64 Start, u64 End, EFI_STATUS Status);
+
 VOID
 BinaryEx
 (
@@ -395,6 +402,53 @@ IsFreeSpaceFromTo
 	return 1;
 }
 
+VOID 
+ExceptionEbf(
+	u64 Start,
+	u64 End,
+	EFI_STATUS Status
+)
+{
+	CHAR16 expc[512];
+
+	DrawRectangle(gop, 0, 0, horizontalResolution, verticalResolution, Conio->atributes->BG);
+
+	SetScreenAtribute(0, brred);
+	printcu(L"\n");
+	printcu(L"who has behaved very badly!?:\n\n");
+	SPrint(expc, sizeof(expc), L"(Is: 0x%u-0x%u)", Start, End);
+	printcu(expc);
+	printcu(L"\n");
+	SPrint(expc, sizeof(expc), L"(Reason: %r)", Status);
+	printcu(expc);
+	printcu(L"\n");
+	SPrint(expc, sizeof(expc), L"(In Instruction: %x)", memory_acces[10]);
+	printcu(expc);
+	printcu(L"\n\n\n");
+	printcu(L"You can continue writing 'c' in the\nasking. but it will never be the same\nagain.\n\n");
+	printcu(L"Write 'a' in the asking. to accept the\nthing that your make\n\n");
+
+	printc(L"\n");
+
+	while (true)
+	{
+		// prompt
+		printc(L"\n... ");
+
+		// read the line
+		ch16* Rnn = ReadLineSeriusWorck();
+
+		// continue if the user write 'c'
+		if (StrCmp(Rnn, L"c") == 0) break;
+		// acept if the user write 'a'
+		else if (StrCmp(Rnn, L"a") == 0)
+		{
+			printc(L"\nRestart your device to continue...\n");
+			while (1); 
+		}
+	}
+}
+
 /**
 * AllocateMemory
 *
@@ -406,14 +460,15 @@ AllocateMemory
 	t16 size
 )
 {
-	//
-	// check if not trolling
-	//
+	// a special case
+	if (size == 0) 
+	{
+		for (size_t i = 2001; i < 30000; i++)
+		{
+			if (memory_acces[i] == NULL) {memory_acces[i] = 0; return i;}
+		}
+	}
 
-	if (
-		size == 0
-		)
-		StartGroundSequence();
 
 	//
 	// set the buffer variables
@@ -522,6 +577,15 @@ FreeArray
 	t16 StartingAt
 )
 {
+	// SystemInfoArray == EbfNullPtr means that the system has been exit from bootservices and this means
+	// that are running a operating system and the opertating system are have the responsability
+	// for avoid the exceptions, in the case in BootServices the bootloader are the resposability
+	// to manage that
+	if ((StartingAt == EbfNullPtr) && SystemInfoArray == EbfNullPtr)
+		ExceptionEbf(StartingAt, StartingAt, EFI_NOT_FOUND);
+	else if ((StartingAt == EbfNullPtr) && SystemInfoArray != EbfNullPtr)
+		return EbfNullPtr;
+
 	//
 	// configure params to free the pool
 	//
@@ -794,62 +858,56 @@ ExecuteAllEvents
 (
 )
 {
-	//
-	// declare variables
-	//
-
 	t16 EventsCount;
 
-	//
-	// check if the events array exists
-	//
+	// check if in bootservices and have events enabled or dont freeded
+	// this for avoid bugs and for make the system to implement the semi-multitask
+	// system
+	if (!EventsSemiMultiTask && !SystemInfoArray) return EFI_NOT_FOUND;
 
-	if (!EventsSemiMultiTask) return EFI_NOT_FOUND;
-
-	//
-	// get params
-	//
-
+	// get the events list
 	EventsCount = GetArrayLength(EventsSemiMultiTask);
 
-	//
-	// execute any for any
-	//
+	// make the execution for each event, the event are maked by {MemToTrue, BlockIn, Code}
+	// and if the (MemToTrue + (BlockIn * 32767)) == 1 the event executes and sets to false
 	for (size_t i = 0; i < EventsCount; i++)
 	{
-		// get event
+		// get event array for execute
 		EBF_DIRECTION Event = GetMemoryPool(EventsSemiMultiTask, (t16)i);
 
-		//
-		// check all
-		//
+		// avoid error making to not have that and avoiding acces to NULL pointers
+		if (Event == EbfNullPtr) return EFI_INVALID_PARAMETER;
 
-		// return if not event
-		if (!Event) return EFI_INVALID_PARAMETER;
-	
-		// the events only can be {RegisterToTrue, PtrToCode}
-		if (GetArrayLength(Event) != 2) return EFI_INVALID_PARAMETER;
+		// make it follow the standart {MemToTrue, Block, CodePtr}
+		if (GetArrayLength(Event) != 3) return EFI_INVALID_PARAMETER;
 
-		//
-		// execute the code
-		//
 
-		// get the code that points the event
-		ch16* CodeToExecute = LocateMemory(GetMemoryPool(Event, 1));
+		// get the params for the event and the execution
+		u64 RegisterToTrue = (GetMemoryPool(Event, 0) + (GetMemoryPool(Event, 1) * 32767));
+		ch16* CodeToExecute = LocateMemory(GetMemoryPool(Event, 2));
 
-		// invalid code
-		if (!CodeToExecute) return EFI_NOT_FOUND;
+		// avoid to execute code that points to Null because if a
+		// code null executes the system can crash or bricks the UEFI
+		// for some external bugs that are in OVMF
+		if (CodeToExecute == EbfNullPtr) return EFI_NOT_FOUND;
 
-		// save the stack
-		t16 SavedStack = memory_acces[10];
+		// if the event is true, there is execute and make it false
+		// for dont execute again
+		if (memory_acces[RegisterToTrue] == 1) {
+			// avoid other execution
+			memory_acces[RegisterToTrue] = 0;
 
-		// execute the code
-		BinaryEx(CodeToExecute, 0);
+			// save the stack
+			t16 SavedStack = memory_acces[10];
 
-		// pop the stack
-		memory_acces[10] = SavedStack;
+			// execute the code
+			BinaryEx(CodeToExecute, 0);
 
-		// free the code
+			// pop the stack
+			memory_acces[10] = SavedStack;
+		}
+
+		// free the event code execution
 		FreePool(CodeToExecute);
 	}
 
@@ -2503,6 +2561,7 @@ BinaryEx
 				)
 			{
 				ch16* Line = ReadLineSeriusWorck();
+				UINTN Length = StrLen(Line);
 
 				memory_acces[p2] = AllocateStringMemory(Line);
 			}
@@ -3191,19 +3250,20 @@ BinaryEx
 					memory_acces[ReturnOn] = AllocateStringMemory(Valu2);
 				}
 
-				if (p1 == 60)
-				{
-					t16 Number = memory_acces[p2];
-					t16 Comma = memory_acces[p2 + 1];
-					t16 ReturnOn = p2 + 2;
+			}
 
-					CHAR16 Valu[30];
+			if (p1 == 60)
+			{
+				t16 Number = memory_acces[p2];
+				t16 Comma = memory_acces[p2 + 1];
+				t16 ReturnOn = p2 + 2;
 
-					ValueToString(Valu, Comma ,Number);
+				CHAR16 Valu[30];
 
-					CHAR16* Valu2 = Valu;
-					memory_acces[ReturnOn] = AllocateStringMemory(Valu2);
-				}
+				ValueToString(Valu, Comma, Number);
+
+				CHAR16* Valu2 = Valu;
+				memory_acces[ReturnOn] = AllocateStringMemory(Valu2);
 			}
 
 			if (p1 == 61)
@@ -3229,6 +3289,153 @@ BinaryEx
 #else
 				while (TRUE);
 #endif
+			}
+
+			if (p1 == 62)
+			{
+
+				// declare the variables used in the operation
+				t16 TypeOfPciChild = memory_acces[p2];
+				t16 RegisterToFound = memory_acces[p2 + 1];
+				t16 RetOn = p2 + 2;
+
+				// declare the variables for the list
+				// of the PCis
+				UINTN Directions[30];
+				UINTN Count;
+
+				// search a list of PCis
+				SearchPciRegisterWithFirstChildOfList(
+					(UINT8)TypeOfPciChild,
+					(UINTN)RegisterToFound,
+					&Directions,
+					&Count
+				);
+
+				// declare the location of the PCi list array
+				EBF_DIRECTION PciList = AllocateMemory(Count);
+
+				// declare the PCis list for usage in the array
+				for (size_t i = 0; i < Count; i++)
+				{
+					// the item
+					EBF_DIRECTION Item = Push64BitIntOnArray(Directions[i]);
+
+					// push the item in the array
+					SetMemoryPool(PciList, (t16)i, Item);
+				}
+
+				// return it
+				memory_acces[RetOn] = PciList;
+			}
+
+			if (p1 == 63)
+			{
+				// the array
+				EBF_DIRECTION Array = memory_acces[p2];
+
+				for (size_t i = 0; i < GetArrayLength(Array); i++)
+				{
+					// get the array
+					EBF_DIRECTION SubArray = GetMemoryPool(Array, (t16)i);
+
+					// if the array is null make it a exception
+					if (SubArray == EbfNullPtr) ExceptionEbf(((u64)(SubArray + 1) + i), ((u64)(SubArray + 1) + i), EFI_NOT_FOUND);
+					
+					// frees the array
+					if ((SubArray > 2000 && SubArray < 30000)) FreeArray(SubArray);
+				}
+
+				// make it pointer to `EbfNullPtr`
+				memory_acces[p2] = FreeArray(Array);
+			}
+
+
+			if (p1 == 64)
+			{
+				// declare the variables used in the operation
+				t16 TypeOfPciChild = memory_acces[p2];
+				t16 RetOn = p2 + 1;
+
+				// declare the variables for the list
+				// of the PCis
+				UINTN Directions[30];
+				UINTN Count;
+
+				// search a list of PCis ids
+				memory_acces[StatusDirecion] = SearchPciRegisterWithFirstChildOfListIds(
+					(UINT8)TypeOfPciChild,
+					&Directions,
+					&Count
+				);
+
+				// declare the location of the PCi list array
+				EBF_DIRECTION PciList = AllocateMemory(Count);
+
+				// declare the PCis list for usage in the array
+				for (size_t i = 0; i < Count; i++)
+				{
+					// the item
+					t16 Item = (t16)Directions[i];
+
+					// push the item in the array
+					SetMemoryPool(PciList, (t16)i, Item);
+				}
+
+				// return it
+				memory_acces[RetOn] = PciList;
+			}
+
+
+			if (p1 == 65)
+			{
+				t16 PciId = memory_acces[p2];
+				t16 RegisterToFound = memory_acces[p2 + 1];
+				t16 RetOn = p2 + 2;
+
+				UINTN Direction;
+
+				memory_acces[StatusDirecion] = GetPciById(
+					(UINT8)PciId,
+					(UINTN)RegisterToFound,
+					&Direction
+				);
+
+				memory_acces[RetOn] = Push64BitIntOnArray(Direction);
+			}
+
+
+			if (p1 == 66)
+			{
+				// declare the variables used in the operation
+				t16 RetOn = p2;
+
+				// declare the variables for the list
+				// of the PCis
+				UINTN Directions[30];
+				UINTN Count;
+
+				// search a list of PCis ids
+				memory_acces[StatusDirecion] = ListAllPciDevicesIds(
+					&Directions,
+					&Count
+				);
+
+				// declare the location of the PCi list array
+				EBF_DIRECTION PciList = AllocateMemory(Count);
+
+				// declare the PCis list for usage in the array
+				for (size_t i = 0; i < Count; i++)
+				{
+					// the item
+					t16 Item = (t16)Directions[i];
+
+					// push the item in the array
+					SetMemoryPool(PciList, (t16)i, Item);
+				}
+
+				// return it
+				memory_acces[RetOn] = PciList;
 			}
 
 		}

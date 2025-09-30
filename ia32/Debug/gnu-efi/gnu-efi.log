@@ -12,6 +12,110 @@
   hw.c
   initplat.c
   math.c
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(49,5): error C4235: se ha utilizado una extensión no estándar: la palabra clave '__asm' no se admite en esta arquitectura
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(50,17): error C2065: 'mov': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(50,17): error C2146: error de sintaxis: falta ';' delante del identificador 'eax'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(50,20): error C2065: 'eax': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(50,28): error C2065: 'dword': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(50,28): error C2146: error de sintaxis: falta ';' delante del identificador 'ptr'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(50,32): error C2065: 'ptr': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(50,32): error C2146: error de sintaxis: falta ';' delante del identificador 'Operand'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(50,41): error C2109: el subíndice requiere una matriz o tipo de puntero
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(51,9): error C2146: error de sintaxis: falta ';' delante del identificador 'mov'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(51,17): error C2065: 'mov': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(51,17): error C2146: error de sintaxis: falta ';' delante del identificador 'edx'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(51,20): error C2065: 'edx': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(51,28): error C2065: 'dword': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(51,28): error C2146: error de sintaxis: falta ';' delante del identificador 'ptr'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(51,32): error C2065: 'ptr': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(51,32): error C2146: error de sintaxis: falta ';' delante del identificador 'Operand'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(51,41): error C2109: el subíndice requiere una matriz o tipo de puntero
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(52,9): error C2146: error de sintaxis: falta ';' delante del identificador 'mov'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(52,17): error C2065: 'mov': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(52,17): error C2146: error de sintaxis: falta ';' delante del identificador 'ecx'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(52,20): error C2065: 'ecx': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(53,9): error C2146: error de sintaxis: falta ';' delante del identificador 'and'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(53,17): error C2065: 'and': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(53,17): error C2146: error de sintaxis: falta ';' delante del identificador 'ecx'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(53,20): error C2065: 'ecx': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(55,9): error C2146: error de sintaxis: falta ';' delante del identificador 'shld'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(55,17): error C2065: 'shld': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(55,17): error C2146: error de sintaxis: falta ';' delante del identificador 'edx'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(55,20): error C2065: 'edx': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(55,25): error C2065: 'eax': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(56,9): error C2065: 'cl': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(56,9): error C2146: error de sintaxis: falta ';' delante del identificador 'shl'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(56,17): error C2065: 'shl': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(56,17): error C2146: error de sintaxis: falta ';' delante del identificador 'eax'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(56,20): error C2065: 'eax': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(58,9): error C2065: 'cl': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(58,9): error C2146: error de sintaxis: falta ';' delante del identificador 'cmp'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(58,17): error C2065: 'cmp': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(58,17): error C2146: error de sintaxis: falta ';' delante del identificador 'ecx'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(58,20): error C2065: 'ecx': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(59,9): error C2146: error de sintaxis: falta ';' delante del identificador 'jc'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(59,23): error C2065: 'jc': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(59,23): error C2143: error de sintaxis: falta ';' delante de 'tipo'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(61,9): error C2146: error de sintaxis: falta ';' delante del identificador 'mov'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(61,17): error C2065: 'mov': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(61,17): error C2146: error de sintaxis: falta ';' delante del identificador 'edx'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(61,20): error C2065: 'edx': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(62,9): error C2065: 'eax': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(62,9): error C2146: error de sintaxis: falta ';' delante del identificador 'xor'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(62,17): error C2065: 'xor': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(62,17): error C2146: error de sintaxis: falta ';' delante del identificador 'eax'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(62,20): error C2065: 'eax': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(64,1): error C2065: 'eax': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(64,1): error C2146: error de sintaxis: falta ';' delante del identificador 'ls10'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(65,17): error C2065: 'mov': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(65,17): error C2146: error de sintaxis: falta ';' delante del identificador 'dword'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(65,23): error C2065: 'dword': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(65,23): error C2146: error de sintaxis: falta ';' delante del identificador 'ptr'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(65,27): error C2065: 'ptr': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(65,27): error C2146: error de sintaxis: falta ';' delante del identificador 'Result'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(65,35): error C2109: el subíndice requiere una matriz o tipo de puntero
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(66,9): error C2065: 'eax': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(66,9): error C2146: error de sintaxis: falta ';' delante del identificador 'mov'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(66,17): error C2065: 'mov': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(66,17): error C2146: error de sintaxis: falta ';' delante del identificador 'dword'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(66,23): error C2065: 'dword': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(66,23): error C2146: error de sintaxis: falta ';' delante del identificador 'ptr'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(66,27): error C2065: 'ptr': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(66,27): error C2146: error de sintaxis: falta ';' delante del identificador 'Result'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(66,35): error C2109: el subíndice requiere una matriz o tipo de puntero
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(67,5): error C2065: 'edx': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(67,5): error C2143: error de sintaxis: falta ';' delante de '}'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(84,5): error C4235: se ha utilizado una extensión no estándar: la palabra clave '__asm' no se admite en esta arquitectura
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(85,17): error C2065: 'mov': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(85,17): error C2146: error de sintaxis: falta ';' delante del identificador 'eax'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(85,20): error C2065: 'eax': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(85,28): error C2065: 'dword': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(85,28): error C2146: error de sintaxis: falta ';' delante del identificador 'ptr'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(85,32): error C2065: 'ptr': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(85,32): error C2146: error de sintaxis: falta ';' delante del identificador 'Operand'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(85,41): error C2109: el subíndice requiere una matriz o tipo de puntero
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(86,9): error C2146: error de sintaxis: falta ';' delante del identificador 'mov'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(86,17): error C2065: 'mov': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(86,17): error C2146: error de sintaxis: falta ';' delante del identificador 'edx'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(86,20): error C2065: 'edx': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(86,28): error C2065: 'dword': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(86,28): error C2146: error de sintaxis: falta ';' delante del identificador 'ptr'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(86,32): error C2065: 'ptr': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(86,32): error C2146: error de sintaxis: falta ';' delante del identificador 'Operand'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(86,41): error C2109: el subíndice requiere una matriz o tipo de puntero
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(87,9): error C2146: error de sintaxis: falta ';' delante del identificador 'mov'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(87,17): error C2065: 'mov': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(87,17): error C2146: error de sintaxis: falta ';' delante del identificador 'ecx'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(87,20): error C2065: 'ecx': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(88,9): error C2146: error de sintaxis: falta ';' delante del identificador 'and'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(88,17): error C2065: 'and': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(88,17): error C2146: error de sintaxis: falta ';' delante del identificador 'ecx'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(88,20): error C2065: 'ecx': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(90,9): error C2146: error de sintaxis: falta ';' delante del identificador 'shrd'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(90,17): error C2065: 'shrd': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(90,17): error C2146: error de sintaxis: falta ';' delante del identificador 'eax'
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(90,20): error C2065: 'eax': identificador no declarado
+C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\gnu-efi\lib\ia32\math.c(90,20): fatal  error C1003: el recuento de errores supera 100; se detiene la compilación
   init.c
   lock.c
   misc.c
@@ -27,4 +131,3 @@
   sread.c
   str.c
   Generando código...
-  gnu-efi.vcxproj -> C:\Users\erick\OneDrive\ErickCraftStudiosMgrChannel\Saved Proyects\KellyBootloaderCode\KellyBootloader\ia32\Debug\gnu-efi.lib
